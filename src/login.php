@@ -1,7 +1,7 @@
 <?php
      //Recebendo dados do login   
-     $usuario = $POST["usuario"];
-     $senha   = $POST["senha"];
+     $usuario = $_POST["usuario"];
+     $senha   = $_POST["senha"];
 
      //Preparar para injetar
      $usuario = stripcslashes($usuario);
