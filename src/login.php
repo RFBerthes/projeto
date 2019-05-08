@@ -1,26 +1,46 @@
 <?php
-     //Recebendo dados do login   
-     $usuario = $_POST["usuario"];
-     $senha   = $_POST["senha"];
+    session_start();
+    include('conexao.php');
 
-     //Preparar para injetar
-     $usuario = stripcslashes($usuario);
-     $senha   = stripcslashes($senha);
-     $usuario = mysql_real_escape_string($usuario);
-     $senha   = mysql_real_escape_string($senha);
+    //Recebendo dados do login   
+    //$login = $_POST["usuario"];
+    //$senha   = $_POST["senha"];
+    $usuario = mysqli_real_escape_string($conexao, $_POST['usuario']);
+    $senha = mysqli_real_escape_string($conexao, $_POST['senha']);
 
-     //Conexão com servidor e BD
-     mysql_connect("localhost", "root", "");
-     mysql_select_db("pep");
+    $query = "SELECT usuario, perfil FROM usuarios WHERE usuario = '{$usuario}' AND senha = '{$senha}'";
 
-     //Consultar o banco de dados para uso 
-     $result = msql_query("select * form usuario where usuario = '$username' and senha = '$senha' ")
-     or die("Failed to query database".mysql_error());
 
-     $row = mysql_fetch_array($result);
-     if ($row['usuario'] == $username && $row['senha'] == $senha){
-         echo "Login efetuado com sucesso ".$row['usuario'];
-     }else{
-         echo "Erro no login, tente novamente"
-     }
+    //Consultar o banco de dados para uso 
+    $result = mysqli_query($conexao, $query);
+    //Isolar Perfil
+    $perfil = $result->fetch_assoc();
+    //verificar quantas linha a query retornou (0 não encontrou | 1 encontrou)
+    $row = mysqli_num_rows($result);
+
+    if ($row == 1){
+        switch ($perfil['perfil']) {
+            case "admin":
+                header("Location: /projeto/src/admin.html");
+                break;
+            case "caixa":
+                header("Location: /projeto/src/caixa.html");
+                break;
+            case "atendente":
+                header("Location: /projeto/src/atendente.html");
+                break;
+            case "cozinheiro":
+                header("Location: /projeto/src/cozinheiro.html");
+                break;
+            default;
+                echo 'Usuário cadastrado com função inválida, procure o adminstrador!';
+                header("Location: /projeto/src/index.html");
+                break;
+        }
+    }else{
+        echo 'Senha ou usuário invalidos!';
+        exit;
+        header("Location: /projeto/src/index.html");
+    }
+
 ?>
