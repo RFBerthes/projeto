@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 08-Maio-2019 às 08:58
--- Versão do servidor: 10.1.38-MariaDB
--- versão do PHP: 7.3.4
+-- Generation Time: 09-Maio-2019 às 00:00
+-- Versão do servidor: 10.1.39-MariaDB
+-- versão do PHP: 7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -90,28 +90,6 @@ CREATE TABLE `pedido` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `perfil`
---
-
-CREATE TABLE `perfil` (
-  `idperfil` int(11) NOT NULL,
-  `usuario_idusuario` int(11) NOT NULL,
-  `funcao` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `perfil`
---
-
-INSERT INTO `perfil` (`idperfil`, `usuario_idusuario`, `funcao`) VALUES
-(1, 1, 'admin'),
-(2, 2, 'caixa'),
-(3, 3, 'atendente'),
-(4, 4, 'cozinheiro');
-
--- --------------------------------------------------------
-
---
 -- Estrutura da tabela `pizza`
 --
 
@@ -129,6 +107,7 @@ CREATE TABLE `pizza` (
 
 CREATE TABLE `usuarios` (
   `idusuario` int(11) NOT NULL,
+  `perfil` varchar(15) NOT NULL,
   `nome` varchar(45) NOT NULL,
   `usuario` varchar(45) NOT NULL,
   `senha` varchar(20) NOT NULL
@@ -138,11 +117,11 @@ CREATE TABLE `usuarios` (
 -- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`idusuario`, `nome`, `usuario`, `senha`) VALUES
-(1, 'TESTE ADMIN', 'admin', '55782209'),
-(2, 'TESTE CAIXA', 'caixa', 'caixa'),
-(3, 'TESTE ATENDENTE', 'atendente', 'atendente'),
-(4, 'TESTE COZINHEIRO', 'cozinheiro', 'cozinheiro');
+INSERT INTO `usuarios` (`idusuario`, `perfil`, `nome`, `usuario`, `senha`) VALUES
+(1, 'admin', 'TESTE ADMIN', 'admin', '55782209'),
+(2, 'caixa', 'TESTE CAIXA', 'caixa', 'caixa'),
+(3, 'atendente', 'TESTE ATENDENTE', 'atendente', 'atendente'),
+(4, 'cozinheiro', 'TESTE COZINHEIRO', 'cozinheiro', 'cozinheiro');
 
 --
 -- Indexes for dumped tables
@@ -186,13 +165,6 @@ ALTER TABLE `pedido`
   ADD KEY `fk_pedido_usuario1_idx` (`usuario_idusuario`);
 
 --
--- Indexes for table `perfil`
---
-ALTER TABLE `perfil`
-  ADD PRIMARY KEY (`idperfil`),
-  ADD KEY `fk_Tipo_usuario_usuario1_idx` (`usuario_idusuario`);
-
---
 -- Indexes for table `pizza`
 --
 ALTER TABLE `pizza`
@@ -233,12 +205,6 @@ ALTER TABLE `pedido`
   MODIFY `idpedido` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `perfil`
---
-ALTER TABLE `perfil`
-  MODIFY `idperfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
 -- AUTO_INCREMENT for table `pizza`
 --
 ALTER TABLE `pizza`
@@ -275,12 +241,6 @@ ALTER TABLE `comanda`
 ALTER TABLE `pedido`
   ADD CONSTRAINT `fk_pedido_comanda1` FOREIGN KEY (`comanda_idcomanda`) REFERENCES `comanda` (`idcomanda`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_pedido_usuario1` FOREIGN KEY (`usuario_idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Limitadores para a tabela `perfil`
---
-ALTER TABLE `perfil`
-  ADD CONSTRAINT `fk_Tipo_usuario_usuario1` FOREIGN KEY (`usuario_idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
