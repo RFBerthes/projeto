@@ -20,16 +20,16 @@
         <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">HOME <span class="sr-only">(página atual)</span></a>
+              <a class="nav-link" href="admin.html">HOME <span class="sr-only">(página atual)</span></a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 ADMINISTRAÇÃO
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">            Categorias </a>
-                <a class="dropdown-item" href="produtos.html">Produtos    </a>
-                <a class="dropdown-item" href="usuarios.html">Usuários    </a>
+                <a class="dropdown-item" href="categorias.html">Categorias  </a>
+                <a class="dropdown-item" href="produtos.html">  Produtos    </a>
+                <a class="dropdown-item" href="usuarios.html">  Usuários    </a>
               </div>
             </li>
             <li class="nav-item">
@@ -55,8 +55,23 @@
         </div>
       </nav>
 
+      <!-- Função Abrir Conteudo em div -->
+      <!-- <script>
+        $(document).ready(function(){
+          $("#conteudoNavbarSuportado a").click(function( e ) {
+            e.preventDefault();
+            var href = $(this).attr('href');
+            $("#conteudoDinamico").load( href +" #conteudoDinamico");
+          });
+        });
+      </script> -->
+
   </head>
   <body>
+    <div class="container bg-dark text-white mt-2 mb-2" id="conteudoDinamico">
+      <p>Conteudo Home</p>
+
+    </div>
 
 
     <!-- Optional JavaScript -->

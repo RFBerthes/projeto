@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 09-Maio-2019 às 00:00
+-- Generation Time: 09-Maio-2019 às 19:09
 -- Versão do servidor: 10.1.39-MariaDB
 -- versão do PHP: 7.3.5
 
@@ -30,9 +30,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `bebida` (
   `idbebida` int(11) NOT NULL,
-  `nome` varchar(45) DEFAULT NULL,
-  `valor` decimal(10,2) DEFAULT NULL,
-  `quantidade` int(11) NOT NULL,
+  `nome` varchar(45) NOT NULL,
+  `valor` decimal(10,2) NOT NULL,
+  `estoque` int(11) NOT NULL,
   `comanda_idcomanda` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -44,8 +44,7 @@ CREATE TABLE `bebida` (
 
 CREATE TABLE `cliente` (
   `idcliente` int(11) NOT NULL,
-  `nome` varchar(45) NOT NULL,
-  `dtNasc` date DEFAULT NULL
+  `nome` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -82,9 +81,11 @@ CREATE TABLE `mesa` (
 
 CREATE TABLE `pedido` (
   `idpedido` int(11) NOT NULL,
-  `valorPedido` decimal(10,2) DEFAULT NULL,
+  `tempo` time DEFAULT NULL,
+  `status` varchar(45) NOT NULL,
   `comanda_idcomanda` int(11) NOT NULL,
-  `usuario_idusuario` int(11) NOT NULL
+  `usuario_idusuario` int(11) NOT NULL,
+  `cliente_idcliente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -96,6 +97,7 @@ CREATE TABLE `pedido` (
 CREATE TABLE `pizza` (
   `idpizza` int(11) NOT NULL,
   `tamanho` int(11) DEFAULT NULL,
+  `sabor` varchar(45) DEFAULT NULL,
   `valor` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -118,7 +120,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`idusuario`, `perfil`, `nome`, `usuario`, `senha`) VALUES
-(1, 'admin', 'TESTE ADMIN', 'admin', '55782209'),
+(1, 'admin', 'TESTE ADMIN', 'admin', 'admin'),
 (2, 'caixa', 'TESTE CAIXA', 'caixa', 'caixa'),
 (3, 'atendente', 'TESTE ATENDENTE', 'atendente', 'atendente'),
 (4, 'cozinheiro', 'TESTE COZINHEIRO', 'cozinheiro', 'cozinheiro');
@@ -162,7 +164,8 @@ ALTER TABLE `mesa`
 ALTER TABLE `pedido`
   ADD PRIMARY KEY (`idpedido`),
   ADD KEY `fk_pedido_comanda1_idx` (`comanda_idcomanda`),
-  ADD KEY `fk_pedido_usuario1_idx` (`usuario_idusuario`);
+  ADD KEY `fk_pedido_usuario1_idx` (`usuario_idusuario`),
+  ADD KEY `fk_pedido_cliente1_idx` (`cliente_idcliente`);
 
 --
 -- Indexes for table `pizza`
@@ -214,7 +217,7 @@ ALTER TABLE `pizza`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
@@ -239,6 +242,7 @@ ALTER TABLE `comanda`
 -- Limitadores para a tabela `pedido`
 --
 ALTER TABLE `pedido`
+  ADD CONSTRAINT `fk_pedido_cliente1` FOREIGN KEY (`cliente_idcliente`) REFERENCES `cliente` (`idcliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_pedido_comanda1` FOREIGN KEY (`comanda_idcomanda`) REFERENCES `comanda` (`idcomanda`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_pedido_usuario1` FOREIGN KEY (`usuario_idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;

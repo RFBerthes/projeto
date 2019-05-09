@@ -10,12 +10,4 @@
     session_start();
 ?>
 
-<?php
-  include('conexao.php');
-  $addMesa = "INSERT INTO 'mesa' ('idmesa') VALUES (NULL);";
 
-  //Insere novo registro
-  $result = mysqli_query($conexao, $addMesa);
-  $mesas = $result->fetch_assoc();
-  echo '$mesas['idmesa']'
-?>
