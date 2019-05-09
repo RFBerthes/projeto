@@ -1,8 +1,8 @@
 <?php
-    session_start();
+
     include('conexao.php');
 
-    //Recebendo dados do login   
+    //Recebendo dados do login
     //$login = $_POST["usuario"];
     //$senha   = $_POST["senha"];
     $usuario = mysqli_real_escape_string($conexao, $_POST['usuario']);
@@ -11,7 +11,7 @@
     $query = "SELECT usuario, perfil FROM usuarios WHERE usuario = '{$usuario}' AND senha = '{$senha}'";
 
 
-    //Consultar o banco de dados para uso 
+    //Consultar o banco de dados para uso
     $result = mysqli_query($conexao, $query);
     //Isolar Perfil
     $perfil = $result->fetch_assoc();
