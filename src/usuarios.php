@@ -67,16 +67,26 @@
           <div class="card-header" style="text-align:center">
             <h2>CADASTRO</h2>
           </div>
+          <?php 
+            $url = "http://localhost/projeto/src/usuarios.php";
+            if(strpos($url, "sucesso") == true):
+          ?>
+            <div class="notification is-seccess">
+              <p>Usuário adicionado com sucesso!</p>         
+            </div>
+          <?php 
+            endif;
+          ?>
     
-          <form action="processa.php" method="POST">
+          <form action="registro-usuario.php" method="POST">
 
             <div class="form-group">
               <label>Função</label>
-              <select name="nivel" id="nivel" class="form-control">
-                  <option value="0">Administrador</option>
-                  <option value="1">Caixa</option>
-                  <option value="2" selected>Atendente</option>
-                  <option value="3">Cozinheiro</option>
+              <select name="perfil" id="perfil" class="form-control">
+                  <option value="admin">Administrador</option>
+                  <option value="caixa">Caixa</option>
+                  <option value="atendente" selected>Atendente</option>
+                  <option value="cozinheiro">Cozinheiro</option>
               </select>
             </div>
 
@@ -85,14 +95,13 @@
               <input type="text" id=nome name=nome required class="form-control" placeholder="Nome">
             </div>
             <div class="form-group">
-              <label>Email</label>
+              <label>Usuario</label>
               <input type="text" id=usuario name=usuario required class="form-control" placeholder="Usuário" >
             </div>
 
             <div class="form-group">
               <label>Senha</label>
-              <input class="form-control" id="password" name="password" required placeholder="Digite sua senha"
-                type="password" minlength="4">
+              <input class="form-control" id="senha" name="senha" required placeholder="Digite sua senha" type="password" minlength="4">
             </div>
     
             <div class="form-group" style="display: flex;flex-direction: row;justify-content: center;align-items: center;">
