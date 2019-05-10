@@ -21,26 +21,25 @@
     if ($row == 1){
         switch ($perfil['perfil']) {
             case "admin":
-                header("Location: /projeto/src/admin.html");
+                header("Location: admin.php");
                 break;
             case "caixa":
-                header("Location: /projeto/src/caixa.html");
+                header("Location: caixa.php");
                 break;
             case "atendente":
-                header("Location: /projeto/src/atendente.html");
+                header("Location: atendente.php");
                 break;
             case "cozinheiro":
-                header("Location: /projeto/src/cozinheiro.html");
+                header("Location: cozinheiro.php");
                 break;
             default;
                 echo 'Usuário cadastrado com função inválida, procure o adminstrador!';
-                header("Location: /projeto/src/index.html");
+                header("Location: index.php");
                 break;
         }
     }else{
         echo 'Senha ou usuário invalidos!';
-        exit;
-        header("Location: /projeto/src/index.html");
-    }
+        header("Location: index.php");
+    }     
 
 ?>
