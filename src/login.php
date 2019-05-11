@@ -18,28 +18,30 @@
     //verificar quantas linha a query retornou (0 não encontrou | 1 encontrou)
     $row = mysqli_num_rows($result);
 
-    if ($row == 1){
+    if ($row == 0){
+        //trata usuário ou senha inválidos
+        header('location: index.html?erro1');
+                
+    }elseif ($row == 1){
+        //trata encontrado
         switch ($perfil['perfil']) {
             case "admin":
-                header("Location: admin.php");
+                header("Location: admin.html");
                 break;
             case "caixa":
-                header("Location: caixa.php");
+                header("Location: caixa.html");
                 break;
             case "atendente":
-                header("Location: atendente.php");
+                header("Location: atendente.html");
                 break;
             case "cozinheiro":
-                header("Location: cozinheiro.php");
+                header("Location: cozinheiro.html");
                 break;
             default;
-                echo 'Usuário cadastrado com função inválida, procure o adminstrador!';
-                header("Location: index.php");
+                //trata usuário com perfil inválido
+                header('location: index.html?erro2');
                 break;
         }
-    }else{
-        echo 'Senha ou usuário invalidos!';
-        header("Location: index.php");
-    }     
+    }    
 
 ?>
