@@ -9,10 +9,31 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/styles.css">
 
+    <!-- Validação de sessão -->
+
+    <?php
+    /* esse bloco de código em php verifica se existe a sessão, pois o usuário pode
+    simplesmente não fazer o login e digitar na barra de endereço do seu navegador 
+    o caminho para a página principal do site (sistema), burlando assim a obrigação de 
+    fazer um login, com isso se ele não estiver feito o login não será criado a session, 
+    então ao verificar que a session não existe a página redireciona o mesmo
+    para a index.php.*/
+    session_start();
+    // if((!isset ($_SESSION['usuário']) == false))
+    // {
+      
+    //   unset($_SESSION['usuário']);
+    //   unset($_SESSION['senha']);
+    //   header('location:index.php');
+      
+    // }
+    
+    ?>
+
     <title>Admin</title>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-info">
-        <a class="navbar-brand" href="admin.html">Peça&Pag</a>
+        <a class="navbar-brand" href="admin.php">Peça&Pag</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -20,20 +41,20 @@
         <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="admin.html">HOME <span class="sr-only">(página atual)</span></a>
+              <a class="nav-link" href="admin.php">HOME <span class="sr-only">(página atual)</span></a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 ADMINISTRAÇÃO
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="categorias.html">Categorias  </a>
-                <a class="dropdown-item" href="produtos.html">  Produtos    </a>
-                <a class="dropdown-item" href="usuarios.html">  Usuários    </a>
+                <a class="dropdown-item" href="categorias.php">Categorias  </a>
+                <a class="dropdown-item" href="produtos.php">  Produtos    </a>
+                <a class="dropdown-item" href="usuarios.php">  Usuários    </a>
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="mesas.html">MESAS</a>
+              <a class="nav-link" href="mesas.php">MESAS</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">RELATÓRIOS</a>
@@ -42,7 +63,7 @@
               <a class="nav-link disabled" href="#">BACKUP</a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link" href="#">SAIR</a>
+              <a class="nav-link" href="index.php">SAIR</a>
             </li>
           </ul>
           <ul class="navbar-nav ml-auto">
@@ -69,7 +90,7 @@
   </head>
   <body>
     <div class="container bg-dark text-white mt-2 mb-2" id="conteudoDinamico">
-      <p>Conteudo Home</p>
+      <?php print_r($_SESSION); ?>
 
     </div>
 

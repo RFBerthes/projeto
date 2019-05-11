@@ -1,5 +1,4 @@
 <?php
-
     include('conexao.php');
 
     //Recebendo dados do login
@@ -20,26 +19,34 @@
 
     if ($row == 0){
         //trata usuário ou senha inválidos
-        header('location: index.html?erro1');
+        header('location: index.php?erro1');
                 
     }elseif ($row == 1){
         //trata encontrado
         switch ($perfil['perfil']) {
             case "admin":
-                header("Location: admin.html");
+                $_SESSION['usuário'] = $usuario;
+                header("Location: admin.php");
+                exit();
                 break;
             case "caixa":
-                header("Location: caixa.html");
+            
+                header("Location: caixa.php");
+                exit();
                 break;
             case "atendente":
-                header("Location: atendente.html");
+
+                header("Location: atendente.php");
+                exit();
                 break;
             case "cozinheiro":
-                header("Location: cozinheiro.html");
+
+                header("Location: cozinheiro.php");
+                exit();
                 break;
             default;
                 //trata usuário com perfil inválido
-                header('location: index.html?erro2');
+                header('location: index.php?erro2');
                 break;
         }
     }    

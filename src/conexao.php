@@ -7,7 +7,6 @@
 
     //Conexão com servidor e BD
     $conexao = mysqli_connect(HOST, USUARIO, SENHA, BD) or die ('Não foi possível conectar ao banco de dados');
-    session_start();
 ?>
 
 
