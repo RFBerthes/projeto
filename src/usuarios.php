@@ -67,16 +67,15 @@
           <div class="card-header" style="text-align:center">
             <h2>CADASTRO</h2>
           </div>
-          <?php 
-            $url = "http://localhost/projeto/src/usuarios.php";
-            if(strpos($url, "sucesso") == true):
-          ?>
-            <div class="notification is-seccess">
-              <p>Usuário adicionado com sucesso!</p>         
+          <?php if (isset($_GET['sucesso'])) { ?>
+            <div class="alert alert-success" role="alert" style="text-align:center">
+              <strong>Usuário cadastrado com sucesso!</strong>
             </div>
-          <?php 
-            endif;
-          ?>
+          <?php }elseif (isset($_GET['erro1'])){ ?>
+            <div class="alert alert-danger" role="alert" style="text-align:center">
+              <strong>Erro! Usuário já existe, tente novamente...</strong>
+            </div>
+          <?php } ?>
     
           <form action="registro-usuario.php" method="POST">
 

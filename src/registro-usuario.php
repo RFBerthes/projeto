@@ -7,7 +7,7 @@
     $usuario = $_POST["usuario"];
     $senha   = $_POST["senha"];
     
-    $query = "SELECT usuario FROM `usuarios` WHERE usuario = 'usuario' ";
+    $query = "SELECT usuario FROM `usuarios` WHERE usuario = '$usuario' ";
     
     //Consultar o banco de dados para uso
     $result = mysqli_query($conexao, $query);
