@@ -2,8 +2,8 @@
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 09-Maio-2019 às 19:09
+-- Host: localhost
+-- Generation Time: 11-Maio-2019 às 23:46
 -- Versão do servidor: 10.1.39-MariaDB
 -- versão do PHP: 7.3.5
 
@@ -50,21 +50,6 @@ CREATE TABLE `cliente` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `comanda`
---
-
-CREATE TABLE `comanda` (
-  `idcomanda` int(11) NOT NULL,
-  `data` datetime DEFAULT NULL,
-  `cliente_idcliente` int(11) NOT NULL,
-  `mesa_idmesa` int(11) NOT NULL,
-  `usuario_idusuario` int(11) NOT NULL,
-  `pizza_idpizza` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Estrutura da tabela `mesa`
 --
 
@@ -98,7 +83,8 @@ CREATE TABLE `pizza` (
   `idpizza` int(11) NOT NULL,
   `tamanho` int(11) DEFAULT NULL,
   `sabor` varchar(45) DEFAULT NULL,
-  `valor` decimal(10,2) NOT NULL
+  `valor` decimal(10,2) NOT NULL,
+  `pedido_idpedido` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -120,10 +106,10 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`idusuario`, `perfil`, `nome`, `usuario`, `senha`) VALUES
-(1, 'admin', 'TESTE ADMIN', 'admin', 'admin'),
-(2, 'caixa', 'TESTE CAIXA', 'caixa', 'caixa'),
-(3, 'atendente', 'TESTE ATENDENTE', 'atendente', 'atendente'),
-(4, 'cozinheiro', 'TESTE COZINHEIRO', 'cozinheiro', 'cozinheiro');
+(1, 'admin', 'admin', 'admin', 'admin'),
+(2, 'caixa', 'caixa', 'caixa', 'caixa'),
+(3, 'atendente', 'atendente', 'atendente', 'atendente'),
+(4, 'cozinheiro', 'cozinheiro', 'cozinheiro', 'cozinheiro');
 
 --
 -- Indexes for dumped tables
@@ -141,16 +127,6 @@ ALTER TABLE `bebida`
 --
 ALTER TABLE `cliente`
   ADD PRIMARY KEY (`idcliente`);
-
---
--- Indexes for table `comanda`
---
-ALTER TABLE `comanda`
-  ADD PRIMARY KEY (`idcomanda`),
-  ADD KEY `fk_comanda_cliente1_idx` (`cliente_idcliente`),
-  ADD KEY `fk_comanda_mesa1_idx` (`mesa_idmesa`),
-  ADD KEY `fk_comanda_usuario1_idx` (`usuario_idusuario`),
-  ADD KEY `fk_comanda_pizza1_idx` (`pizza_idpizza`);
 
 --
 -- Indexes for table `mesa`
@@ -171,7 +147,8 @@ ALTER TABLE `pedido`
 -- Indexes for table `pizza`
 --
 ALTER TABLE `pizza`
-  ADD PRIMARY KEY (`idpizza`);
+  ADD PRIMARY KEY (`idpizza`),
+  ADD KEY `fk_pizza_pedido1_idx` (`pedido_idpedido`);
 
 --
 -- Indexes for table `usuarios`
@@ -196,12 +173,6 @@ ALTER TABLE `cliente`
   MODIFY `idcliente` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `comanda`
---
-ALTER TABLE `comanda`
-  MODIFY `idcomanda` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `pedido`
 --
 ALTER TABLE `pedido`
@@ -217,7 +188,7 @@ ALTER TABLE `pizza`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
@@ -230,21 +201,18 @@ ALTER TABLE `bebida`
   ADD CONSTRAINT `fk_bebida_comanda1` FOREIGN KEY (`comanda_idcomanda`) REFERENCES `comanda` (`idcomanda`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `comanda`
---
-ALTER TABLE `comanda`
-  ADD CONSTRAINT `fk_comanda_cliente1` FOREIGN KEY (`cliente_idcliente`) REFERENCES `cliente` (`idcliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_comanda_mesa1` FOREIGN KEY (`mesa_idmesa`) REFERENCES `mesa` (`idmesa`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_comanda_pizza1` FOREIGN KEY (`pizza_idpizza`) REFERENCES `pizza` (`idpizza`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_comanda_usuario1` FOREIGN KEY (`usuario_idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Limitadores para a tabela `pedido`
 --
 ALTER TABLE `pedido`
   ADD CONSTRAINT `fk_pedido_cliente1` FOREIGN KEY (`cliente_idcliente`) REFERENCES `cliente` (`idcliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_pedido_comanda1` FOREIGN KEY (`comanda_idcomanda`) REFERENCES `comanda` (`idcomanda`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_pedido_usuario1` FOREIGN KEY (`usuario_idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `pizza`
+--
+ALTER TABLE `pizza`
+  ADD CONSTRAINT `fk_pizza_pedido1` FOREIGN KEY (`pedido_idpedido`) REFERENCES `pedido` (`idpedido`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
