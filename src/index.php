@@ -17,15 +17,6 @@
           <div class="card-body">
             <h5 class="card-title text-center">Bem vindo ao P&P</h5>
             <h5 class="card-title text-center">Identifique-se</h5>
-              <?php if (isset($_GET['erro1'])) { ?>
-                <div class="alert alert-danger" role="alert" style="text-align:center">
-                  <strong>Ops..Usuário ou senha inválidos</strong>
-                </div>
-              <? }elseif (isset($_GET['erro2'])) { ?>
-                <div class="alert alert-danger" role="alert" style="text-align:center">
-                  <strong>Usuário cadastrado com função inválida, procure o adminstrador!</strong>
-                </div>
-              <? } ?>
               <form action="login.php" method="post" class="form-signin">
                 <div class="form-label-group">
                   <!-- <label for="usuario">Usuário</label> -->
@@ -41,6 +32,17 @@
                 </div>
               <button class="btn btn-lg btn-primary btn-block text-uppercase my-2" type="submit">ENTRAR</button>
               </form>
+              <?php if (isset($_GET['erro1'])) { ?>
+                <script>alert('Ops..Usuário ou senha inválidos!')</script>
+                <!-- <div class="alert alert-danger" role="alert" style="text-align:center">
+                  <strong>Ops..Usuário ou senha inválidos</strong>
+                </div> -->
+              <?php }elseif (isset($_GET['erro2'])) { ?>
+                <script>alert('Usuário cadastrado com função inválida, procure o adminstrador!')</script>
+                <!-- <div class="alert alert-danger" role="alert" style="text-align:center">
+                  <strong>Usuário cadastrado com função inválida, procure o adminstrador!</strong>
+                </div> -->
+              <?php } ?>
         </div>
       </div>
     </div>
@@ -52,4 +54,3 @@
     <script src="js/bootstrap.js"></script>
   </body>
 </html>
-

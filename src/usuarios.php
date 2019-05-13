@@ -27,7 +27,7 @@
                 ADMINISTRAÇÃO
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="categorias.php">Categorias </a>
+                <a class="dropdown-item" href="cadastros.php">cadastros </a>
                 <a class="dropdown-item" href="produtos.php">Produtos    </a>
                 <a class="dropdown-item" href="usuarios.php">Usuários    </a>
               </div>

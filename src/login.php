@@ -25,7 +25,6 @@
         //trata encontrado
         switch ($perfil['perfil']) {
             case "admin":
-                $_SESSION['usuário'] = $usuario;
                 header("Location: admin.php");
                 exit();
                 break;
