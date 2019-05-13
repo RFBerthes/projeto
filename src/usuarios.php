@@ -122,19 +122,19 @@
               //$num_total = $mysqli->query("select pro_nome, pro_preco from produto")->num_rows;
               ?>
 
-              <div class="container pt-3">
+              <div class="table-responsive-sm pt-3">
                 <h3 style="text-align:center">Usuários</h3>
                   <div class="pt-2">
                     <?php if($num > 0){ ?>
-                    <table class="table table-bordered table-hover bg-secondary">
-                      <thead style="text-align:center; font-weight:bold;">
+                    <table class="table bg-light table-striped" style="text-align:center">
+                      <thead style="text-align:center; font-weight:bold;" >
                         <tr>
                           <td>Perfil</td>
                           <td>Nome</td>
                           <td>Login</td>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody >
                         <?php while($usuarios = $result->fetch_assoc()) { ?>
                         <tr>
                           <td><?php echo $usuarios['perfil']; ?></td>

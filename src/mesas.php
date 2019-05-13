@@ -61,39 +61,43 @@
       </div>
 
       <script>
-          function addNewRow(){
+        function addMesa(){
+        let conteudo =  '<div class="card text-dark mt-2 mr-2" id="cadr_@VALOR@" style="width:15%" >'+
+                          '<div class="card-body ">'+
+                            '<h5 class="card-title" >Mesa nº ..</h5>'+
+                            '<p class="card-text">Garçom: João</p>'+
+                            '<input onclick="rmRow(this)" type="button" class="btn btn-outline-danger" id="remInput" value="Excluir" aria-hidden="true">'+
+                          '</div>'+ 
+                        '</div>'
+          //conteudo.replace("@VALOR@", last)
+          //last += 1
+          $(".row").append(conteudo)   // Append new elements
+        
+        }
 
-            INSERT INTO 'mesa' ('idmesa') VALUES (NULL);
-            $('.row').append('<div  class="row1" id="+newRow+">'+$(".row1")+'</div>');
-            id++;
-          }
-       </script>
+        function rmMesa(btnstate){
+          var eMesa = document.getElementById("tempMesa")
+          eMesa.parentNode.removeChild(eMesa)
+        }
+
+      </script>
 
   </head>
   <body>
 
-      <div class="container bg-dark text-white mt-2 mb-2" id="conteudoDinamico">
-        <input onclick="addNewRow()" type="button" id="addInput" value="Adicionar Mesa" class="btn btn-primary mb-2 mt-2" aria-hidden="true">
+      <div class="container bg-dark text-white mt-2 pb-3 pl-3" id="conteudoDinamico">
+      
+      <input onclick="addMesa()" type="button" id="addInput" value="Adicionar Mesa" class="btn btn-primary mb-2 mt-3" aria-hidden="true">
 
-        <form action="*" method="post" class="formulario">
-            <div class="row">
-              <div class="row1">
-                <div class="card text-dark ml-3 mt-2" >
-                  <div class="card-body">
-                    <h5 class="card-title" >Mesa nº </h5>
-                    <p class="card-text">Garçom: João</p>
-                    <a href="#" class="card-link">Editar</a>
-                    <input onclick="rmRow(this)" type="button" class="btn btn-outline-danger ml-2" id="remInput" value="Excluir" aria-hidden="true">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-success mb-2 mt-2">Salvar </button>
-            </div>
-        </form>
+        <div class="row pl-3" id="mesas" >
+        <!-- RECEBE DIVS DINAMICAS -->
 
+
+        </div>
       </div>
+
+      
+
 
 
     <!-- Optional JavaScript -->
@@ -114,3 +118,4 @@
   $mesas = $result->fetch_assoc();
   echo '$mesas['idmesa']';
   exit; -->
+

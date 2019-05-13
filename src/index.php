@@ -15,7 +15,8 @@
       <div class="container bg-dark text-white mt-2 mb-2" style="width:500px">
         <div class="card card-signin my-5 text-white bg-dark">
           <div class="card-body">
-            <h5 class="card-title text-center">Logo.png</h5>
+            <h5 class="card-title text-center">Bem vindo ao P&P</h5>
+            <h5 class="card-title text-center">Identifique-se</h5>
               <?php if (isset($_GET['erro1'])) { ?>
                 <div class="alert alert-danger" role="alert" style="text-align:center">
                   <strong>Ops..Usuário ou senha inválidos</strong>
