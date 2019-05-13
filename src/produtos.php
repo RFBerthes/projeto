@@ -134,7 +134,7 @@
             <div class="col">
                 <?php  
                   // puxar produtos do banco
-                  $consulta = "SELECT tamanho, nsabor, valor FROM `pizza` WHERE 1";
+                  $consulta = "SELECT * FROM `pizza` WHERE 1";
                   $result = mysqli_query($conexao, $consulta) or die ($conexao->error);
                   $num = $result->num_rows;
                 ?>
@@ -147,7 +147,7 @@
                         <thead style="text-align:center; font-weight:bold;" >
                           <tr>
                             <td>Tamanho</td>
-                            <td>Sabor</td>
+                            <td>Nº Sabores</td>
                             <td>Valor (R$)</td>      
                           </tr>
                         </thead>
@@ -157,6 +157,7 @@
                             <td><?php echo $pizzas['tamanho']; ?></td>
                             <td><?php echo $pizzas['nsabor']; ?></td>
                             <td><?php echo $pizzas['valor']; ?></td>
+                            <td><input type="checkbox" value="*" /></td>
                           </tr>
                           <?php } ?>
                         </tbody>
