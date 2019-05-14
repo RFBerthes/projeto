@@ -1,4 +1,9 @@
-<!doctype html>
+<?php
+	include_once("conexao.php");
+	$result_usuarios = "SELECT * FROM usuarios";
+	$resultado_usuarios = mysqli_query($conexao, $result_usuarios);
+?>
+<!DOCTYPE html>
 <html lang="pt-br">
   <head>
     <!-- Required meta tags -->
@@ -55,100 +60,166 @@
         </div>
       </nav>
 
-      <script type="text/JavaScript">
-
-      
+      <script type="text/javascript">
+        $('#exampleModal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) // Button that triggered the modal
+          var recipient = button.data('whatever') // Extract info from data-* attributes
+          var recipientnome = button.data('whatevernome')
+          var recipientdetalhes = button.data('whateverdetalhes')
+          // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+          // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+          var modal = $(this)
+          modal.find('.modal-title').text('ID do Curso: ' + recipient)
+          modal.find('#id_curso').val(recipient)
+          modal.find('#recipient-name').val(recipientnome)
+          modal.find('#detalhes-text').val(recipientdetalhes)
+        })
       </script>
 
   </head>
   <body>
       <div class="container bg-dark text-white mt-2 mb-2">
-        <div class="row">
-          <div class="col">
-            <div class="container pt-3">
-              <h3 style="text-align:center">Cadastro</h3>
+      <div class="pull-right">
+				<button type="button" class="btn btn-xs btn-success mt-2 mb-2" data-toggle="modal" data-target="#myModalcad">Cadastrar</button>
+			</div>
+			<!-- Inicio Modal -->
+			<div class="modal fade text-dark" id="myModalcad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel">Cadastrar Usuário</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						</div>
+						<div class="modal-body">
                 <form action="registro-usuario.php" method="POST">
                 
-                  <?php if (isset($_GET['sucesso'])) { ?>
-                    <div class="alert alert-success" role="alert" style="text-align:center">
-                      <strong>Usuário cadastrado com sucesso!</strong>
+                  <div class="form-group">
+                    <label>Perfil</label>
+                    <select name="perfil" id="perfil" class="form-control">
+                        <option value="admin">Administrador</option>
+                        <option value="caixa">Caixa</option>
+                        <option value="atendente" selected>Atendente</option>
+                        <option value="cozinheiro">Cozinheiro</option>
+                    </select>
+                  </div>
+  
+                  <div class="form-group">
+                    <label>Nome</label>
+                    <input type="text" id=nome name=nome required class="form-control" placeholder="Nome">
+                  </div>
+                  <div class="form-group">
+                    <label>Usuario</label>
+                    <input type="text" id=usuario name=usuario required class="form-control" placeholder="Usuário" >
+                  </div>
+  
+                  <div class="form-group">
+                    <label>Senha</label>
+                    <input class="form-control" id="senha" name="senha" required placeholder="Senha" type="password" minlength="4">
+                  </div>
+          
+                  <div class="form-group" style="display: flex;flex-direction: row;justify-content: center;align-items: center;">
+                    <button type="submit" class="btn btn-primary btn-block mb-3" style="width:25%;"> Enviar </button>
+                  </div>
+                </form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Fim Modal -->
+        <?php if (isset($_GET['sucesso'])) { ?>
+          <div class="alert alert-success" role="alert" style="text-align:center">
+            <strong>Usuário cadastrado com sucesso!</strong>
+          </div>
+        <?php }elseif (isset($_GET['erro1'])){ ?>
+          <div class="alert alert-danger" role="alert" style="text-align:center">
+            <strong>Erro! Usuário já existe, tente novamente...</strong>
+          </div>
+        <?php } ?>
+
+        <!-- Table -->
+        <div class="row">
+            <div class="col-md-12">
+              <table class="table bg-light table-striped" style="text-align:center">
+                <thead>
+                  <tr>
+                    <th>Perfil</th>
+                    <th>Nome</th>
+                    <th>Login</th>
+                    <th>Ação</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php while($usuarios = mysqli_fetch_assoc($resultado_usuarios)){ ?>
+                    <tr>
+                      <td><?php echo $usuarios['perfil']; ?></td>
+                      <td><?php echo $usuarios['nome'];   ?></td>
+                      <td><?php echo $usuarios['usuario'];?></td>
+                      <td>                          
+                        <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#exampleModal" data-whateverperfil="<?php echo $usuarios['perfil']; ?>"  data-whatevernome="<?php echo $usuarios['nome']; ?>" data-whateverusuario="<?php echo $usuarios['usuario']; ?>">Editar</button>
+                        <a href="processa_apagar.php?usuario=<?php echo $usuarios['usuario']; ?>"><button type="button" class="btn btn-xs btn-danger">Apagar</button></a>
+                      </td>
+                    </tr>
+                    <!-- Inicio Modal -->
+                    <div class="modal fade" id="myModal<?php echo $usuarios['usuario']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title text-center" id="myModalLabel"><?php echo $usuarios['nome']; ?></h4>
+                          </div>
+                          <div class="modal-body">
+                            <p><?php echo $usuarios['usuario']; ?></p>
+                            <p><?php echo $usuarios['nome'];    ?></p>
+                            <p><?php echo $usuarios['perfil'];  ?></p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  <?php }elseif (isset($_GET['erro1'])){ ?>
-                    <div class="alert alert-danger" role="alert" style="text-align:center">
-                      <strong>Erro! Usuário já existe, tente novamente...</strong>
-                    </div>
+                    <!-- Fim Modal -->
                   <?php } ?>
+                </tbody>
+               </table>
+            </div>
+          </div>
 
-                <div class="form-group">
-                  <label>Perfil</label>
-                  <select name="perfil" id="perfil" class="form-control">
-                      <option value="admin">Administrador</option>
-                      <option value="caixa">Caixa</option>
-                      <option value="atendente" selected>Atendente</option>
-                      <option value="cozinheiro">Cozinheiro</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label>Nome</label>
-                  <input type="text" id=nome name=nome required class="form-control" placeholder="Nome">
-                </div>
-                <div class="form-group">
-                  <label>Usuario</label>
-                  <input type="text" id=usuario name=usuario required class="form-control" placeholder="Usuário" >
-                </div>
-
-                <div class="form-group">
-                  <label>Senha</label>
-                  <input class="form-control" id="senha" name="senha" required placeholder="Senha" type="password" minlength="4">
-                </div>
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title text-dark" id="exampleModalLabel">Editar Usuário</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+                    <form method="POST" action="processa.php" enctype="multipart/form-data">
+                      <div class="form-group">
+                          <label>Perfil</label>
+                          <select name="perfil" id="perfil" class="form-control">
+                              <option value="admin">Administrador</option>
+                              <option value="caixa">Caixa</option>
+                              <option value="atendente" selected>Atendente</option>
+                              <option value="cozinheiro">Cozinheiro</option>
+                          </select>
+                        </div>
         
-                <div class="form-group" style="display: flex;flex-direction: row;justify-content: center;align-items: center;">
-                  <button type="submit" class="btn btn-primary btn-block mb-3" style="width:25%;"> Enviar </button>
-                </div>
-              </form>    
-            </div>
-          </div>
-          <div class="col">
-              <?php
-              include("conexao.php");
-              
-              // puxar produtos do banco
-              $consulta = "SELECT perfil, nome, usuario FROM `usuarios` WHERE 1";
-              $result = mysqli_query($conexao, $consulta) or die ($conexao->error);
-              $num = $result->num_rows;
-              
-              // pega a quantidade total de objetos no banco de dados
-              //$num_total = $mysqli->query("select pro_nome, pro_preco from produto")->num_rows;
-              ?>
+                        <div class="form-group">
+                          <label>Nome</label>
+                          <input type="text" id=nome name=nome required class="form-control" placeholder="Nome">
+                        </div>
+                        <div class="form-group">
+                          <label>Usuario</label>
+                          <input type="text" id=usuario name=usuario required class="form-control" placeholder="Usuário" >
+                        </div>
 
-              <div class="table-responsive-sm pt-3">
-                <h3 style="text-align:center">Usuários</h3>
-                  <div class="pt-2">
-                    <?php if($num > 0){ ?>
-                    <table class="table bg-light table-striped" style="text-align:center">
-                      <thead style="text-align:center; font-weight:bold;" >
-                        <tr>
-                          <td>Perfil</td>
-                          <td>Nome</td>
-                          <td>Login</td>
-                        </tr>
-                      </thead>
-                      <tbody >
-                        <?php while($usuarios = $result->fetch_assoc()) { ?>
-                        <tr>
-                          <td><?php echo $usuarios['perfil']; ?></td>
-                          <td><?php echo $usuarios['nome'];   ?></td>
-                          <td><?php echo $usuarios['usuario'];?></td>
-                        </tr>
-                        <?php } ?>
-                      </tbody>
-                    </table>
-                  <?php } ?>
+                      <!-- <input name="id" type="hidden" id="id_curso"> -->
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-danger">Alterar</button>
+                      </div>
+                    </form>
+                  </div>			  
                 </div>
+              </div>
             </div>
-          </div>
-        </div>
       </div>
 
     <!-- Optional JavaScript -->
