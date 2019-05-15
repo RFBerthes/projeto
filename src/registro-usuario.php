@@ -17,16 +17,15 @@
     echo $row;
 
     if ($row == 1){
-      echo "erro1";
+       echo "erro1";
        header('location:usuarios.php?erro1');
-       exit();
        
     }else{
        $inserirdados = mysqli_query($conexao, "INSERT INTO `usuarios` (`idusuario`, `perfil`, `nome`, `usuario`, `senha`) VALUES (NULL, '$perfil', '$nome', '$usuario', '$senha')");
-       header('location:usuarios.php?sucesso');
-       exit();
+       header('location:usuarios.php?sucesso1');
        
     }
     
+    $conexao->close();
 ?>
 

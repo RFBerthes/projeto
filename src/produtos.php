@@ -8,6 +8,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../node_modules/sweetalert2/dist/s">
+
 
     <title>Admin</title>
 
@@ -202,7 +204,15 @@
               </div>
             </div>
             <?php if (isset($_GET['sucesso1'])) { ?>
-              <script>alert('Pizza cadastrada com sucesso!')</script>
+              <!-- <script>alert('Pizza cadastrada com sucesso!')</script> -->
+              <script>
+                if(1==1){
+                Swal.fire(
+                  'Good job!',
+                  'You clicked the button!',
+                  'success'
+                )}
+              </script>
                   <!-- <div class="alert alert-success" role="alert" style="text-align:center">
                     <strong>Pizza cadastrado com sucesso!</strong>
                   </div> -->
@@ -232,6 +242,9 @@
     <script src="js/jquery.js"></script>
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.js"></script>
+    <script src="../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+
+
   </body>
 </html>
 

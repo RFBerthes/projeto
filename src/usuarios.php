@@ -13,6 +13,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../node_modules/sweetalert2/dist/sweetalert2.css">
+
+    <!-- JavaScript -->
+    <script src="../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
     <title>Admin</title>
 
@@ -59,25 +63,6 @@
           </form>
         </div>
       </nav>
-
-      <script type="text/javascript">
-        $('#exampleModal').on('show.bs.modal', function (event) {
-          var button = $(event.relatedTarget) // Button that triggered the modal
-          var recipient = button.data('whatever') // Extract info from data-* attributes
-          var recipientperfil = button.data('whateverperfil')
-          var recipientnome = button.data('whatevernome')
-          var recipientusuario = button.data('whateverusuario')
-          // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-          // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-          var modal = $(this)
-          modal.find('.modal-title').text('ID do Usuario: ' + recipient)
-          modal.find('#idusuario').val(recipient)
-          modal.find('#recipient-perfil').val(recipientperfil)
-          modal.find('#recipient-name').val(recipientnome)
-          modal.find('#recipient-usuario').val(recipientusuario)
-        })
-      </script>
-
   </head>
   <body>
       <div class="container bg-dark text-white mt-2 mb-2">
@@ -128,16 +113,6 @@
 				</div>
 			</div>
 			<!-- Fim Modal -->
-        <?php if (isset($_GET['sucesso'])) { ?>
-          <div class="alert alert-success" role="alert" style="text-align:center">
-            <strong>Usuário cadastrado com sucesso!</strong>
-          </div>
-        <?php }elseif (isset($_GET['erro1'])){ ?>
-          <div class="alert alert-danger" role="alert" style="text-align:center">
-            <strong>Erro! Usuário já existe, tente novamente...</strong>
-          </div>
-        <?php } ?>
-
         <!-- Table -->
         <div class="row">
             <div class="col-md-12">
@@ -156,7 +131,7 @@
                       <td><?php echo $usuarios['perfil']; ?></td>
                       <td><?php echo $usuarios['nome'];   ?></td>
                       <td><?php echo $usuarios['usuario'];?></td>
-                      <td>                          
+                      <td>
                         <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#exampleModal" data-whatever="<?php echo $usuarios['idusuario']; ?>"  data-whateverperfil="<?php echo $usuarios['perfil']; ?>"  data-whatevernome="<?php echo $usuarios['nome']; ?>" data-whateverusuario="<?php echo $usuarios['usuario']; ?>" >Editar</button>
                         <a href="apagar-usuario.php?usuario=<?php echo $usuarios['usuario']; ?>"><button type="button" class="btn btn-xs btn-danger">Apagar</button></a>
                       </td>
@@ -178,7 +153,7 @@
                     <form method="POST" action="edita-usuario.php" enctype="multipart/form-data">
                       <div class="form-group">
                           <label>Perfil</label>
-                          <select name="perfil" id="perfil" class="form-control">
+                          <select name=perfil id=recepient-perfil class="form-control">
                               <option value="admin">Administrador</option>
                               <option value="caixa">Caixa</option>
                               <option value="atendente" selected>Atendente</option>
@@ -188,13 +163,13 @@
         
                         <div class="form-group">
                           <label>Nome</label>
-                          <input type="text" id=nome name=nome required class="form-control" placeholder="Nome">
+                          <input type="text" id=recepient-nome name=nome required class="form-control" placeholder="Nome">
                         </div>
                         <div class="form-group">
                           <label>Usuario</label>
-                          <input type="text" id=usuario name=usuario required class="form-control" placeholder="Usuário" >
+                          <input type="text" id=recepient-usuario name=usuario required class="form-control" placeholder="Usuário" >
                         </div>
-                      <input type="hidden" name="idusuario"  id="idusuario">
+                      <input type="hidden" id="recepient-idusuario" name="idusuario">
                       <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-danger">Alterar</button>
@@ -206,11 +181,81 @@
             </div>
       </div>
 
+      <!-- popup informativos -->
+      <?php if (isset($_GET['sucesso1'])) { ?>
+        <script>
+          Swal.fire({
+            type: 'success',
+            title: 'Feito!',
+            text: 'Usuário cadastrado com sucesso!!',
+          })
+        </script>
+      <?php }elseif (isset($_GET['erro1'])) { ?>
+        <script>
+            Swal.fire({
+            type: 'error',
+            title: 'Oops...',
+            text: 'Usuário já existe, tente novamente',
+          })
+        </script>
+      <?php }elseif (isset($_GET['sucesso2'])) { ?>
+        <script>
+          Swal.fire({
+            type: 'success',
+            title: 'Feito!',
+            text: 'Usuário editado com sucesso!!',
+          })
+        </script>
+      <?php }elseif (isset($_GET['erro2'])) { ?>
+        <script>
+            Swal.fire({
+            type: 'error',
+            title: 'Oops...',
+            text: 'Usuário não foi editado, tente novamente',
+          })
+        </script>
+        <?php }elseif (isset($_GET['sucesso3'])) { ?>
+        <script>
+          Swal.fire({
+            type: 'success',
+            title: 'Feito',
+            text: 'Usuário excluído com sucesso!!',
+          })
+        </script>
+      <?php }elseif (isset($_GET['erro3'])) { ?>
+        <script>
+            Swal.fire({
+            type: 'error',
+            title: 'Oops...',
+            text: 'Usuário não foi excluído, tente novamente',
+          })
+        </script>
+      <?php } ?>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="js/jquery.js"></script>
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.js"></script>
+    
+
+    <script type="text/javascript">
+        $('#exampleModal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) // Button that triggered the modal
+          var recipient = button.data('whatever') // Extract info from data-* attributes
+          var recipientperfil = button.data('whateverperfil')
+          var recipientnome = button.data('whatevernome')
+          var recipientusuario = button.data('whateverusuario')
+          // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+          // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+          var modal = $(this)
+          modal.find('.modal-title').text('ID do Usuario: ' + recipient)
+          modal.find('#recepient-idusuario').val(recipient)
+          modal.find('#recipient-perfil').val(recipientperfil)
+          modal.find('#recipient-name').val(recipientnome)
+          modal.find('#recipient-usuario').val(recipientusuario)
+        })
+      </script>
   </body>
 </html>
 

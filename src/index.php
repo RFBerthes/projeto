@@ -8,8 +8,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../node_modules/sweetalert2/dist/sweetalert2.css">
+    <script src="../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
     <title>Peça&Pag</title>
+
+
   </head>
   <body>
       <div class="container bg-dark text-white mt-2 mb-2" style="width:500px">
@@ -33,7 +37,15 @@
               <button class="btn btn-lg btn-primary btn-block text-uppercase my-2" type="submit">ENTRAR</button>
               </form>
               <?php if (isset($_GET['erro1'])) { ?>
-                <script>alert('Ops..Usuário ou senha inválidos!')</script>
+                <!-- <script>alert('Ops..Usuário ou senha inválidos!')</script> -->
+                <script>
+                  Swal.fire({
+                    type: 'error',
+                    title: 'Oops...',
+                    text: 'Usuário ou senha inválidos!!',
+                    footer: 'Tente novamente'
+                  })
+                </script>
                 <!-- <div class="alert alert-danger" role="alert" style="text-align:center">
                   <strong>Ops..Usuário ou senha inválidos</strong>
                 </div> -->
