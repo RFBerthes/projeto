@@ -64,15 +64,17 @@
         $('#exampleModal').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget) // Button that triggered the modal
           var recipient = button.data('whatever') // Extract info from data-* attributes
+          var recipientperfil = button.data('whateverperfil')
           var recipientnome = button.data('whatevernome')
-          var recipientdetalhes = button.data('whateverdetalhes')
+          var recipientusuario = button.data('whateverusuario')
           // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
           // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
           var modal = $(this)
-          modal.find('.modal-title').text('ID do Curso: ' + recipient)
-          modal.find('#id_curso').val(recipient)
+          modal.find('.modal-title').text('ID do Usuario: ' + recipient)
+          modal.find('#idusuario').val(recipient)
+          modal.find('#recipient-perfil').val(recipientperfil)
           modal.find('#recipient-name').val(recipientnome)
-          modal.find('#detalhes-text').val(recipientdetalhes)
+          modal.find('#recipient-usuario').val(recipientusuario)
         })
       </script>
 
@@ -155,27 +157,10 @@
                       <td><?php echo $usuarios['nome'];   ?></td>
                       <td><?php echo $usuarios['usuario'];?></td>
                       <td>                          
-                        <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#exampleModal" data-whateverperfil="<?php echo $usuarios['perfil']; ?>"  data-whatevernome="<?php echo $usuarios['nome']; ?>" data-whateverusuario="<?php echo $usuarios['usuario']; ?>">Editar</button>
-                        <a href="processa_apagar.php?usuario=<?php echo $usuarios['usuario']; ?>"><button type="button" class="btn btn-xs btn-danger">Apagar</button></a>
+                        <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#exampleModal" data-whatever="<?php echo $usuarios['idusuario']; ?>"  data-whateverperfil="<?php echo $usuarios['perfil']; ?>"  data-whatevernome="<?php echo $usuarios['nome']; ?>" data-whateverusuario="<?php echo $usuarios['usuario']; ?>" >Editar</button>
+                        <a href="apagar-usuario.php?usuario=<?php echo $usuarios['usuario']; ?>"><button type="button" class="btn btn-xs btn-danger">Apagar</button></a>
                       </td>
                     </tr>
-                    <!-- Inicio Modal -->
-                    <div class="modal fade" id="myModal<?php echo $usuarios['usuario']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title text-center" id="myModalLabel"><?php echo $usuarios['nome']; ?></h4>
-                          </div>
-                          <div class="modal-body">
-                            <p><?php echo $usuarios['usuario']; ?></p>
-                            <p><?php echo $usuarios['nome'];    ?></p>
-                            <p><?php echo $usuarios['perfil'];  ?></p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Fim Modal -->
                   <?php } ?>
                 </tbody>
                </table>
@@ -190,7 +175,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   </div>
                   <div class="modal-body">
-                    <form method="POST" action="processa.php" enctype="multipart/form-data">
+                    <form method="POST" action="edita-usuario.php" enctype="multipart/form-data">
                       <div class="form-group">
                           <label>Perfil</label>
                           <select name="perfil" id="perfil" class="form-control">
@@ -209,8 +194,7 @@
                           <label>Usuario</label>
                           <input type="text" id=usuario name=usuario required class="form-control" placeholder="Usuário" >
                         </div>
-
-                      <!-- <input name="id" type="hidden" id="id_curso"> -->
+                      <input type="hidden" name="idusuario"  id="idusuario">
                       <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-danger">Alterar</button>
