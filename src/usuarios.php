@@ -36,8 +36,9 @@
                 ADMINISTRAÇÃO
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="cadastros.php">cadastros </a>
-                <a class="dropdown-item" href="produtos.php">Produtos    </a>
+                <a class="dropdown-item" href="sabores.php">Sabores </a>
+                <a class="dropdown-item" href="pizzas.php">Pizzas    </a>
+                <a class="dropdown-item" href="bebidas.php">Bebidas    </a>
                 <a class="dropdown-item" href="usuarios.php">Usuários    </a>
               </div>
             </li>
@@ -116,6 +117,7 @@
         <!-- Table -->
         <div class="row">
             <div class="col-md-12">
+              <h3 style="text-align:center">Usuários</h3>
               <table class="table bg-light table-striped" style="text-align:center">
                 <thead>
                   <tr>
@@ -238,7 +240,7 @@
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.js"></script>
     
-
+    <!-- Modal JavaScript -->
     <script type="text/javascript">
         $('#exampleModal').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget) // Button that triggered the modal

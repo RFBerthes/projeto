@@ -14,7 +14,6 @@
 
     //verificar quantas linha a query retornou (0 não encontrou | 1 encontrou)
     $row = mysqli_num_rows($result);
-    echo $row;
 
     if ($row == 1){
        echo "erro1";

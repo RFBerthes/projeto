@@ -37,23 +37,27 @@
               <button class="btn btn-lg btn-primary btn-block text-uppercase my-2" type="submit">ENTRAR</button>
               </form>
               <?php if (isset($_GET['erro1'])) { ?>
-                <!-- <script>alert('Ops..Usuário ou senha inválidos!')</script> -->
                 <script>
                   Swal.fire({
                     type: 'error',
                     title: 'Oops...',
                     text: 'Usuário ou senha inválidos!!',
-                    footer: 'Tente novamente'
+                    // footer: 'Tente novamente'
                   })
                 </script>
                 <!-- <div class="alert alert-danger" role="alert" style="text-align:center">
                   <strong>Ops..Usuário ou senha inválidos</strong>
                 </div> -->
               <?php }elseif (isset($_GET['erro2'])) { ?>
-                <script>alert('Usuário cadastrado com função inválida, procure o adminstrador!')</script>
-                <!-- <div class="alert alert-danger" role="alert" style="text-align:center">
-                  <strong>Usuário cadastrado com função inválida, procure o adminstrador!</strong>
-                </div> -->
+                <script>
+                    Swal.fire({
+                      type: 'error',
+                      title: 'Oops...',
+                      text: 'Usuário cadastrado com função inválida, procure o adminstrador!',
+                      // footer: 'Tente novamente'
+                    })
+                </script>
+
               <?php } ?>
         </div>
       </div>

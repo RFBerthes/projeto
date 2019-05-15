@@ -33,9 +33,10 @@
                 ADMINISTRAÇÃO
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="cadastros.php"> cadastros  </a>
-                <a class="dropdown-item" href="produtos.php">  Produtos    </a>
-                <a class="dropdown-item" href="usuarios.php">  Usuários    </a>
+                <a class="dropdown-item" href="sabores.php">Sabores  </a>
+                <a class="dropdown-item" href="pizzas.php">Pizzas    </a>
+                <a class="dropdown-item" href="bebidas.php">Bebidas    </a>
+                <a class="dropdown-item" href="usuarios.php">Usuários    </a>
               </div>
             </li>
             <li class="nav-item">

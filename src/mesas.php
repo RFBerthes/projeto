@@ -28,7 +28,8 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="cadastros.php">Categorias </a>
-                <a class="dropdown-item" href="produtos.php">  Produtos   </a>
+                <a class="dropdown-item" href="pizzas.php">  Pizzas   </a>
+                <a class="dropdown-item" href="bebidas.php">Bebidas    </a>
                 <a class="dropdown-item" href="usuarios.php">  Usuários   </a>
               </div>
             </li>

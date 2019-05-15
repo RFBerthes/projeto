@@ -5,12 +5,6 @@
 	$nome = mysqli_real_escape_string($conexao, $_POST['nome']);
 	$perfil = mysqli_real_escape_string($conexao, $_POST['perfil']);
 	
-	// echo "id $idusuario <br>";
-	// echo "user $usuario <br>";
-	// echo "nome $nome <br>";
-	// echo "perfil $perfil<br>";
-	// exit;
-	
 	$result_usuarios = "UPDATE usuarios SET nome='$nome', perfil = '$perfil', usuario = '$usuario' WHERE idusuario = '$idusuario'";	
 	$resultado_usuarios = mysqli_query($conexao, $result_usuarios);	
 
