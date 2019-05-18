@@ -22,9 +22,9 @@
       <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item ">
-            <a class="nav-link" href="admin.php" id="home">HOME <span class="sr-only">(página atual)</span></a>
+            <a class="nav-link" href="atendente.php" id="home">HOME <span class="sr-only">(página atual)</span></a>
           </li>
-          <li class="nav-item dropdown ">
+          <!-- <li class="nav-item dropdown ">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               ADMINISTRAÇÃO
             </a>
@@ -33,20 +33,20 @@
               <a class="dropdown-item" href="pizzas.php">   Pizzas     </a>
               <a class="dropdown-item" href="bebidas.php">  Bebidas    </a>
             </div>
-          </li>
+          </li> -->
           <li class="nav-item">
-            <a class="nav-link"  href="usuarios.php"> USUÁRIOS   </a>
+            <a class="nav-link"  href="#"> COMANDAS   </a>
           </li>
           </li>
           <li class="nav-item" id="link-mesa">
-            <a class="nav-link" href="mesas.php">MESAS</a>
+            <a class="nav-link" href="#">CLIENTES</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">RELATÓRIOS</a>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#">MESAS</a>
           </li>
           <li class="nav-item">
             <a class="nav-link disabled" href="#">BACKUP</a>
-          </li>
+          </li> -->
           <li class="nav-item ">
             <a class="nav-link" href="index.php">SAIR</a>
           </li>
