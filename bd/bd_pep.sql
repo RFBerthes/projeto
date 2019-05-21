@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 15-Maio-2019 às 22:02
+-- Generation Time: 21-Maio-2019 às 22:33
 -- Versão do servidor: 10.1.39-MariaDB
 -- versão do PHP: 7.3.5
 
@@ -75,13 +75,23 @@ CREATE TABLE `comanda` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `mesa`
+-- Estrutura da tabela `mesas`
 --
 
-CREATE TABLE `mesa` (
+CREATE TABLE `mesas` (
   `idmesa` int(11) NOT NULL,
   `lugares` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `mesas`
+--
+
+INSERT INTO `mesas` (`idmesa`, `lugares`) VALUES
+(1, NULL),
+(2, NULL),
+(3, NULL),
+(4, NULL);
 
 -- --------------------------------------------------------
 
@@ -131,18 +141,19 @@ INSERT INTO `pizzas` (`idpizza`, `tamanho`, `nsabor`, `valor`) VALUES
 
 CREATE TABLE `sabores` (
   `idsabor` int(11) NOT NULL,
-  `nome` varchar(45) NOT NULL
+  `nome` varchar(45) NOT NULL,
+  `pizzas_idpizza` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `sabores`
 --
 
-INSERT INTO `sabores` (`idsabor`, `nome`) VALUES
-(1, 'Portuguesa'),
-(2, 'Calabresa'),
-(5, 'Frango'),
-(9, 'Quatro Queijos');
+INSERT INTO `sabores` (`idsabor`, `nome`, `pizzas_idpizza`) VALUES
+(1, 'Portuguesa', 0),
+(2, 'Calabresa', 0),
+(5, 'Frango', 0),
+(9, 'Quatro Queijos', 0);
 
 -- --------------------------------------------------------
 
@@ -192,9 +203,9 @@ ALTER TABLE `comanda`
   ADD KEY `fk_comanda_bebida1_idx` (`bebida_idbebida`);
 
 --
--- Indexes for table `mesa`
+-- Indexes for table `mesas`
 --
-ALTER TABLE `mesa`
+ALTER TABLE `mesas`
   ADD PRIMARY KEY (`idmesa`);
 
 --
@@ -217,7 +228,8 @@ ALTER TABLE `pizzas`
 -- Indexes for table `sabores`
 --
 ALTER TABLE `sabores`
-  ADD PRIMARY KEY (`idsabor`);
+  ADD PRIMARY KEY (`idsabor`),
+  ADD KEY `fk_sabores_pizzas1_idx` (`pizzas_idpizza`);
 
 --
 -- Indexes for table `usuarios`
@@ -246,6 +258,12 @@ ALTER TABLE `cliente`
 --
 ALTER TABLE `comanda`
   MODIFY `idcomanda` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `mesas`
+--
+ALTER TABLE `mesas`
+  MODIFY `idmesa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `pedido`
@@ -281,7 +299,7 @@ ALTER TABLE `usuarios`
 ALTER TABLE `comanda`
   ADD CONSTRAINT `fk_comanda_bebida1` FOREIGN KEY (`bebida_idbebida`) REFERENCES `bebidas` (`idbebida`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_comanda_cliente1` FOREIGN KEY (`cliente_idcliente`) REFERENCES `cliente` (`idcliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_comanda_mesa1` FOREIGN KEY (`mesa_idmesa`) REFERENCES `mesa` (`idmesa`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_comanda_mesa1` FOREIGN KEY (`mesa_idmesa`) REFERENCES `mesas` (`idmesa`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_comanda_usuarios1` FOREIGN KEY (`usuarios_idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -292,6 +310,12 @@ ALTER TABLE `pedido`
   ADD CONSTRAINT `fk_pedido_comanda1` FOREIGN KEY (`comanda_idcomanda`) REFERENCES `comanda` (`idcomanda`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_pedido_pizza1` FOREIGN KEY (`pizza_idpizza`) REFERENCES `pizzas` (`idpizza`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_pedido_usuario1` FOREIGN KEY (`usuario_idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `sabores`
+--
+ALTER TABLE `sabores`
+  ADD CONSTRAINT `fk_sabores_pizzas1` FOREIGN KEY (`pizzas_idpizza`) REFERENCES `pizzas` (`idpizza`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
