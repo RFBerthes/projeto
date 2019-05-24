@@ -1,5 +1,6 @@
 <?php
   include_once("conexao.php");
+    session_start();
     // puxar produtos do banco
     $consulta1 = "SELECT * FROM `usuarios`";
     $consulta2 = "SELECT * FROM `mesas`";
@@ -20,10 +21,12 @@
     </script>
   </head>
   <body>
-    <div class="container bg-dark text-white mt-3">
+    <div class="container bg-dark text-white mt-3" style="height: auto">
+
     <div class="row">
-      <div class="column ml-4 mt-3 ">
-        <h2 style="text-align:center">Usuários</h2>
+      <div class="column mr-1 pl-2 pr-2 mt-3 ml-2">
+        <div style="height: 50%">
+          <h2 style="text-align:center">Usuários</h2>
           <table class="table bg-light table-striped " style="text-align:center">
               <thead>
                 <tr>
@@ -41,78 +44,64 @@
                   </tr>
                 <?php } ?>
               </tbody>
-             </table>
-      </div>
-      <div class="colunm ml-4 mt-3">
-        <h2 style="text-align:center">Mesas</h2>
-        <div class="row">
-            <?php while($mesas = mysqli_fetch_assoc($result_mesas)){ ?>
-              <div class="card text-dark mr-1"  style="width:120px;height:120px;" >
-                  <div class="card-body ">
-                    <p>Mesa nº <?php echo $mesas['idmesa']; ?></p>
-                    <a href="apagar-mesa.php?idmesa=<?php echo $mesas['idmesa']; ?>"><button type="button" class="btn btn-xs btn-danger">Apagar</button></a>
-                  </div> 
-                </div>          
-            <?php } ?>
+              </table>
           </div>
-        </div>
+          
+          <div>
+            <h2 style="text-align:center">Sabores</h2>
+            <table class="table bg-light table-striped" style="text-align:center">
+                <thead>
+                  <tr>
+                    <th>Nome</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php while($sabores = mysqli_fetch_assoc($result_sabores)){ ?>
+                  <tr>
+                    <td><?php echo $sabores['nome']; ?></td>
+                  </tr>
+                  <?php } ?>
+                </tbody>
+              </table>
+          </div>
       </div>
-    <div class="row">
-      <h2 style="text-align:center">Sabores</h2>
-      <div class="column ml-4 mt-2">
+      <div class="colunm pl-4 pr-2 mt-3">
+        <div style="height: 50%">
+          <h2 style="text-align:center">Mesas</h2>
+            <div class="row">
+                <?php while($mesas = mysqli_fetch_assoc($result_mesas)){ ?>
+                  <div class="card text-dark mr-1"  style="width:19,5%;height:15%" >
+                      <div class="card-body ">
+                        <p>Mesa nº <?php echo $mesas['idmesa']; ?></p>
+                      </div> 
+                    </div>          
+                <?php } ?>
+            </div>
+        </div>
+        <div>
+          <h2 style="text-align:center">Bebidas</h2>
           <table class="table bg-light table-striped" style="text-align:center">
               <thead>
                 <tr>
                   <th>Nome</th>
-                  <th>Ação</th>
+                  <th>Valor (R$)</th>
+                  <th>Estoque</th>  
                 </tr>
               </thead>
               <tbody>
-                <?php while($sabores = mysqli_fetch_assoc($result_sabores)){ ?>
+                <?php while($bebidas = mysqli_fetch_assoc($result_bebidas)){ ?>
                 <tr>
-                  <td><?php echo $sabores['nome']; ?></td>
-                  <td>
-                    <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $sabores['idsabor']; ?>" data-whatevernome="<?php echo $sabores['nome']; ?>" >Editar</button>
-                    <a href="apagar-sabor.php?nome=<?php echo $sabores['nome']; ?>"><button type="button"
-                        class="btn btn-xs btn-danger">Apagar</button></a>
-                  </td>
+                  <td><?php echo $bebidas['nome']; ?></td>
+                  <td><?php echo $bebidas['valor']; ?></td>
+                  <td><?php echo $bebidas['estoque']; ?></td>
                 </tr>
                 <?php } ?>
               </tbody>
             </table>
-
-      </div>
-      <div class="column ml-4 mt-3">
-        <h2 style="text-align:center">Bebidas</h2>
-        <table class="table bg-light table-striped" style="text-align:center">
-            <thead>
-              <tr>
-                <th>Nome</th>
-                <th>Valor (R$)</th>
-                <th>Estoque</th>  
-                <th>Ação</th> 
-              </tr>
-            </thead>
-            <tbody>
-              <?php while($bebidas = mysqli_fetch_assoc($result_bebidas)){ ?>
-              <tr>
-                <td><?php echo $bebidas['nome']; ?></td>
-                <td><?php echo $bebidas['valor']; ?></td>
-                <td><?php echo $bebidas['estoque']; ?></td>
-                <td>
-                  <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $bebidas['idbebida']; ?>" data-whateverestoque="<?php echo $bebidas['estoque']; ?>" data-whatevernome="<?php echo $bebidas['nome']; ?>" data-whatevervalor="<?php echo $bebidas['valor']; ?>">Editar</button>
-                  <a href="apagar-bebida.php?nome=<?php echo $bebidas['nome']; ?>"><button type="button"
-                      class="btn btn-xs btn-danger">Apagar</button></a>
-                </td>
-              </tr>
-              <?php } ?>
-            </tbody>
-          </table>
-        
         </div>
+      </div>
     </div>
-    
-    </div>
+  </div>
 
 
     <!-- Optional JavaScript -->

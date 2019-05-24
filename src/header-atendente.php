@@ -11,7 +11,7 @@
 <!-- JavaScript -->
   <script src="../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
-  <title>Admin</title>
+  <title>Atendente</title>
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-info">
       <a class="navbar-brand" href="admin.php">Peça&Pag</a>
