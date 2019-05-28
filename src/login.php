@@ -39,6 +39,8 @@
             case "atendente":
 
                 header("Location: atendente.php");
+                session_start();
+                $_SESSION['idusuario'] = $dados['idusuario'];
                 exit();
                 break;
             case "cozinheiro":

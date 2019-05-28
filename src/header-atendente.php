@@ -14,7 +14,7 @@
   <title>Atendente</title>
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-info">
-      <a class="navbar-brand" href="admin.php">Peça&Pag</a>
+      <a class="navbar-brand" href="atendente.php">Peça&Pag</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -35,11 +35,11 @@
             </div>
           </li> -->
           <li class="nav-item">
-            <a class="nav-link"  href="#"> COMANDAS   </a>
+            <a class="nav-link"  href="comandas.php"> COMANDAS   </a>
           </li>
           </li>
           <li class="nav-item" id="link-mesa">
-            <a class="nav-link" href="#">CLIENTES</a>
+            <a class="nav-link" href="clientes.php">CLIENTES</a>
           </li>
           <!-- <li class="nav-item">
             <a class="nav-link" href="#">MESAS</a>

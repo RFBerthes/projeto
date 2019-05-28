@@ -1,58 +1,85 @@
+<?php
+  include_once("conexao.php");
+    session_start();
+    // puxar produtos do banco
+    $consulta1 = "SELECT * FROM `clientes`";
+    // $consulta2 = "SELECT * FROM `mesas`";
+    // $consulta3 = "SELECT * FROM `sabores`";
+    // $consulta4 = "SELECT * FROM `bebidas`";
+    $result_clientes = mysqli_query($conexao, $consulta1) or die ($conexao->error);
+    // $result_mesas = mysqli_query($conexao, $consulta2) or die ($conexao->error);
+    // $result_sabores = mysqli_query($conexao, $consulta3) or die ($conexao->error);
+    // $result_bebidas = mysqli_query($conexao, $consulta4) or die ($conexao->error);
+
+?>
 <!doctype html>
 <html lang="pt-br">
-  <head>
-    <?php require_once "header-atendente.php" ?>
+
+<head>
+  <?php require_once "header-atendente.php" ?>
   </head>
-  <body class="bg-dark text-white">
-      <div class="container-fluid">
-          <div class="row">
-            <div class="col-sm-3 bg-secondary" >
-              <p>Lorem ipsum...</p>
-            </div>
-            <div class="col-sm-7 bg-white text-dark" >
-            <?php
-session_start();
-define("DIR", dirname(__FILE__));
-define("DS", DIRECTORY_SEPARATOR);
 
-include_once DIR.DS.'App'.DS.'Loader.php';
+<body>
+  <div class="container bg-dark text-white mt-2 mb-2 pb-2">
 
-$loader = new App\Loader();
-$loader->register();
+  </div>
 
-$pdo               = new \PDO("mysql:host=localhost;dbname=shop", "root", "");
-$productRepository = new App\Model\Product\ProductRepositoryPDO($pdo);
+  <!-- popup informativos -->
+  <?php if (isset($_GET['sucesso1'])) { ?>
+  <script>
+    Swal.fire({
+      type: 'success',
+      title: 'Feito!',
+      text: 'Cliente cadastrado com sucesso!!',
+    })
+  </script>
+  <?php }elseif (isset($_GET['erro1'])) { ?>
+  <script>
+    Swal.fire({
+      type: 'error',
+      title: 'Oops...',
+      text: 'Cliente já existe, tente novamente',
+    })
+  </script>
+  <?php }elseif (isset($_GET['sucesso2'])) { ?>
+  <script>
+    Swal.fire({
+      type: 'success',
+      title: 'Feito!',
+      text: 'Cliente editado com sucesso!!',
+    })
+  </script>
+  <?php }elseif (isset($_GET['erro2'])) { ?>
+  <script>
+    Swal.fire({
+      type: 'error',
+      title: 'Oops...',
+      text: 'Cliente não foi editado, tente novamente',
+    })
+  </script>
+  <?php }elseif (isset($_GET['sucesso3'])) { ?>
+  <script>
+    Swal.fire({
+      type: 'success',
+      title: 'Feito',
+      text: 'Cliente excluído com sucesso!!',
+    })
+  </script>
+  <?php }elseif (isset($_GET['erro3'])) { ?>
+  <script>
+    Swal.fire({
+      type: 'error',
+      title: 'Oops...',
+      text: 'Cliente não foi excluído, tente novamente',
+    })
+  </script>
+  <?php } ?>
 
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="js/jquery.js"></script>
+  <script src="js/popper.js"></script>
+  <script src="js/bootstrap.js"></script>
+</body>
 
-$page   = isset($_GET['page']) ? $_GET['page'] : '';
-$action = isset($_GET['action']) ? $_GET['action'] : 'index';
-
-
-
-
-switch ($page) {
-    case 'cart':
-        $sessionCart = new App\Model\Shopping\CartSession();
-        $cart = new App\Controller\Cart($productRepository, $sessionCart);
-        call_user_func_array(array($cart, $action), array());
-    break;
-
-    default:
-        $home = new App\Controller\Home($productRepository);
-        call_user_func_array(array($home, $action), array());
-}
-?>
-            </div>
-            <div class="col-sm-2" style="background-color:pink;">
-                <p>Sed ut perspiciatis...</p>
-              
-          </div>
-        </div> 
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="js/jquery.js"></script>
-    <script src="js/popper.js"></script>
-    <script src="js/bootstrap.js"></script>
-  </body>
 </html>

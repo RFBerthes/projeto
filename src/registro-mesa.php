@@ -12,6 +12,5 @@
     }else{
       header('location:mesas.php?erro1');      
     }
-    
 ?>
 

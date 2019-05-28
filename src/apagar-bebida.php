@@ -4,8 +4,8 @@
 	$nome = $_GET['nome'];
 	
 	
-	$del_sabor = "DELETE FROM bebidas WHERE nome = '$nome'";
-	$result = mysqli_query($conexao, $del_sabor);	
+	$del_bebida = "DELETE FROM bebidas WHERE nome = '$nome'";
+	$result = mysqli_query($conexao, $del_bebida);	
 
 
 	if(mysqli_affected_rows($conexao) != 0){
