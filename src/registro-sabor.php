@@ -15,7 +15,7 @@
     }else{
       $insere_sabor = "INSERT INTO `sabores` (`idsabor`, `nome`) VALUES (NULL, '$nome')";	
       $resultado_sabor = mysqli_query($conexao, $insere_sabor);	
-      header('location:cadastros.php?sucesso1');       
+      header('location:sabores.php?sucesso1');       
     }
     
 ?>
