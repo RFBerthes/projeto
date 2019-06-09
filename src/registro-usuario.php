@@ -1,30 +1,45 @@
 <?php
-    include('conexao.php');
 
-    //Recebendo dados do login
-    $perfil  = $_POST["perfil"];
-    $nome    = $_POST["nome"];
-    $usuario = $_POST["usuario"];
-    $senha   = $_POST["senha"];
-    
-    $query = "SELECT usuario FROM `usuarios` WHERE usuario = '$usuario' ";
-    
-    //Consultar o banco de dados para uso
-    $result = mysqli_query($conexao, $query);
+include('database_functions.php');
 
-    //verificar quantas linha a query retornou (0 não encontrou | 1 encontrou)
-    $row = mysqli_num_rows($result);
+//recebendo dados login
+$perfil = $_POST['perfil'];
+$nome = $_POST['nome'];
+$usuario = $_POST['usuario'];
+$senha = $_POST['senha'];
 
-    if ($row == 1){
-       echo "erro1";
-       header('location:usuarios.php?erro1');
-       
-    }else{
-       $inserirdados = mysqli_query($conexao, "INSERT INTO `usuarios` (`idusuario`, `perfil`, `nome`, `usuario`, `senha`) VALUES (NULL, '$perfil', '$nome', '$usuario', '$senha')");
-       header('location:usuarios.php?sucesso1');
-       
-    }
+$pdo = connect_to_database("bd_pep");
+
+$sql_search = "SELECT nome FROM usuarios WHERE nome = :nome";
+$stmt_search = $pdo->prepare($sql_search);
+$stmt_search->bindParam(':nome', $nome);
+
+$sql_ins = "INSERT INTO usuarios (idusuario, perfil, nome, usuario, senha) VALUES (NULL, :perfil, :nome, :usuario, :senha)";
+$stmt_ins = $pdo->prepare($sql_ins);
+$stmt_ins->bindParam(':perfil', $perfil);
+$stmt_ins->bindParam(':nome', $nome);
+$stmt_ins->bindParam(':usuario', $usuario);
+$stmt_ins->bindParam(':senha', $senha);
+
+
+try {
+        $stmt_search->execute();
+
+        if ($stmt_search->rowCount() > 0) {
+            header("Location: usuarios.php?erro1");
+            exit();
+        } else {
+            $stmt_ins->execute();
+            header("Location: usuarios.php?sucesso1");
+        }
+        
     
-    $conexao->close();
+} catch (Exception $e) {
+  echo "ERROR: ".$e->getMessage()."<br>";
+  exit('Oooops...');
+}
+
 ?>
+
+
 

@@ -1,3 +1,15 @@
+<?php
+  include('database_functions.php');
+  session_start();
+  if((!isset ($_SESSION['usuario']) == true)){
+    unset($_SESSION['usuario']);
+    header('location:index.php?erro3');
+  }
+  $login =  $_SESSION['usuario'];
+  
+  $pdo = connect_to_database("bd_pep");
+?>
+
 <header>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -29,8 +41,7 @@
               ADMINISTRAÇÃO
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="sabores.php">  Sabores </a>
-              <a class="dropdown-item" href="pizzas.php">   Pizzas     </a>
+              <a class="dropdown-item" href="lanches.php">  Lanches    </a>
               <a class="dropdown-item" href="bebidas.php">  Bebidas    </a>
             </div>
           </li>
@@ -42,22 +53,19 @@
             <a class="nav-link" href="mesas.php">MESAS</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">RELATÓRIOS</a>
+            <a class="nav-link disabled" href="#">RELATÓRIOS</a>
           </li>
           <li class="nav-item">
             <a class="nav-link disabled" href="#">BACKUP</a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="index.php">SAIR</a>
-          </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-
+          <li class="nav-item ">
+            <a class="nav-link" href="logout.php">SAIR <img src="open-iconic/png/account-logout-2x.png"> </a>
+          </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-          <button class="btn btn-outline-success my-2 my-sm-0 bg-dark" type="submit">OK</button>
-        </form>
+
+
       </div>
     </nav>
 

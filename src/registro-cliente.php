@@ -1,22 +1,36 @@
 <?php
-    include('conexao.php');
+  include('database_functions.php');
+  $pdo = connect_to_database("bd_pep");
 
-    //Recebendo dados do login
-    $nome  = $_POST["nome"];
+  //recebendo dados login
+  $nome  = $_POST["nome"];
 
-    $query = "SELECT * FROM `clientes` WHERE nome = '$nome' ";
- 
-    //Consultar o banco de dados para uso
-    $result = mysqli_query($conexao, $query);
+  //Consultar o banco de dados para uso
+  $sql_search = "SELECT * FROM clientes WHERE nome = :nome ";
+  $stmt_search = $pdo->prepare($sql_search);
+  $stmt_search->bindParam(':nome', $nome);
 
-    //verificar quantas linhas foram alteradas
-    if(mysqli_affected_rows($result) == 1){
-       header('location:clientes.php?erro1');      
-    }else{
-      $insere_sabor = "INSERT INTO `clientes` (`idcliente`, `nome`) VALUES (NULL, '$nome')";	
-      $resultado_sabor = mysqli_query($conexao, $insere_sabor);	
-      header('location:clientes.php?sucesso1');       
-    }
+  $sql_ins = "INSERT INTO clientes (nome) VALUES (:nome)";
+  $stmt_ins = $pdo->prepare($sql_ins);
+  $stmt_ins->bindParam(':nome', $nome);
+
+  try {
+          $stmt_search->execute();
+          
+          //verificar quantas linhas foram alteradas
+          if ($stmt_search->rowCount() > 0) {
+              header("Location: clientes.php?erro1");
+          } else {
+              $stmt_ins->execute();
+              header("Location: clientes.php?sucesso1");
+          }
+      
+  } catch (Exception $e) {
+    echo "ERROR: ".$e->getMessage()."<br>";
+    exit('Oooops...');
+  }
+    
     
 ?>
+
 

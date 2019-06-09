@@ -1,22 +1,26 @@
 <?php
-    include_once("conexao.php");
 
-    //Recebendo dados 
-    $idmesa = $_GET['idmesa'];
-    // echo $idmesa;
-    // exit;
-	
-    $del_mesa = "DELETE FROM mesas WHERE idmesa = '$idmesa'";
-    $result = mysqli_query($conexao, $del_mesa);	
-  
-  
-    if(mysqli_affected_rows($conexao) != 0){
-      header('location:mesas.php?sucesso3');
-  
-    }else{
-      echo "erro1";
-      header('location:mesas.php?erro3');
-    }
-    
-    $conexao->close();
-   ?>
+include('database_functions.php');
+$pdo = connect_to_database("bd_pep");
+
+//Recebendo dados 
+$idmesa = $_GET['idmesa'];
+
+$sql_del = "DELETE FROM mesas WHERE idmesa = :idmesa";
+$stmt_del = $pdo->prepare($sql_del);
+$stmt_del->bindParam(':idmesa', $idmesa);
+
+try {
+    $stmt_del->execute();
+
+    if ($stmt_del->rowCount() == 0) {
+      header("Location: mesas.php?erro3");
+    } else {
+      header("Location: mesas.php?sucesso3");
+    }		
+} catch (Exception $e) {
+echo "ERROR: ".$e->getMessage()."<br>";
+exit('Oooops...');
+}
+
+?>

@@ -1,14 +1,12 @@
-<?php
-  include_once("conexao.php");
-    // puxar produtos do banco
-    $consulta = "SELECT * FROM `mesas`";
-    $result = mysqli_query($conexao, $consulta) or die ($conexao->error);
-?>
-  
 <!doctype html>
 <html lang="pt-br">
   <head>
-    <?php require_once "header-admin.php" ?>
+    <?php 
+      require_once "header-admin.php";
+      //Buscas
+      $sql1 = "SELECT * FROM mesas";
+      $mesas = $pdo->query($sql1);
+    ?>
   </head>
   <body>
 
@@ -18,18 +16,15 @@
       
         <div class="row pl-3" id="mesas" >
 
-
-        <?php while($mesas = mysqli_fetch_assoc($result)){ ?>
-          <div class="card text-dark mt-2 mr-2" id="cadr_@VALOR@" style="width:15%" >
+        <?php while($row = $mesas->fetch()){ ?>
+          <div class="card text-dark mt-2 mr-2" style="width:15%" >
               <div class="card-body ">
-                <h5 class="card-title" >Mesa nº <?php echo $mesas['idmesa']; ?></h5>
+                <h5 class="card-title" >Mesa nº <?php echo $row['idmesa']; ?></h5>
                 <p class="card-text">Garçom: ?</p>
-                <a href="apagar-mesa.php?idmesa=<?php echo $mesas['idmesa']; ?>"><button type="button" class="btn btn-xs btn-danger">Apagar</button></a>
+                <a href="apagar-mesa.php?idmesa=<?php echo $row['idmesa']; ?>"><button type="button" class="btn btn-xs btn-danger "> <img src="open-iconic/png/trash-2x.png"> </button></a>
               </div> 
             </div>          
         <?php } ?>
-
-
 
         </div>
       </div>

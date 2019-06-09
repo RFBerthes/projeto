@@ -1,14 +1,12 @@
-<?php
-  include_once("conexao.php");
-    // puxar produtos do banco
-    $consulta = "SELECT * FROM `bebidas`";
-    $result = mysqli_query($conexao, $consulta) or die ($conexao->error);
-  ?>
-
 <!doctype html>
 <html lang="pt-br">
   <head>
-    <?php require_once "header-admin.php" ?>
+    <?php 
+      require_once "header-admin.php";
+      //Buscas
+      $sql1 = "SELECT * FROM bebidas";
+      $bebidas = $pdo->query($sql1);  
+    ?>
   </head>
   <body>
       <div class="container bg-dark text-white mt-2 mb-2 pb-2">
@@ -30,7 +28,7 @@
                 <form action="registro-bebida.php" method="POST">
                   <div class="form-group">
                     <label>Nome</label>
-                    <input type="text" id="nome" name="nome" required class="form-control" placeholder="nome">
+                    <input type="text" id="nome" name="nome" required class="form-control" placeholder="Descrição">
                   </div>
                   <div class="form-group">
                     <label>Valor</label>
@@ -38,7 +36,7 @@
                   </div>
                   <div class="form-group">
                     <label>Estoque</label>
-                    <input type="number" id="estoque" name="estoque" required class="form-control" placeholder="estoque" >
+                    <input type="number" id="estoque" name="estoque" required class="form-control" placeholder="Estoque" >
                   </div>  
                   <div class="form-group" style="display: flex;flex-direction: row;justify-content: center;align-items: center;">
                     <button type="submit" class="btn btn-primary btn-block mb-3" style="width:25%;"> Salvar </button>
@@ -64,15 +62,15 @@
               </tr>
             </thead>
             <tbody>
-              <?php while($bebidas = mysqli_fetch_assoc($result)){ ?>
+              <?php while($row = $bebidas->fetch()){ ?>
               <tr>
-                <td><?php echo $bebidas['nome']; ?></td>
-                <td><?php echo $bebidas['valor']; ?></td>
-                <td><?php echo $bebidas['estoque']; ?></td>
+                <td><?php echo $row['nome_bebida']; ?></td>
+                <td><?php echo $row['valor']; ?></td>
+                <td><?php echo $row['estoque']; ?></td>
                 <td>
-                  <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $bebidas['idbebida']; ?>" data-whateverestoque="<?php echo $bebidas['estoque']; ?>" data-whatevernome="<?php echo $bebidas['nome']; ?>" data-whatevervalor="<?php echo $bebidas['valor']; ?>">Editar</button>
-                  <a href="apagar-bebida.php?nome=<?php echo $bebidas['nome']; ?>"><button type="button"
-                      class="btn btn-xs btn-danger">Apagar</button></a>
+                  <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $row['idbebida']; ?>" data-whateverestoque="<?php echo $row['estoque']; ?>" data-whatevernome="<?php echo $row['nome_bebida']; ?>" data-whatevervalor="<?php echo $row['valor']; ?>"> <img src="open-iconic/png/pencil-2x.png"> </button>
+                  <a href="apagar-bebida.php?idbebida=<?php echo $row['idbebida']; ?>"><button type="button"
+                      class="btn btn-xs btn-danger"> <img src="open-iconic/png/trash-2x.png"> </button></a>
                 </td>
               </tr>
               <?php } ?>
@@ -94,7 +92,7 @@
                   <form method="POST" action="edita-bebida.php" enctype="multipart/form-data">
                     <div class="form-group">
                       <label>Nome</label>
-                      <input type="text" id="recipient-nome" name="nome" required class="form-control" placeholder="nome">
+                      <input type="text" id="recipient-nome" name="nome" required class="form-control" placeholder="Descrição">
                     </div>
                     <div class="form-group">
                       <label>Valor</label>
@@ -114,7 +112,7 @@
               </div>
             </div>
           </div>
-          <!-- Fim ModalExcluir -->
+          <!-- Fim ModalEditar -->
 
       <!-- popup informativos -->
       <?php if (isset($_GET['sucesso1'])) { ?>

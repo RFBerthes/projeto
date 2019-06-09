@@ -1,58 +1,62 @@
 <?php
-    include('conexao.php');
+    include('database_functions.php');
+
+    $pdo = connect_to_database("bd_pep");
 
     //Recebendo dados do login
-    //$login = $_POST["usuario"];
-    //$senha   = $_POST["senha"];
-    $usuario = mysqli_real_escape_string($conexao, $_POST['usuario']);
-    $senha = mysqli_real_escape_string($conexao, $_POST['senha']);
-    //$senha = md5($_POST['senha']);
+    // resgata variáveis do formulário
+    $usuario = $_POST['usuario'];
+    $senha = $_POST['senha'];
 
-    $query = "SELECT * FROM usuarios WHERE usuario = '{$usuario}' AND senha = '{$senha}'";
+    $sql = "SELECT * FROM usuarios WHERE usuario = :usuario AND senha = :senha";
+    $usuario_busca = $pdo->prepare($sql);
 
-    //Consultar o banco de dados para uso
-    $result = mysqli_query($conexao, $query);
-    //Isolar Perfil
-    $dados = $result->fetch_assoc();
+    $usuario_busca->bindParam(':usuario', $usuario);
+    $usuario_busca->bindParam(':senha', $senha);
 
-    //verificar quantas linha a query retornou (0 não encontrou | 1 encontrou)
-    $row = mysqli_num_rows($result);
+    $usuario_busca->execute();
 
-    if ($row == 0){
-        //trata usuário ou senha inválidos
-        header('location: index.php?erro1');
-                
-    }elseif ($row == 1){
+    
+
+    if ($usuario_busca->rowCount() == 1)
+    {
         //trata encontrado
-        switch ($dados['perfil']) {
-            case "admin":
-                header("Location: admin.php");
+        $row = $usuario_busca->fetch();
+        switch ($row['perfil']) {
+            case "Administrador":
                 session_start();
-                $_SESSION['idusuario'] = $dados['idusuario'];
-                exit();
+                $_SESSION['usuario'] = $row['nome'];
+                $_SESSION['idusuario'] = $row['idusuario'];
+                header('Location: admin.php');
                 break;
-            case "caixa":
-            
-                header("Location: caixa.php");
-                exit();
-                break;
-            case "atendente":
-
-                header("Location: atendente.php");
+            case "Atendente": 
                 session_start();
-                $_SESSION['idusuario'] = $dados['idusuario'];
+                $_SESSION['usuario'] = $row['nome'];
+                $_SESSION['idusuario'] = $row['idusuario'];
+                header('Location: atendente.php');
                 exit();
                 break;
-            case "cozinheiro":
-
-                header("Location: cozinheiro.php");
+            case "Cozinheiro": 
+                session_start();
+                $_SESSION['usuario'] = $row['nome'];
+                header('Location: cozinheiro.php');
                 exit();
                 break;
+            case "Caixa": 
+                session_start();
+                $_SESSION['usuario'] = $row['nome'];
+                header('Location: caixa.php');
+                exit();
+                break;
+                
             default;
-                //trata usuário com perfil inválido
-                header('location: index.php?erro2');
-                break;
-        }
-    }    
+            //trata usuário com perfil inválido
+            header('location: index.php?erro');
+            break;
+    }   
+    }else{
+        //trata usuário ou senha inválidos
+        header('location: index.php?erro');
+    } 
 
-?>
+    ?>

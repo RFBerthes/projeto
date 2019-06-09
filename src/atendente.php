@@ -1,26 +1,16 @@
-<?php
-  include_once("conexao.php");
-    session_start();
-    // puxar produtos do banco
-    $consulta1 = "SELECT * FROM `clientes`";
-    // $consulta2 = "SELECT * FROM `mesas`";
-    // $consulta3 = "SELECT * FROM `sabores`";
-    // $consulta4 = "SELECT * FROM `bebidas`";
-    $result_clientes = mysqli_query($conexao, $consulta1) or die ($conexao->error);
-    // $result_mesas = mysqli_query($conexao, $consulta2) or die ($conexao->error);
-    // $result_sabores = mysqli_query($conexao, $consulta3) or die ($conexao->error);
-    // $result_bebidas = mysqli_query($conexao, $consulta4) or die ($conexao->error);
-
-?>
 <!doctype html>
 <html lang="pt-br">
 
 <head>
-  <?php require_once "header-atendente.php" ?>
-  </head>
+  <?php require_once "header-atendente.php";
+  echo "Bem vindo $login";
 
-<body>
-  <div class="container bg-dark text-white mt-2 mb-2 pb-2">
+  ?>
+</head>
+
+<body class="bg-dark text-white">
+    <div class="container">
+
 
   </div>
 

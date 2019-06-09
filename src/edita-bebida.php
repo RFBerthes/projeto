@@ -1,19 +1,33 @@
 <?php
-	include_once("conexao.php");
-	$idbebida = mysqli_real_escape_string($conexao, $_POST['idbebida']);
-	$estoque = mysqli_real_escape_string($conexao, $_POST['estoque']);
-	$valor = mysqli_real_escape_string($conexao, $_POST['valor']);
-	$nome = mysqli_real_escape_string($conexao, $_POST['nome']);
+	include('database_functions.php');
+	$pdo = connect_to_database("bd_pep");
+
+	//recebendo dados login
+	$idbebida = $_POST['idbebida'];
+	$valor = $_POST['valor'];
+	$nome = $_POST['nome'];
+	$estoque = $_POST['estoque'];
+
 	
-	$result_usuarios = "UPDATE bebidas SET estoque='$estoque', nome='$nome', valor='$valor' WHERE idbebida = '$idbebida'";	
-	$resultado_usuarios = mysqli_query($conexao, $result_usuarios);	
+	$sql_upd = "UPDATE bebidas SET nome_bebida = :nome, valor = :valor, estoque = :estoque WHERE bebidas.idbebida = :idbebida";
+	$stmt_upd = $pdo->prepare($sql_upd);
+	$stmt_upd->bindParam(':idbebida', $idbebida);
+	$stmt_upd->bindParam(':nome', $nome);
+	$stmt_upd->bindParam(':valor', $valor);
+	$stmt_upd->bindParam(':estoque', $estoque);
 
-	if(mysqli_affected_rows($conexao) != 0){
-		header('location:bebidas.php?sucesso2');
+	try {
+        $stmt_upd->execute();
 
-	}else{
-		header('location:bebidas.php?erro2');
+        if ($stmt_upd->rowCount() == 0) {
+			header('location:bebidas.php?erro2');
+            exit();
+        } else {
+			header('location:bebidas.php?sucesso2');
+            exit();
+        }		
+	} catch (Exception $e) {
+	echo "ERROR: ".$e->getMessage()."<br>";
+	exit('Oooops...');
 	}
-	
-	$conexao->close(); 
 ?>

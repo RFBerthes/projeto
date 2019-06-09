@@ -1,19 +1,33 @@
 <?php
-	include_once("conexao.php");
-	$idusuario = mysqli_real_escape_string($conexao, $_POST['idusuario']);
-	$usuario = mysqli_real_escape_string($conexao, $_POST['usuario']);
-	$nome = mysqli_real_escape_string($conexao, $_POST['nome']);
-	$perfil = mysqli_real_escape_string($conexao, $_POST['perfil']);
+	include('database_functions.php');
+
+	//recebendo dados login
+	$idusuario = $_POST['idusuario'];
+	$perfil = $_POST['perfil'];
+	$nome = $_POST['nome'];
+	$usuario = $_POST['usuario'];
+
+	$pdo = connect_to_database("bd_pep");
 	
-	$result_usuarios = "UPDATE usuarios SET nome='$nome', perfil = '$perfil', usuario = '$usuario' WHERE idusuario = '$idusuario'";	
-	$resultado_usuarios = mysqli_query($conexao, $result_usuarios);	
+	$sql_upd = "UPDATE usuarios SET perfil = :perfil, nome = :nome, usuario = :usuario WHERE usuarios.idusuario = :idusuario";
+	$stmt_upd = $pdo->prepare($sql_upd);
+	$stmt_upd->bindParam(':perfil', $perfil);
+	$stmt_upd->bindParam(':nome', $nome);
+	$stmt_upd->bindParam(':usuario', $usuario);
+	$stmt_upd->bindParam(':idusuario', $idusuario);
 
-	if(mysqli_affected_rows($conexao) != 0){
-		header('location:usuarios.php?sucesso2');
+	try {
+        $stmt_upd->execute();
 
-	}else{
-		header('location:usuarios.php?erro2');
+        if ($stmt_upd->rowCount() == 0) {
+			header('location:usuarios.php?erro2');
+            exit();
+        } else {
+			header('location:usuarios.php?sucesso2');
+            exit();
+        }		
+	} catch (Exception $e) {
+	echo "ERROR: ".$e->getMessage()."<br>";
+	exit('Oooops...');
 	}
-	
-	$conexao->close(); 
 ?>

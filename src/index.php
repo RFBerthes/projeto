@@ -57,7 +57,15 @@
                       // footer: 'Tente novamente'
                     })
                 </script>
-
+              <?php }elseif (isset($_GET['erro3'])) { ?>
+                <script>
+                    Swal.fire({
+                      type: 'error',
+                      title: 'Oops...',
+                      text: 'Sessão não iniciada! autentique-se',
+                      // footer: 'Tente novamente'
+                    })
+                </script>
               <?php } ?>
         </div>
       </div>

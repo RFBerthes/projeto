@@ -1,22 +1,28 @@
 <?php
-    include_once("conexao.php");
 
-    //Recebendo dados 
-    $idcliente = $_GET['idcliente'];
-    //echo $idcliente;
-    //exit;
-	
-    $del_cliente = "DELETE FROM clientes WHERE idcliente = '$idcliente'";
-    $result = mysqli_query($conexao, $del_cliente);
-  
-  
-    if(mysqli_affected_rows($conexao) != 0){
-      header('location:clientes.php?sucesso3');
-  
-    }else{
-      echo "erro1";
-      header('location:clientes.php?erro3');
-    }
-    
-    $conexao->close();
-   ?>
+include('database_functions.php');
+$pdo = connect_to_database("bd_pep");
+
+//Recebendo dados 
+$idcliente = $_GET['idcliente'];
+
+$sql_del = "DELETE FROM clientes WHERE idcliente = :idcliente";
+$stmt_del = $pdo->prepare($sql_del);
+$stmt_del->bindParam(':idcliente', $idcliente);
+
+try {
+    $stmt_del->execute();
+
+    if ($stmt_del->rowCount() == 0) {
+      header("Location: clientes.php?erro3");
+      exit();
+    } else {
+      header("Location: clientes.php?sucesso3");
+      exit();
+    }		
+} catch (Exception $e) {
+echo "ERROR: ".$e->getMessage()."<br>";
+exit('Oooops...');
+}
+
+?>

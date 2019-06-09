@@ -1,16 +1,27 @@
 <?php
-    include_once("conexao.php");
+  include('database_functions.php');
+  $pdo = connect_to_database("bd_pep");
 
-    //Recebendo dados 
-    $idmesa  = $_GET['idmesa'];
+  //recebendo dados login
+  $idmesa  = $_GET['idmesa'];
 
-    //verificar quantas linhas foram alteradas
-    if($idmesa == 1){
-      $insere_mesa = "INSERT INTO `mesas` (`idmesa`, `lugares`) VALUES ('', NULL)";	
-      $resultado_mesa = mysqli_query($conexao, $insere_mesa);	
-      header('location:mesas.php?sucesso1');       
-    }else{
-      header('location:mesas.php?erro1');      
-    }
+  $sql_ins = "INSERT INTO `mesas` (`idmesa`, `lugares`) VALUES ('', NULL)";
+  $stmt_ins = $pdo->prepare($sql_ins);
+
+  try {
+        if($idmesa != 1){
+          header("Location: mesas.php?erro1");
+        } else {
+            $stmt_ins->execute();
+            header("Location: mesas.php?sucesso1");
+        }
+      
+  } catch (Exception $e) {
+    echo "ERROR: ".$e->getMessage()."<br>";
+    exit('Oooops...');
+  }
+    
+    
 ?>
+
 

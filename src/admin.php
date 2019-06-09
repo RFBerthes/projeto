@@ -1,27 +1,27 @@
-<?php
-include_once("conexao.php");
-session_start();
-// puxar produtos do banco
-$consulta1 = "SELECT * FROM `usuarios`";
-$consulta2 = "SELECT * FROM `mesas`";
-$consulta3 = "SELECT * FROM `sabores`";
-$consulta4 = "SELECT * FROM `bebidas`";
-$result_usuarios = mysqli_query($conexao, $consulta1) or die($conexao->error);
-$result_mesas = mysqli_query($conexao, $consulta2) or die($conexao->error);
-$result_sabores = mysqli_query($conexao, $consulta3) or die($conexao->error);
-$result_bebidas = mysqli_query($conexao, $consulta4) or die($conexao->error);
-
-?>
 <!doctype html>
 <html lang="pt-br">
 
 <head>
-  <?php require_once "header-admin.php" ?>
-  <script>
-  </script>
+  <?php require_once "header-admin.php";
+  echo "Bem vindo $login";
+  //Buscas
+  $sql1 = "SELECT * FROM usuarios";
+  $usuarios = $pdo->query($sql1);
+
+  $sql2 = "SELECT * FROM mesas";
+  $mesas = $pdo->query($sql2);
+
+  $sql3 = "SELECT * FROM bebidas";
+  $bebidas = $pdo->query($sql3);
+
+  $sql4 = "SELECT * FROM lanches";
+  $lanches = $pdo->query($sql4);
+  ?>
+
 </head>
 
 <body class="bg-dark text-white">
+
 
   <div class="row pt-3 ml-3 mr-3">
     <div class="column ml-3 mr-3" style="width:45%">
@@ -35,16 +35,16 @@ $result_bebidas = mysqli_query($conexao, $consulta4) or die($conexao->error);
           </tr>
         </thead>
         <tbody>
-          <?php while ($usuarios = mysqli_fetch_assoc($result_usuarios)) { ?>
+          <?php while ($row = $usuarios->fetch()) { ?>
             <tr>
               <td>
-                <?php echo $usuarios['perfil']; ?>
+                <?php echo $row['perfil']; ?>
               </td>
               <td>
-                <?php echo $usuarios['nome'];   ?>
+                <?php echo $row['nome'];   ?>
               </td>
               <td>
-                <?php echo $usuarios['usuario']; ?>
+                <?php echo $row['usuario'];?>
               </td>
             </tr>
           <?php } ?>
@@ -55,10 +55,10 @@ $result_bebidas = mysqli_query($conexao, $consulta4) or die($conexao->error);
     <div class="column ml-4 mr-3" style="width:45%">
     <h2 style="text-align:center;"><a class="text-white" href="mesas.php">Mesas</h2></a>
       <div class="row">
-        <?php while ($mesas = mysqli_fetch_assoc($result_mesas)) { ?>
+        <?php while ($row = $mesas->fetch()) { ?>
           <div class="card text-dark ml-2 mb-2" style="width:18%;height:18%">
             <div class="card-body ">
-              <p>Mesa <?php echo $mesas['idmesa']; ?>  </p>
+              <p>Mesa <?php echo $row['idmesa']; ?> </p>
             </div>
           </div>
         <?php } ?>
@@ -68,18 +68,22 @@ $result_bebidas = mysqli_query($conexao, $consulta4) or die($conexao->error);
 
   <div class="row ml-3 mr-3 mt-3">
     <div class="column ml-3 mr-3" style="width:45%">
-    <h2 style="text-align:center;"><a class="text-white" href="sabores.php">Sabores</h2></a>
+    <h2 style="text-align:center;"><a class="text-white" href="lanches.php">Lanches</h2></a>
       <table class="table bg-light table-striped" style="text-align:center">
         <thead>
           <tr>
             <th>Nome</th>
+            <th>Valor (R$)</th>
           </tr>
         </thead>
         <tbody>
-          <?php while ($sabores = mysqli_fetch_assoc($result_sabores)) { ?>
+          <?php while ($row = $lanches->fetch()) { ?>
             <tr>
               <td>
-                <?php echo $sabores['nome']; ?>
+                <?php echo $row['nome_lanche']; ?>
+              </td>
+              <td>
+                <?php echo $row['valor']; ?>
               </td>
             </tr>
           <?php } ?>
@@ -98,16 +102,16 @@ $result_bebidas = mysqli_query($conexao, $consulta4) or die($conexao->error);
           </tr>
         </thead>
         <tbody>
-          <?php while ($bebidas = mysqli_fetch_assoc($result_bebidas)) { ?>
+          <?php while ($row = $bebidas->fetch()) { ?>
             <tr>
               <td>
-                <?php echo $bebidas['nome']; ?>
+                <?php echo $row['nome_bebida']; ?>
               </td>
               <td>
-                <?php echo $bebidas['valor']; ?>
+                <?php echo $row['valor']; ?>
               </td>
               <td>
-                <?php echo $bebidas['estoque']; ?>
+                <?php echo $row['estoque']; ?>
               </td>
             </tr>
           <?php } ?>

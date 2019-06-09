@@ -1,22 +1,36 @@
 <?php
-    include('conexao.php');
 
-    //Recebendo dados do login
-    $nome  = $_POST["nome"];
+  include('database_functions.php');
+  $pdo = connect_to_database("bd_pep");
 
-    $query = "SELECT * FROM `sabores` WHERE nome = '$nome' ";
- 
-    //Consultar o banco de dados para uso
-    $result = mysqli_query($conexao, $query);
+  //recebendo dados login
+  $nome  = $_POST["nome"];
 
-    //verificar quantas linhas foram alteradas
-    if(mysqli_affected_rows($result) == 1){
-       header('location:cadastros.php?erro1');      
-    }else{
-      $insere_sabor = "INSERT INTO `sabores` (`idsabor`, `nome`) VALUES (NULL, '$nome')";	
-      $resultado_sabor = mysqli_query($conexao, $insere_sabor);	
-      header('location:sabores.php?sucesso1');       
-    }
+  //Consultar o banco de dados para uso
+  $sql_search = "SELECT * FROM sabores WHERE nome = :nome ";
+  $stmt_search = $pdo->prepare($sql_search);
+  $stmt_search->bindParam(':nome', $nome);
+
+  $sql_ins = "INSERT INTO sabores (nome) VALUES (:nome)";
+  $stmt_ins = $pdo->prepare($sql_ins);
+  $stmt_ins->bindParam(':nome', $nome);
+
+  try {
+          $stmt_search->execute();
+          
+          //verificar quantas linhas foram alteradas
+          if ($stmt_search->rowCount() > 0) {
+              header("Location: sabores.php?erro1");
+              exit();
+          } else {
+              $stmt_ins->execute();
+              header("Location: sabores.php?sucesso1");
+          }
+      
+  } catch (Exception $e) {
+    echo "ERROR: ".$e->getMessage()."<br>";
+    exit('Oooops...');
+  }
     
 ?>
 

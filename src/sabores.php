@@ -1,14 +1,13 @@
-<?php
-  include_once("conexao.php");
-  // puxar sabores do banco
-  $consulta = "SELECT * FROM `sabores` ";
-  $result = mysqli_query($conexao, $consulta) or die ($conexao->error);
-?>
 <!doctype html>
 <html lang="pt-br">
 
 <head>
-  <?php require_once "header-admin.php" ?>
+  <?php require_once "header-admin.php";
+    //Buscas
+    $sql1 = "SELECT * FROM sabores";
+    $sabores = $pdo->query($sql1);
+    // $row = $sabores->fetch()
+  ?>
 </head>
 
 <body>
@@ -57,13 +56,12 @@
             </tr>
           </thead>
           <tbody>
-            <?php while($sabores = mysqli_fetch_assoc($result)){ ?>
+            <?php while($row = $sabores->fetch()){ ?>
             <tr>
-              <td><?php echo $sabores['nome']; ?></td>
+              <td><?php echo $row['nome']; ?></td>
               <td>
-                <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $sabores['idsabor']; ?>" data-whatevernome="<?php echo $sabores['nome']; ?>" >Editar</button>
-                <a href="apagar-sabor.php?nome=<?php echo $sabores['nome']; ?>"><button type="button"
-                    class="btn btn-xs btn-danger">Apagar</button></a>
+                <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $row['idsabor']; ?>" data-whatevernome="<?php echo $row['nome']; ?>" > <img src="open-iconic/png/pencil-2x.png"> </button>
+                <a href="apagar-sabor.php?nome=<?php echo $row['nome']; ?>"><button type="button" class="btn btn-xs btn-danger"> <img src="open-iconic/png/trash-2x.png"> </button></a>
               </td>
             </tr>
             <?php } ?>

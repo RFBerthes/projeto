@@ -1,12 +1,12 @@
-<?php
-	include_once("conexao.php");
-	$result_usuarios = "SELECT * FROM usuarios";
-	$resultado_usuarios = mysqli_query($conexao, $result_usuarios);
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
-    <?php require_once "header-admin.php" ?>
+    <?php require_once "header-admin.php";
+      //Buscas
+      $sql1 = "SELECT * FROM usuarios";
+      $usuarios = $pdo->query($sql1);
+      // $row = $usuarios->fetch()
+    ?>
   </head>
   <body>
       <div class="container bg-dark text-white mt-2 mb-2">
@@ -14,23 +14,23 @@
 				<button type="button" class="btn btn-xs btn-success mt-2 mb-2" data-toggle="modal" data-target="#myModalcad">Cadastrar</button>
 			</div>
 			<!-- Inicio Modal -->
-			<div class="modal fade text-dark" id="myModalcad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal fade" id="myModalcad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
               <h4 class="modal-title" id="myModalLabel">Cadastrar Usuário</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						</div>
-						<div class="modal-body">
+						<div class="modal-body  text-dark">
                 <form action="registro-usuario.php" method="POST">
                 
                   <div class="form-group">
                     <label>Perfil</label>
                     <select name="perfil" id="perfil" class="form-control">
-                        <option value="admin">Administrador</option>
-                        <option value="caixa">Caixa</option>
-                        <option value="atendente" selected>Atendente</option>
-                        <option value="cozinheiro">Cozinheiro</option>
+                        <option value="Administrador">Administrador</option>
+                        <option value="Caixa">Caixa</option>
+                        <option value="Atendente" selected>Atendente</option>
+                        <option value="Cozinheiro">Cozinheiro</option>
                     </select>
                   </div>
   
@@ -71,38 +71,40 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <?php while($usuarios = mysqli_fetch_assoc($resultado_usuarios)){ ?>
+                  <?php while($row = $usuarios->fetch()){ ?>
                     <tr>
-                      <td><?php echo $usuarios['perfil']; ?></td>
-                      <td><?php echo $usuarios['nome'];   ?></td>
-                      <td><?php echo $usuarios['usuario'];?></td>
+                      <td><?php echo $row['perfil']; ?></td>
+                      <td><?php echo $row['nome'];   ?></td>
+                      <td><?php echo $row['usuario'];?></td>
                       <td>
-                        <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#exampleModal" data-whatever="<?php echo $usuarios['idusuario']; ?>"  data-whateverperfil="<?php echo $usuarios['perfil']; ?>"  data-whatevernome="<?php echo $usuarios['nome']; ?>" data-whateverusuario="<?php echo $usuarios['usuario']; ?>" >Editar</button>
-                        <a href="apagar-usuario.php?usuario=<?php echo $usuarios['usuario']; ?>"><button type="button" class="btn btn-xs btn-danger">Apagar</button></a>
+                        <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#EditModal" data-whatever="<?php echo $row['idusuario']; ?>"  data-whateverperfil="<?php echo $row['perfil']; ?>" data-whatevernome="<?php echo $row['nome']; ?>" data-whateverusuario="<?php echo $row['usuario']; ?>" > <img src="open-iconic/png/pencil-2x.png"> </button>
+                        <a href="delete-usuario.php?idusuario=<?php echo $row['idusuario']; ?>"><button type="button" class="btn btn-xs btn-danger"> <img src="open-iconic/png/trash-2x.png"> </button></a>
                       </td>
                     </tr>
                   <?php } ?>
                 </tbody>
                </table>
             </div>
-          </div>
+          </div>      
+          <!-- Fim  Table -->
 
-          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+          <!-- Edit modal -->
+          <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h4 class="modal-title text-dark" id="exampleModalLabel">Editar Usuário</h4>
+                    <h4 class="modal-title text-dark" id="EditModalLabel">Editar Usuário</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   </div>
-                  <div class="modal-body">
+                  <div class="modal-body  text-dark">
                     <form method="POST" action="edita-usuario.php" enctype="multipart/form-data">
                       <div class="form-group">
                           <label>Perfil</label>
                           <select name=perfil id=recepient-perfil class="form-control">
-                              <option value="admin">Administrador</option>
-                              <option value="caixa">Caixa</option>
-                              <option value="atendente" selected>Atendente</option>
-                              <option value="cozinheiro">Cozinheiro</option>
+                              <option value="Administrador">Administrador</option>
+                              <option value="Caixa">Caixa</option>
+                              <option value="Atendente" selected>Atendente</option>
+                              <option value="Cozinheiro">Cozinheiro</option>
                           </select>
                         </div>
         
@@ -112,7 +114,7 @@
                         </div>
                         <div class="form-group">
                           <label>Usuario</label>
-                          <input type="text" id=recepient-usuario name=usuario required class="form-control" placeholder="Usuário" >
+                          <input type="text" id=recipient-usuario name=usuario required class="form-control" placeholder="Usuário" >
                         </div>
                       <input type="hidden" id="recepient-idusuario" name="idusuario">
                       <div class="modal-footer">
@@ -185,7 +187,7 @@
     
     <!-- Modal JavaScript -->
     <script type="text/javascript">
-        $('#exampleModal').on('show.bs.modal', function (event) {
+        $('#EditModal').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget) // Button that triggered the modal
           var recipient = button.data('whatever') // Extract info from data-* attributes
           var recipientperfil = button.data('whateverperfil')
@@ -197,7 +199,7 @@
           modal.find('.modal-title').text('ID do Usuario: ' + recipient)
           modal.find('#recepient-idusuario').val(recipient)
           modal.find('#recipient-perfil').val(recipientperfil)
-          modal.find('#recipient-name').val(recipientnome)
+          modal.find('#recepient-nome').val(recipientnome)
           modal.find('#recipient-usuario').val(recipientusuario)
         })
       </script>
