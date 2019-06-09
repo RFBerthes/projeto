@@ -2,10 +2,10 @@
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 05-Jun-2019 às 05:36
--- Versão do servidor: 10.1.40-MariaDB
--- versão do PHP: 7.3.5
+-- Host: localhost
+-- Tempo de geração: 09/06/2019 às 21:46
+-- Versão do servidor: 10.1.38-MariaDB
+-- Versão do PHP: 7.3.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,27 +19,38 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `bd_pep`
+-- Banco de dados: `bd_pep`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `bebidas`
+-- Estrutura para tabela `bebidas`
 --
 
 CREATE TABLE `bebidas` (
   `idbebida` int(11) NOT NULL,
-  `nome` varchar(45) NOT NULL,
+  `nome_bebida` varchar(45) NOT NULL,
   `valor` decimal(10,2) NOT NULL,
-  `estoque` int(11) NOT NULL,
-  `pedidos_idpedido` int(11) NOT NULL
+  `estoque` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Despejando dados para a tabela `bebidas`
+--
+
+INSERT INTO `bebidas` (`idbebida`, `nome_bebida`, `valor`, `estoque`) VALUES
+(1, 'Coca-Cola (Lata 350 ml)', '4.00', 40),
+(2, 'Pepsi (Lata 350ml)', '4.00', 40),
+(3, 'Suco Natural (400 ml)', '5.00', 35),
+(4, 'AguÃ¡ (600 ml)', '4.00', 30),
+(5, 'Cerveja (Lata  373 ml)', '5.00', 47),
+(8, 'GuaranÃ¡ (600 ml)', '5.00', 45);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `clientes`
+-- Estrutura para tabela `clientes`
 --
 
 CREATE TABLE `clientes` (
@@ -47,16 +58,29 @@ CREATE TABLE `clientes` (
   `nome` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Despejando dados para a tabela `clientes`
+--
+
+INSERT INTO `clientes` (`idcliente`, `nome`) VALUES
+(1, 'Rafael'),
+(4, 'Jessica'),
+(5, 'Roger'),
+(8, 'Josefina'),
+(10, 'John'),
+(12, 'Hyanka');
+
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `comandas`
+-- Estrutura para tabela `comandas`
 --
 
 CREATE TABLE `comandas` (
   `idcomanda` int(11) NOT NULL,
-  `data` datetime DEFAULT NULL,
+  `data` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `total` decimal(10,2) DEFAULT NULL,
+  `status_comanda` varchar(30) NOT NULL,
   `cliente_idcliente` int(11) NOT NULL,
   `mesa_idmesa` int(11) NOT NULL,
   `usuarios_idusuario` int(11) NOT NULL
@@ -65,7 +89,29 @@ CREATE TABLE `comandas` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `mesas`
+-- Estrutura para tabela `lanches`
+--
+
+CREATE TABLE `lanches` (
+  `idlanche` int(11) NOT NULL,
+  `nome_lanche` varchar(45) NOT NULL,
+  `valor` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Despejando dados para a tabela `lanches`
+--
+
+INSERT INTO `lanches` (`idlanche`, `nome_lanche`, `valor`) VALUES
+(6, 'X Salada', '17.00'),
+(8, 'X CoraÃ§Ã£o', '18.00'),
+(9, 'X Bacon', '18.00'),
+(10, 'Pastel Carne', '6.00');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `mesas`
 --
 
 CREATE TABLE `mesas` (
@@ -74,7 +120,7 @@ CREATE TABLE `mesas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `mesas`
+-- Despejando dados para a tabela `mesas`
 --
 
 INSERT INTO `mesas` (`idmesa`, `lugares`) VALUES
@@ -86,63 +132,31 @@ INSERT INTO `mesas` (`idmesa`, `lugares`) VALUES
 (6, NULL),
 (7, NULL),
 (8, NULL),
-(9, NULL),
-(10, NULL);
+(9, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pedidos`
+-- Estrutura para tabela `pedidos`
 --
 
 CREATE TABLE `pedidos` (
   `idpedido` int(11) NOT NULL,
-  `tempo` time DEFAULT NULL,
+  `data` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `status` varchar(45) NOT NULL,
+  `tipo` varchar(45) DEFAULT NULL,
   `comanda_idcomanda` int(11) NOT NULL,
   `usuario_idusuario` int(11) NOT NULL,
-  `cliente_idcliente` int(11) NOT NULL
+  `lanches_idlanche` int(11) DEFAULT NULL,
+  `quantidade` int(11) NOT NULL,
+  `obs` varchar(30) DEFAULT NULL,
+  `bebidas_idbebida` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pizzas`
---
-
-CREATE TABLE `pizzas` (
-  `idpizza` int(11) NOT NULL,
-  `tamanho` varchar(45) DEFAULT NULL,
-  `nsabor` int(11) DEFAULT NULL,
-  `valor` decimal(10,2) NOT NULL,
-  `pedidos_idpedido` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `sabores`
---
-
-CREATE TABLE `sabores` (
-  `idsabor` int(11) NOT NULL,
-  `nome` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `sabores`
---
-
-INSERT INTO `sabores` (`idsabor`, `nome`) VALUES
-(13, 'Calabresa'),
-(14, 'Frango'),
-(15, 'CoraÃ§Ã£o'),
-(16, 'Portuguesa');
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `usuarios`
+-- Estrutura para tabela `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -154,32 +168,32 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `usuarios`
+-- Despejando dados para a tabela `usuarios`
 --
 
 INSERT INTO `usuarios` (`idusuario`, `perfil`, `nome`, `usuario`, `senha`) VALUES
-(10, 'admin', 'Rafael Berthes', 'admin', 'admin'),
-(11, 'atendente', 'GarÃ§om da Silva', 'atendente', 'atendente');
+(8, 'Administrador', 'Rafael Berthes', 'admin', 'admin'),
+(9, 'Atendente', 'GarÃ§om Fulano da Silva', 'atendente', 'atendente'),
+(10, 'Cozinheiro', 'Cozinheiro Pereira', 'cozinheiro', 'caixa');
 
 --
--- Indexes for dumped tables
+-- Índices de tabelas apagadas
 --
 
 --
--- Indexes for table `bebidas`
+-- Índices de tabela `bebidas`
 --
 ALTER TABLE `bebidas`
-  ADD PRIMARY KEY (`idbebida`),
-  ADD KEY `fk_bebidas_pedidos1_idx` (`pedidos_idpedido`);
+  ADD PRIMARY KEY (`idbebida`);
 
 --
--- Indexes for table `clientes`
+-- Índices de tabela `clientes`
 --
 ALTER TABLE `clientes`
   ADD PRIMARY KEY (`idcliente`);
 
 --
--- Indexes for table `comandas`
+-- Índices de tabela `comandas`
 --
 ALTER TABLE `comandas`
   ADD PRIMARY KEY (`idcomanda`),
@@ -188,103 +202,85 @@ ALTER TABLE `comandas`
   ADD KEY `fk_comanda_usuarios1_idx` (`usuarios_idusuario`);
 
 --
--- Indexes for table `mesas`
+-- Índices de tabela `lanches`
+--
+ALTER TABLE `lanches`
+  ADD PRIMARY KEY (`idlanche`);
+
+--
+-- Índices de tabela `mesas`
 --
 ALTER TABLE `mesas`
   ADD PRIMARY KEY (`idmesa`);
 
 --
--- Indexes for table `pedidos`
+-- Índices de tabela `pedidos`
 --
 ALTER TABLE `pedidos`
   ADD PRIMARY KEY (`idpedido`),
   ADD KEY `fk_pedido_comanda1_idx` (`comanda_idcomanda`),
   ADD KEY `fk_pedido_usuario1_idx` (`usuario_idusuario`),
-  ADD KEY `fk_pedido_cliente1_idx` (`cliente_idcliente`);
+  ADD KEY `fk_pedidos_lanches1_idx` (`lanches_idlanche`),
+  ADD KEY `fk_pedidos_bebidas1_idx` (`bebidas_idbebida`);
 
 --
--- Indexes for table `pizzas`
---
-ALTER TABLE `pizzas`
-  ADD PRIMARY KEY (`idpizza`),
-  ADD KEY `fk_pizzas_pedidos1_idx` (`pedidos_idpedido`);
-
---
--- Indexes for table `sabores`
---
-ALTER TABLE `sabores`
-  ADD PRIMARY KEY (`idsabor`);
-
---
--- Indexes for table `usuarios`
+-- Índices de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`idusuario`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de tabelas apagadas
 --
 
 --
--- AUTO_INCREMENT for table `bebidas`
+-- AUTO_INCREMENT de tabela `bebidas`
 --
 ALTER TABLE `bebidas`
-  MODIFY `idbebida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idbebida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `clientes`
+-- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `idcliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idcliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `comandas`
+-- AUTO_INCREMENT de tabela `comandas`
 --
 ALTER TABLE `comandas`
-  MODIFY `idcomanda` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idcomanda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `mesas`
+-- AUTO_INCREMENT de tabela `lanches`
+--
+ALTER TABLE `lanches`
+  MODIFY `idlanche` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de tabela `mesas`
 --
 ALTER TABLE `mesas`
-  MODIFY `idmesa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idmesa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `pedidos`
+-- AUTO_INCREMENT de tabela `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `idpedido` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idpedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT for table `pizzas`
---
-ALTER TABLE `pizzas`
-  MODIFY `idpizza` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `sabores`
---
-ALTER TABLE `sabores`
-  MODIFY `idsabor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
---
--- AUTO_INCREMENT for table `usuarios`
+-- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- Constraints for dumped tables
+-- Restrições para dumps de tabelas
 --
 
 --
--- Limitadores para a tabela `bebidas`
---
-ALTER TABLE `bebidas`
-  ADD CONSTRAINT `fk_bebidas_pedidos1` FOREIGN KEY (`pedidos_idpedido`) REFERENCES `pedidos` (`idpedido`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Limitadores para a tabela `comandas`
+-- Restrições para tabelas `comandas`
 --
 ALTER TABLE `comandas`
   ADD CONSTRAINT `fk_comanda_cliente1` FOREIGN KEY (`cliente_idcliente`) REFERENCES `clientes` (`idcliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -292,18 +288,13 @@ ALTER TABLE `comandas`
   ADD CONSTRAINT `fk_comanda_usuarios1` FOREIGN KEY (`usuarios_idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `pedidos`
+-- Restrições para tabelas `pedidos`
 --
 ALTER TABLE `pedidos`
-  ADD CONSTRAINT `fk_pedido_cliente1` FOREIGN KEY (`cliente_idcliente`) REFERENCES `clientes` (`idcliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_pedido_comanda1` FOREIGN KEY (`comanda_idcomanda`) REFERENCES `comandas` (`idcomanda`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_pedido_usuario1` FOREIGN KEY (`usuario_idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Limitadores para a tabela `pizzas`
---
-ALTER TABLE `pizzas`
-  ADD CONSTRAINT `fk_pizzas_pedidos1` FOREIGN KEY (`pedidos_idpedido`) REFERENCES `pedidos` (`idpedido`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_pedido_usuario1` FOREIGN KEY (`usuario_idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_pedidos_bebidas1` FOREIGN KEY (`bebidas_idbebida`) REFERENCES `bebidas` (`idbebida`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_pedidos_lanches1` FOREIGN KEY (`lanches_idlanche`) REFERENCES `lanches` (`idlanche`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
