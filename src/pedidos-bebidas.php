@@ -5,9 +5,9 @@
   <?php
   require_once "header-atendente.php";
   //Buscas
-  $sql1 = "SELECT mesa_idmesa, idpedido, nome, comanda_idcomanda, status, nome_lanche, obs, quantidade FROM pedidos
-  JOIN lanches
-  ON pedidos.lanches_idlanche = lanches.idlanche
+  $sql1 = "SELECT mesa_idmesa, idpedido, nome, comanda_idcomanda, status, nome_bebida, obs, quantidade FROM pedidos
+  JOIN bebidas
+  ON pedidos.bebidas_idbebida = bebidas.idbebida
   JOIN usuarios
   ON pedidos.usuario_idusuario = usuarios.idusuario
   JOIN comandas
@@ -22,15 +22,15 @@
       <?php while ($row = $pedidos->fetch()) { ?>
         <div class="card text-dark mt-2 ml-3" style="width:25%">
           <a href="apagar-pedido.php?idpedido=<?php echo $row['idpedido']; ?>"><button type="button" class="close float-right mr-2 mt-1"> <span aria-hidden="true">&times;</span></button></a>
-          <h6 class="card-title" style="text-align:center"><b>Pedido nº <?php echo $row['idpedido']; ?></b></h6>
+          <h6 class="card-title" style="text-align:center"><b>Pedido Bebida nº <?php echo $row['idpedido']; ?></b></h6>
           <p class="card-text pl-2">
             Mesa: <?php echo $row['mesa_idmesa']; ?> <br>
             Comanda: <?php echo $row['comanda_idcomanda']; ?> <br>
-            <?php echo $row['quantidade'] . " - " . $row['nome_lanche'] ?> <br>
+            <?php echo $row['quantidade'] . " - " . $row['nome_bebida'] ?> <br>
             Obs: <?php echo $row['obs']; ?> <br>
             Satus: <?php echo $row['status']; ?> <br>
             <div class="text-center">
-              <button type="button" class="btn btn-xs btn-success mb-2 " data-toggle="modal" data-target="#ModalNovaBebida"> <img src="open-iconic/png/serving-dish.png"> </button>
+              <button type="button" class="btn btn-xs btn-success mb-2 " data-toggle="modal" data-target="#ModalNovaBebida"> <img src="open-iconic/png/coffee.png"> </button>
             </div>
         </div>
       <?php } ?>

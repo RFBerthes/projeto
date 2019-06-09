@@ -25,37 +25,35 @@
   ?>
 </head>
 
-<body>
-  <div class="container bg-dark text-white mt-2 mb-2 pb-2">
-
+<body class="bg-dark">
+  <div class="container  text-white mt-2 mb-2 pb-2">
     <div class="pull-right">
-      <button type="button" class="btn btn-xs btn-success mt-2 mb-2" data-toggle="modal"
-        data-target="#ModalNovaComanda">Nova Comanda</button>
+      <button type="button" class="btn btn-xs btn-success mt-2 mb-2" data-toggle="modal" data-target="#ModalNovaComanda">Nova Comanda</button>
+      <a href="zera-comandas.php"><button type="button" class="btn btn-xs btn-warning mt-2 mb-2 text-white float-right">Reniciar<img src="open-iconic/png/action-undo-2x.png"> </button>
     </div>
     <div class="row">
       <?php while ($rowcm = $comandas->fetch()) { ?>
-      <div class="card text-dark mt-2 ml-3" style="width:20%">
-        <a href="apagar-comanda.php?idcomanda=<?php echo $rowcm['idcomanda']; ?>"><button type="button"
-            class="close float-rigth mr-2 mt-1"> <span aria-hidden="true">&times;</span></button></a>
-        <h6 class="card-title" style="text-align:center"><b>Comanda nº <?php echo $rowcm['idcomanda']; ?></b></h6>
-        <p class="card-text pl-2">
-          Mesa: <?php echo $rowcm['mesa_idmesa']; ?> <br>
-          Cliente: <?php echo $rowcm['nome']; ?>
-          <div class="row pr-3 pl-3 pb-2">
-            <div class="col-4">
-              <button type="button" class="btn btn-xs btn-info " data-toggle="modal" data-target="#ModalNovoPedido"
-                data-whatever="<?php echo $rowcm['idcomanda']; ?>"> <img src="open-iconic/png/dinner.png"> </button>
+        <div class="card text-dark mt-2 ml-3" style="width:20%">
+          <a href="apagar-comanda.php?idcomanda=<?php echo $rowcm['idcomanda']; ?>"><button type="button" class="close float-rigth mr-2 mt-1"> <span aria-hidden="true">&times;</span></button></a>
+          <h6 class="card-title" style="text-align:center"><b>Comanda nº <?php echo $rowcm['idcomanda']; ?></b></h6>
+          <p class="card-text pl-2">
+            Mesa: <?php echo $rowcm['mesa_idmesa']; ?> <br>
+            Cliente: <?php echo $rowcm['nome']; ?> <br>
+            Status: <?php echo $rowcm['status_comanda']; ?>
+            <div class="row pr-3 pl-3 pb-2">
+              <div class="col-4">
+                <button type="button" class="btn btn-xs btn-info " data-toggle="modal" data-target="#ModalNovoPedido" data-whatever="<?php echo $rowcm['idcomanda']; ?>"> <img src="open-iconic/png/dinner.png"> </button>
+              </div>
+              <div class="col-4">
+                <button type="button" class="btn btn-xs btn-warning " data-toggle="modal" data-target="#ModalNovaBebida" data-whatever="<?php echo $rowcm['idcomanda']; ?>"> <img src="open-iconic/png/cola.png"> </button>
+              </div>
+              <div class="col-4 ">
+                <input type="hidden" id="atendente" name="atendente" value="<?php echo $_SESSION['idusuario']; ?>">
+                <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#ModalNovaBebida">
+                  <img src="open-iconic/png/share-2x.png"> </button>
+              </div>
             </div>
-            <div class="col-4">
-              <button type="button" class="btn btn-xs btn-warning " data-toggle="modal" data-target="#ModalNovaBebida"
-                data-whatever="<?php echo $rowcm['idcomanda']; ?>"> <img src="open-iconic/png/cola.png"> </button>
-            </div>
-            <div class="col-4 ">
-              <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#ModalNovaBebida">
-                <img src="open-iconic/png/share-2x.png"> </button>
-            </div>
-          </div>
-      </div>
+        </div>
       <?php } ?>
     </div>
 
@@ -66,8 +64,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h4 class="modal-title" id="myModalLabel">Cadastrar Comanda</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                aria-hidden="true">&times;</span></button>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           </div>
           <div class="modal-body">
             <form action="registro-comanda.php" method="POST">
@@ -75,22 +72,21 @@
                 <label>Mesa</label>
                 <select name="mesa" id="mesa" class="form-control">
                   <?php while ($rowm = $mesas->fetch()) { ?>
-                  <option value="<?php echo $rowm['idmesa']; ?>"><?php echo $rowm['idmesa']; ?></option>
+                    <option value="<?php echo $rowm['idmesa']; ?>"><?php echo $rowm['idmesa']; ?></option>
                   <?php } ?>
                 </select>
 
                 <label>Cliente</label>
                 <select name="cliente" id="cliente" class="form-control">
                   <?php while ($rowc = $clientes->fetch()) { ?>
-                  <option value="<?php echo $rowc['idcliente']; ?>"><?php echo $rowc['nome']; ?></option>
+                    <option value="<?php echo $rowc['idcliente']; ?>"><?php echo $rowc['nome']; ?></option>
                   <?php } ?>
                 </select>
               </div>
 
               <input type="hidden" id="atendente" name="atendente" value="<?php echo $_SESSION['idusuario']; ?>">
 
-              <div class="form-group"
-                style="display: flex;flex-direction: row;justify-content: center;align-items: center;">
+              <div class="form-group" style="display: flex;flex-direction: row;justify-content: center;align-items: center;">
                 <button type="submit" class="btn btn-primary btn-block mb-3" style="width:25%;"> Cadastrar </button>
               </div>
             </form>
@@ -107,8 +103,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h4 class="modal-title" id="myModalLabel">Novo Pedido</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                aria-hidden="true">&times;</span></button>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           </div>
           <div class="modal-body">
             <form action="registro-pedido.php" method="POST">
@@ -117,7 +112,7 @@
                   <label>Lanche</label>
                   <select name="lanche" id="lanche" class="form-control">
                     <?php while ($row = $lanches->fetch()) { ?>
-                    <option value="<?php echo $row['idlanche']; ?>"><?php echo $row['nome_lanche']; ?></option>
+                      <option value="<?php echo $row['idlanche']; ?>"><?php echo $row['nome_lanche']; ?></option>
                     <?php } ?>
                   </select>
                 </div>
@@ -127,13 +122,12 @@
                 </div>
               </div>
               <label>Observação</label>
-              <input type="text" name="obs" id="obs" class="form-control">
+              <input class="form-control" type="text" name="obs" id="obs" placeholder="Observações">
 
               <input type="hidden" id="atendente" name="atendente" value="<?php echo $_SESSION['idusuario']; ?>">
               <input type="hidden" id="recepient-idcomanda" name="idcomanda">
 
-              <div class="form-group mt-2"
-                style="display: flex;flex-direction: row;justify-content: center;align-items: center;">
+              <div class="form-group mt-2" style="display: flex;flex-direction: row;justify-content: center;align-items: center;">
                 <button type="submit" class="btn btn-primary btn-block mt-3 mb-2" style="width:25%;"> Salvar </button>
               </div>
             </form>
@@ -143,23 +137,22 @@
     </div>
     <!-- Fim Modal -->
 
-        <!-- Inicio Modal Bebida -->
-        <div class="modal fade text-dark" id="ModalNovaBebida" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <!-- Inicio Modal Bebida -->
+    <div class="modal fade text-dark" id="ModalNovaBebida" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h4 class="modal-title" id="myModalLabel">Nova Bebida</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                aria-hidden="true">&times;</span></button>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           </div>
           <div class="modal-body">
-            <form action="registro-pedido.php" method="POST">
+            <form action="registro-pedido-bebida.php" method="POST">
               <div class="row ">
                 <div class="col">
                   <label>Bebida</label>
                   <select name="bebida" id="bebida" class="form-control">
                     <?php while ($row = $bebidas->fetch()) { ?>
-                    <option value="<?php echo $row['idbebida']; ?>"><?php echo $row['nome_bebida']; ?></option>
+                      <option value="<?php echo $row['idbebida']; ?>"><?php echo $row['nome_bebida']; ?></option>
                     <?php } ?>
                   </select>
                 </div>
@@ -169,13 +162,12 @@
                 </div>
               </div>
               <label>Observação</label>
-              <input type="text" name="obs" id="obs" class="form-control">
+              <input class="form-control" type="text" name="obs" id="obs" placeholder="Observações">
 
               <input type="hidden" id="atendente" name="atendente" value="<?php echo $_SESSION['idusuario']; ?>">
               <input type="hidden" id="recepient-idcomanda" name="idcomanda">
 
-              <div class="form-group mt-2"
-                style="display: flex;flex-direction: row;justify-content: center;align-items: center;">
+              <div class="form-group mt-2" style="display: flex;flex-direction: row;justify-content: center;align-items: center;">
                 <button type="submit" class="btn btn-primary btn-block mt-3 mb-2" style="width:25%;"> Salvar </button>
               </div>
             </form>
@@ -189,21 +181,21 @@
 
   <!-- popup informativos -->
   <?php if (isset($_GET['sucesso'])) { ?>
-  <script>
-    Swal.fire({
-      type: 'success',
-      title: 'Feito!',
-      text: 'Sucesso!!',
-    })
-  </script>
+    <script>
+      Swal.fire({
+        type: 'success',
+        title: 'Feito!',
+        text: 'Sucesso!!',
+      })
+    </script>
   <?php } elseif (isset($_GET['erro'])) { ?>
-  <script>
-    Swal.fire({
-      type: 'error',
-      title: 'Oops...',
-      text: 'Erro, tente novamente',
-    })
-  </script>
+    <script>
+      Swal.fire({
+        type: 'error',
+        title: 'Oops...',
+        text: 'Erro, tente novamente',
+      })
+    </script>
   <?php } ?>
 
   <!-- Optional JavaScript -->
@@ -214,7 +206,21 @@
 
   <!-- Modal JavaScript -->
   <script type="text/javascript">
-    $('#ModalNovoPedido').on('show.bs.modal', function (event) {
+    $('#ModalNovoPedido').on('show.bs.modal', function(event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var recipient = button.data('whatever') // Extract info from data-* attributes
+      // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+      // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+      var modal = $(this)
+      modal.find('.modal-title').text('ID do Comanda: ' + recipient)
+      modal.find('#recepient-idcomanda').val(recipient)
+
+    })
+  </script>
+
+  <!-- Modal JavaScript -->
+  <script type="text/javascript">
+    $('#ModalNovaBebida').on('show.bs.modal', function(event) {
       var button = $(event.relatedTarget) // Button that triggered the modal
       var recipient = button.data('whatever') // Extract info from data-* attributes
       // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).

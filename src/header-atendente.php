@@ -42,6 +42,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="pedidos.php">PEDIDOS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="pedidos-bebidas.php">BEBIDAS</a>
         </li> 
        </li>
         <li class="nav-item" id="link-mesa">
