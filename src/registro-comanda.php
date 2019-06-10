@@ -8,7 +8,8 @@
   $status  = "Aberta";
   $usuario = $_POST["atendente"];
 
-  $sql_ins = "INSERT INTO comandas ( data, total, status_comanda, cliente_idcliente, mesa_idmesa, usuarios_idusuario) VALUES ( CURRENT_TIMESTAMP, NULL, :status, :cliente, :mesa, :usuario)";
+  $sql_ins = "INSERT INTO comandas ( data, total, status_comanda, cliente_idcliente, mesa_idmesa, usuarios_idusuario) VALUES 
+                                    ( CURRENT_TIMESTAMP, NULL, :status, :cliente, :mesa, :usuario)";
   $stmt_ins = $pdo->prepare($sql_ins);
   $stmt_ins->bindParam(':status', $status);
   $stmt_ins->bindParam(':cliente', $cliente);
@@ -22,7 +23,6 @@
           if ($stmt_ins->rowCount() == 0) {
               header("Location: comandas.php?erro");
           } else {
-              $stmt_ins->execute();
               header("Location: comandas.php?sucesso");
           }
       

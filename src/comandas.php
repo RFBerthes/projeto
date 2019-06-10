@@ -48,7 +48,6 @@
                 <button type="button" class="btn btn-xs btn-warning " data-toggle="modal" data-target="#ModalNovaBebida" data-whatever="<?php echo $rowcm['idcomanda']; ?>"> <img src="open-iconic/png/cola.png"> </button>
               </div>
               <div class="col-4 ">
-                <input type="hidden" id="atendente" name="atendente" value="<?php echo $_SESSION['idusuario']; ?>">
                 <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#ModalNovaBebida">
                   <img src="open-iconic/png/share-2x.png"> </button>
               </div>
@@ -84,7 +83,7 @@
                 </select>
               </div>
 
-              <input type="hidden" id="atendente" name="atendente" value="<?php echo $_SESSION['idusuario']; ?>">
+              <input type="hidden" id="atendente2" name="atendente" value="<?php echo $_SESSION['idusuario']; ?>">
 
               <div class="form-group" style="display: flex;flex-direction: row;justify-content: center;align-items: center;">
                 <button type="submit" class="btn btn-primary btn-block mb-3" style="width:25%;"> Cadastrar </button>
@@ -124,7 +123,7 @@
               <label>Observação</label>
               <input class="form-control" type="text" name="obs" id="obs" placeholder="Observações">
 
-              <input type="hidden" id="atendente" name="atendente" value="<?php echo $_SESSION['idusuario']; ?>">
+              <input type="hidden" id="atendente3" name="atendente" value="<?php echo $_SESSION['idusuario']; ?>">
               <input type="hidden" id="recepient-idcomanda" name="idcomanda">
 
               <div class="form-group mt-2" style="display: flex;flex-direction: row;justify-content: center;align-items: center;">
@@ -164,7 +163,7 @@
               <label>Observação</label>
               <input class="form-control" type="text" name="obs" id="obs" placeholder="Observações">
 
-              <input type="hidden" id="atendente" name="atendente" value="<?php echo $_SESSION['idusuario']; ?>">
+              <input type="hidden" id="atendente1" name="atendente" value="<?php echo $_SESSION['idusuario']; ?>">
               <input type="hidden" id="recepient-idcomanda" name="idcomanda">
 
               <div class="form-group mt-2" style="display: flex;flex-direction: row;justify-content: center;align-items: center;">
