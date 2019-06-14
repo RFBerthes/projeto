@@ -12,7 +12,7 @@
   $stmt_search = $pdo->prepare($sql_search);
   $stmt_search->bindParam(':nome', $nome);
 
-  $sql_ins = "INSERT INTO bebidas (nome_bebida, valor, estoque) VALUES (:nome, :valor, :estoque)";
+  $sql_ins = "INSERT INTO bebidas (nome_bebida, valorbeb, estoque) VALUES (:nome, :valor, :estoque)";
   $stmt_ins = $pdo->prepare($sql_ins);
   $stmt_ins->bindParam(':nome', $nome);
   $stmt_ins->bindParam(':valor', $valor);

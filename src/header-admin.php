@@ -53,7 +53,7 @@
             <a class="nav-link" href="mesas.php">MESAS</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#">RELATÓRIOS</a>
+            <a class="nav-link" href="relatorio.php">RELATÓRIO</a>
           </li>
           <li class="nav-item">
             <a class="nav-link disabled" href="#">BACKUP</a>

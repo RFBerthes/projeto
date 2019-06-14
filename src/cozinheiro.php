@@ -3,7 +3,7 @@
 
 <head>
   <?php
-  require_once "header-atendente.php";
+  require_once "header-cozinheiro.php";
   //Buscas
   $sql1 = "SELECT mesa_idmesa, idpedido, nome, comanda_idcomanda, status, nome_lanche, obs, quantidade FROM pedidos
   JOIN lanches
@@ -13,7 +13,6 @@
   JOIN comandas
   ON comandas.idcomanda = pedidos.comanda_idcomanda";
   $pedidos = $pdo->query($sql1);
-
   ?>
 </head>
 
@@ -21,29 +20,22 @@
   <div class="container bg-dark text-white mt-2 mb-2 pb-2">
   <div class="row">
       <?php while ($row = $pedidos->fetch()) { 
-          if($row['status'] != "Servido"){
-      ?>
+        if($row['status'] == 'Preparo'){
+        ?>
         <div class="card text-dark mt-2 ml-3" style="width:25%">
           <a href="apagar-pedido.php?idpedido=<?php echo $row['idpedido']; ?>"><button type="button" class="close float-right mr-2 mt-1"> <span aria-hidden="true">&times;</span></button></a>
           <h6 class="card-title" style="text-align:center"><b>Pedido nº <?php echo $row['idpedido']; ?></b></h6>
           <p class="card-text pl-2">
             Mesa: <?php echo $row['mesa_idmesa']; ?> <br>
             Comanda: <?php echo $row['comanda_idcomanda']; ?> <br>
-            <?php echo $row['quantidade'] . " - " . $row['nome_lanche'] ?><br>
+            <b><?php echo $row['quantidade'] . " - " . $row['nome_lanche'] ?></b> <br>
             Obs: <?php echo $row['obs']; ?> <br>
             Satus: <?php echo $row['status']; ?> <br>
-
-            <?php if($row['status'] == "Pronto"){ ?>
-              <div class="text-center">
-                <a href="servir-pedido.php?idpedido=<?php echo $row['idpedido']; ?>"><button type="button" class="btn btn-xs btn-success mb-2"><img src="open-iconic/png/serving-dish.png"> </button></a>
-              </div>
-            <?php  } elseif($row['status'] == "Preparo"){ ?>
-              <div class="text-center">
-                <button type="button" class="btn btn-xs btn-warning mb-2"><img src="open-iconic/png/clock-2x.png"> </button>
-              </div>
-            <?php } ?>
+            <div class="text-center">
+              <a href="pronto-pedido.php?idpedido=<?php echo $row['idpedido']; ?>"><button type="button" class="btn btn-xs btn-success mb-2"><img src="open-iconic/png/share-2x.png"> </button></a>
+            </div>
         </div>
-      <?php } }?>
+      <?php } } ?>
     </div>
   </div>
 
@@ -72,6 +64,19 @@
   <script src="js/popper.js"></script>
   <script src="js/bootstrap.js"></script>
 
+  <!-- Modal JavaScript -->
+  <!-- <script type="text/javascript">
+    $('#ModalNovoPedido').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var recipient = button.data('whatever') // Extract info from data-* attributes
+      // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+      // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+      var modal = $(this)
+      modal.find('.modal-title').text('ID do Comanda: ' + recipient)
+      modal.find('#recepient-idcomanda').val(recipient)
+
+    })
+  </script> -->
 
 </body>
 

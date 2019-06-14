@@ -7,6 +7,7 @@
   $cliente  = $_POST["cliente"];
   $status  = "Aberta";
   $usuario = $_POST["atendente"];
+  
 
   $sql_ins = "INSERT INTO comandas ( data, total, status_comanda, cliente_idcliente, mesa_idmesa, usuarios_idusuario) VALUES 
                                     ( CURRENT_TIMESTAMP, NULL, :status, :cliente, :mesa, :usuario)";

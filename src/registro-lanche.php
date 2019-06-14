@@ -11,7 +11,7 @@
   $stmt_search = $pdo->prepare($sql_search);
   $stmt_search->bindParam(':nome', $nome);
 
-  $sql_ins = "INSERT INTO lanches (nome, valor) VALUES (:nome, :valor)";
+  $sql_ins = "INSERT INTO lanches (nome, valorlan) VALUES (:nome, :valor)";
   $stmt_ins = $pdo->prepare($sql_ins);
   $stmt_ins->bindParam(':nome', $nome);
   $stmt_ins->bindParam(':valor', $valor);

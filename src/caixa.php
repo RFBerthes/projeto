@@ -3,7 +3,7 @@
 
 <head>
   <?php
-  require_once "header-atendente.php";
+  require_once "header-caixa.php";
   //Buscas
   $sql1 = "SELECT * FROM usuarios";
   $usuarios = $pdo->query($sql1);
@@ -33,7 +33,7 @@
     </div>
     <div class="row">
       <?php while ($rowcm = $comandas->fetch()) { 
-        if ($rowcm['status_comanda'] == "Aberta") {
+        if ($rowcm['status_comanda'] == "Fechada") {
       ?>
         <div class="card text-dark mt-2 ml-3" style="width:20%">
           <a href="apagar-comanda.php?idcomanda=<?php echo $rowcm['idcomanda']; ?>"><button type="button" class="close float-rigth mr-2 mt-1"> <span aria-hidden="true">&times;</span></button></a>
@@ -41,7 +41,8 @@
           <p class="card-text pl-2">
             Mesa: <?php echo $rowcm['mesa_idmesa']; ?> <br>
             Cliente: <?php echo $rowcm['nome']; ?> <br>
-            Status: <?php echo $rowcm['status_comanda']; ?>
+            Status: <?php echo $rowcm['status_comanda']; ?> <br>
+            Total: R$ <?php echo $rowcm['total']; ?>
             <div class="row pr-3 pl-3 pb-2">
               <div class="col-4">
                 <button type="button" class="btn btn-xs btn-info " data-toggle="modal" data-target="#ModalNovoPedido" data-whatever="<?php echo $rowcm['idcomanda']; ?>"> <img src="open-iconic/png/dinner.png"> </button>
@@ -50,7 +51,7 @@
                 <button type="button" class="btn btn-xs btn-warning " data-toggle="modal" data-target="#ModalNovaBebida" data-whatever="<?php echo $rowcm['idcomanda']; ?>"> <img src="open-iconic/png/cola.png"> </button>
               </div>
               <div class="col-4 ">
-                <a href="fechar-comanda.php?idcomanda=<?php echo $rowcm['idcomanda']; ?>"><button type="button" class="btn btn-xs btn-primary mb-2"> <img src="open-iconic/png/share-2x.png"> </button></a>
+                <a href="pagar-comanda.php?idcomanda=<?php echo $rowcm['idcomanda']; ?>"><button type="button" class="btn btn-xs btn-primary mb-2"> <img src="open-iconic/png/money.png"> </button></a>
               </div>
             </div>
         </div>

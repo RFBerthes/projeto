@@ -3,7 +3,7 @@
 
 <head>
   <?php
-  require_once "header-atendente.php";
+  require_once "header-caixa.php";
   //Buscas
   $sql1 = "SELECT * FROM usuarios";
   $usuarios = $pdo->query($sql1);
@@ -27,35 +27,38 @@
 
 <body class="bg-dark">
   <div class="container  text-white mt-2 mb-2 pb-2">
-    <div class="pull-right">
-      <button type="button" class="btn btn-xs btn-success mt-2 mb-2" data-toggle="modal" data-target="#ModalNovaComanda">Nova Comanda</button>
-      <!-- <a href="zera-comandas.php"><button type="button" class="btn btn-xs btn-warning mt-2 mb-2 text-white float-right">Reniciar<img src="open-iconic/png/action-undo-2x.png"> </button> -->
+
+    <!-- Início Table -->
+    <div class="table-responsive-sm ">
+        <div class="col-md-12">
+          <h3 style="text-align:center">Relatório</h3>
+          <table class="table bg-light table-striped" style="text-align:center">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Cliente</th>
+                <th>Mesa/Comanda</th>
+                <th>Total</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+            <?php while ($rowcm = $comandas->fetch()) { 
+              if ($rowcm['status_comanda'] == "Paga") {
+            ?>             
+            <tr>
+              <td><?php echo $rowcm['data']; ?></td>
+              <td><?php echo $rowcm['nome']; ?></td>
+              <td><?php echo $rowcm['mesa_idmesa']."/".$rowcm['idcomanda']; ?></td>
+              <td><?php echo $rowcm['total']; ?></td>
+              <td><?php echo $rowcm['status_comanda']; ?></td>
+            </tr>
+            <?php } }?>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div class="row">
-      <?php while ($rowcm = $comandas->fetch()) { 
-        if ($rowcm['status_comanda'] == "Aberta") {
-      ?>
-        <div class="card text-dark mt-2 ml-3" style="width:20%">
-          <a href="apagar-comanda.php?idcomanda=<?php echo $rowcm['idcomanda']; ?>"><button type="button" class="close float-rigth mr-2 mt-1"> <span aria-hidden="true">&times;</span></button></a>
-          <h6 class="card-title" style="text-align:center"><b>Comanda nº <?php echo $rowcm['idcomanda']; ?></b></h6>
-          <p class="card-text pl-2">
-            Mesa: <?php echo $rowcm['mesa_idmesa']; ?> <br>
-            Cliente: <?php echo $rowcm['nome']; ?> <br>
-            Status: <?php echo $rowcm['status_comanda']; ?>
-            <div class="row pr-3 pl-3 pb-2">
-              <div class="col-4">
-                <button type="button" class="btn btn-xs btn-info " data-toggle="modal" data-target="#ModalNovoPedido" data-whatever="<?php echo $rowcm['idcomanda']; ?>"> <img src="open-iconic/png/dinner.png"> </button>
-              </div>
-              <div class="col-4">
-                <button type="button" class="btn btn-xs btn-warning " data-toggle="modal" data-target="#ModalNovaBebida" data-whatever="<?php echo $rowcm['idcomanda']; ?>"> <img src="open-iconic/png/cola.png"> </button>
-              </div>
-              <div class="col-4 ">
-                <a href="fechar-comanda.php?idcomanda=<?php echo $rowcm['idcomanda']; ?>"><button type="button" class="btn btn-xs btn-primary mb-2"> <img src="open-iconic/png/share-2x.png"> </button></a>
-              </div>
-            </div>
-        </div>
-      <?php } } ?>
-    </div>
+      <!-- Fim Table -->
 
 
     <!-- Inicio Modal Nova Comanda -->

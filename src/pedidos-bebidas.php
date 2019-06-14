@@ -19,7 +19,9 @@
 <body class="bg-dark">
   <div class="container bg-dark text-white mt-2 mb-2 pb-2">
   <div class="row">
-      <?php while ($row = $pedidos->fetch()) { ?>
+      <?php while ($row = $pedidos->fetch()) { 
+        if($row['status'] == "Aguardando"){
+      ?>
         <div class="card text-dark mt-2 ml-3" style="width:25%">
           <a href="apagar-pedido.php?idpedido=<?php echo $row['idpedido']; ?>"><button type="button" class="close float-right mr-2 mt-1"> <span aria-hidden="true">&times;</span></button></a>
           <h6 class="card-title" style="text-align:center"><b>Pedido Bebida nº <?php echo $row['idpedido']; ?></b></h6>
@@ -30,10 +32,10 @@
             Obs: <?php echo $row['obs']; ?> <br>
             Satus: <?php echo $row['status']; ?> <br>
             <div class="text-center">
-              <button type="button" class="btn btn-xs btn-success mb-2 " data-toggle="modal" data-target="#ModalNovaBebida"> <img src="open-iconic/png/coffee.png"> </button>
+              <a href="servir-pedido.php?idpedido=<?php echo $row['idpedido']; ?>"><button type="button" class="btn btn-xs btn-success mb-2"><img src="open-iconic/png/coffee.png"> </button></a>
             </div>
         </div>
-      <?php } ?>
+      <?php } }?>
     </div>
   </div>
 
