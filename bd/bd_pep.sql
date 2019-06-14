@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 14-Jun-2019 às 07:18
+-- Generation Time: 14-Jun-2019 às 07:28
 -- Versão do servidor: 10.1.40-MariaDB
 -- versão do PHP: 7.3.5
 
@@ -123,7 +123,7 @@ CREATE TABLE `lanches` (
 
 INSERT INTO `lanches` (`idlanche`, `nome_lanche`, `valorlan`) VALUES
 (6, 'X SALADA', '17.00'),
-(8, 'X CORAÇÃO', '18.00'),
+(8, 'X CORAÃ‡ÃƒO', '18.00'),
 (9, 'X BACON', '18.00'),
 (10, 'PASTEL CARNE', '6.00'),
 (11, 'X CALABRESA', '19.00'),
@@ -135,8 +135,8 @@ INSERT INTO `lanches` (`idlanche`, `nome_lanche`, `valorlan`) VALUES
 (17, 'FRITAS (M)', '20.00'),
 (18, 'FRITAS (G)', '25.00'),
 (19, 'POLENTA', '18.00'),
-(20, 'PORÇÃO MISTA', '45.00'),
-(21, 'CAMARÃO À MILANESA', '50.00'),
+(20, 'PORÃ‡ÃƒO MISTA', '45.00'),
+(21, 'CAMARÃƒO Ã€ MILANESA', '50.00'),
 (22, 'PASTEL FRANGO', '12.00'),
 (23, 'PASTEL QUEIJO', '10.00');
 

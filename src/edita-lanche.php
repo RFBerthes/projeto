@@ -8,7 +8,7 @@
 
 	$pdo = connect_to_database("bd_pep");
 	
-	$sql_upd = "UPDATE lanches SET nome = :nome, valor = :valor WHERE lanches.idlanche = :idlanche";
+	$sql_upd = "UPDATE lanches SET nome_lanche = :nome, valorlan = :valor WHERE lanches.idlanche = :idlanche";
 	$stmt_upd = $pdo->prepare($sql_upd);
 	$stmt_upd->bindParam(':idlanche', $idlanche);
 	$stmt_upd->bindParam(':nome', $nome);

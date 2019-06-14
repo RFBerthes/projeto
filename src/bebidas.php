@@ -65,10 +65,10 @@
               <?php while($row = $bebidas->fetch()){ ?>
               <tr>
                 <td><?php echo $row['nome_bebida']; ?></td>
-                <td><?php echo $row['valor']; ?></td>
+                <td><?php echo $row['valorbeb']; ?></td>
                 <td><?php echo $row['estoque']; ?></td>
                 <td>
-                  <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $row['idbebida']; ?>" data-whateverestoque="<?php echo $row['estoque']; ?>" data-whatevernome="<?php echo $row['nome_bebida']; ?>" data-whatevervalor="<?php echo $row['valor']; ?>"> <img src="open-iconic/png/pencil-2x.png"> </button>
+                  <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $row['idbebida']; ?>" data-whateverestoque="<?php echo $row['estoque']; ?>" data-whatevernome="<?php echo $row['nome_bebida']; ?>" data-whatevervalor="<?php echo $row['valorbeb']; ?>"> <img src="open-iconic/png/pencil-2x.png"> </button>
                   <a href="apagar-bebida.php?idbebida=<?php echo $row['idbebida']; ?>"><button type="button"
                       class="btn btn-xs btn-danger"> <img src="open-iconic/png/trash-2x.png"> </button></a>
                 </td>

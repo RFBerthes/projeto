@@ -83,7 +83,7 @@
                 <?php echo $row['nome_lanche']; ?>
               </td>
               <td>
-                <?php echo $row['valor']; ?>
+                <?php echo $row['valorlan']; ?>
               </td>
             </tr>
           <?php } ?>
@@ -108,7 +108,7 @@
                 <?php echo $row['nome_bebida']; ?>
               </td>
               <td>
-                <?php echo $row['valor']; ?>
+                <?php echo $row['valorbeb']; ?>
               </td>
               <td>
                 <?php echo $row['estoque']; ?>

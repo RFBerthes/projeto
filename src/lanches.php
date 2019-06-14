@@ -64,10 +64,10 @@
             <?php while($row = $lanches->fetch()){ ?>
             <tr>
               <td><?php echo $row['nome_lanche']; ?></td>
-              <td><?php echo $row['valor']; ?></td>
+              <td><?php echo $row['valorlan']; ?></td>
               <td>
                 <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#editModal"
-                  data-whatever="<?php echo $row['idlanche']; ?>" data-whatevernome="<?php echo $row['nome_lanche'];?>" data-whatevervalor="<?php echo $row['valor']; ?>"> <img src="open-iconic/png/pencil-2x.png"> </button>
+                  data-whatever="<?php echo $row['idlanche']; ?>" data-whatevernome="<?php echo $row['nome_lanche'];?>" data-whatevervalor="<?php echo $row['valorlan']; ?>"> <img src="open-iconic/png/pencil-2x.png"> </button>
                 <a href="apagar-lanche.php?idlanche=<?php echo $row['idlanche']; ?>"><button type="button" class="btn btn-xs btn-danger"> <img src="open-iconic/png/trash-2x.png"> </button></a>
               </td>
             </tr>

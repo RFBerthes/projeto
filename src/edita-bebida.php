@@ -9,7 +9,7 @@
 	$estoque = $_POST['estoque'];
 
 	
-	$sql_upd = "UPDATE bebidas SET nome_bebida = :nome, valor = :valor, estoque = :estoque WHERE bebidas.idbebida = :idbebida";
+	$sql_upd = "UPDATE bebidas SET nome_bebida = :nome, valorbeb = :valor, estoque = :estoque WHERE bebidas.idbebida = :idbebida";
 	$stmt_upd = $pdo->prepare($sql_upd);
 	$stmt_upd->bindParam(':idbebida', $idbebida);
 	$stmt_upd->bindParam(':nome', $nome);
