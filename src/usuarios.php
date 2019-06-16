@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
-    <?php require_once "header-admin.php";
+    <?php
+      require_once('verifica-login.php');
+
       //Buscas
       $sql1 = "SELECT * FROM usuarios";
       $usuarios = $pdo->query($sql1);
@@ -22,7 +24,7 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						</div>
 						<div class="modal-body  text-dark">
-                <form action="registro-usuario.php" method="POST">
+                <form action="registro/registro-usuario.php" method="POST">
                 
                   <div class="form-group">
                     <label>Perfil</label>
@@ -78,7 +80,7 @@
                       <td><?php echo $row['usuario'];?></td>
                       <td>
                         <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#EditModal" data-whatever="<?php echo $row['idusuario']; ?>"  data-whateverperfil="<?php echo $row['perfil']; ?>" data-whatevernome="<?php echo $row['nome']; ?>" data-whateverusuario="<?php echo $row['usuario']; ?>" > <img src="open-iconic/png/pencil-2x.png"> </button>
-                        <a href="delete-usuario.php?idusuario=<?php echo $row['idusuario']; ?>"><button type="button" class="btn btn-xs btn-danger"> <img src="open-iconic/png/trash-2x.png"> </button></a>
+                        <a href="delete/delete/apagar-usuario.php?idusuario=<?php echo $row['idusuario']; ?>"><button type="button" class="btn btn-xs btn-danger"> <img src="open-iconic/png/trash-2x.png"> </button></a>
                       </td>
                     </tr>
                   <?php } ?>
@@ -97,7 +99,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   </div>
                   <div class="modal-body  text-dark">
-                    <form method="POST" action="edita-usuario.php" enctype="multipart/form-data">
+                    <form method="POST" action="edita/edita-usuario.php" enctype="multipart/form-data">
                       <div class="form-group">
                           <label>Perfil</label>
                           <select name=perfil id=recepient-perfil class="form-control">

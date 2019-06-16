@@ -3,10 +3,11 @@
 
 <head>
   <?php
-  require_once "header-atendente.php";
-  //Buscas
-  $sql1 = "SELECT * FROM clientes";
-  $clientes = $pdo->query($sql1);
+    require_once('verifica-login.php');
+
+    //Buscas
+    $sql1 = "SELECT * FROM clientes";
+    $clientes = $pdo->query($sql1);
   ?>
 </head>
 
@@ -26,7 +27,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           </div>
           <div class="modal-body">
-            <form action="registro-cliente.php" method="POST">
+            <form action="registro/registro-cliente.php" method="POST">
               <div class="form-group">
                 <label>Nome</label>
                 <input type="text" id="nome" name="nome" required class="form-control" placeholder="Cliente">
@@ -59,7 +60,7 @@
                 <td><?php echo $row['nome']; ?></td>
                 <td>
                   <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $row['idcliente']; ?>" data-whatevernome="<?php echo $row['nome']; ?>"> <img src="open-iconic/png/pencil-2x.png"> </button>
-                  <a href="apagar-cliente.php?idcliente=<?php echo $row['idcliente']; ?>"><button type="button" class="btn btn-xs btn-danger"> <img src="open-iconic/png/trash-2x.png"> </button></a>
+                  <a href="delete/apagar-cliente.php?idcliente=<?php echo $row['idcliente']; ?>"><button type="button" class="btn btn-xs btn-danger"> <img src="open-iconic/png/trash-2x.png"> </button></a>
                 </td>
               </tr>
             <?php } ?>
@@ -78,7 +79,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           </div>
           <div class="modal-body">
-            <form method="POST" action="edita-cliente.php" enctype="multipart/form-data">
+            <form method="POST" action="edita/edita-cliente.php" enctype="multipart/form-data">
               <div class="form-group">
                 <label>Nome</label>
                 <input type="text" id=recepient-nome name=nome required class="form-control" placeholder="Nome">

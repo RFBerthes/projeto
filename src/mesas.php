@@ -2,7 +2,8 @@
 <html lang="pt-br">
   <head>
     <?php 
-      require_once "header-admin.php";
+      require_once('verifica-login.php');
+
       //Buscas
       $sql1 = "SELECT * FROM mesas";
       $mesas = $pdo->query($sql1);
@@ -12,7 +13,7 @@
 
       <div class="container bg-dark text-white mt-2 pb-3 pl-3" id="conteudoDinamico">
       
-        <a href="registro-mesa.php?idmesa=1"><button type="button" class="btn btn-xs btn-primary mt-3">Adicionar Mesa</button></a>
+        <a href="registro/registro-mesa.php?idmesa=1"><button type="button" class="btn btn-xs btn-primary mt-3">Adicionar Mesa</button></a>
       
         <div class="row pl-3" id="mesas" >
 
@@ -21,7 +22,7 @@
               <div class="card-body ">
                 <h5 class="card-title" >Mesa nº <?php echo $row['idmesa']; ?></h5>
                 <p class="card-text">Garçom: ?</p>
-                <a href="apagar-mesa.php?idmesa=<?php echo $row['idmesa']; ?>"><button type="button" class="btn btn-xs btn-danger "> <img src="open-iconic/png/trash-2x.png"> </button></a>
+                <a href="delete/apagar-mesa.php?idmesa=<?php echo $row['idmesa']; ?>"><button type="button" class="btn btn-xs btn-danger "> <img src="open-iconic/png/trash-2x.png"> </button></a>
               </div> 
             </div>          
         <?php } ?>

@@ -35,12 +35,12 @@ for (let i = 0; i < longerTimeoutBrowsers.length; i += 1) {
 
 function microtaskDebounce(fn) {
   let called = false;
-  return () => {
+  return () ="bg-dark"> {
     if (called) {
       return;
     }
     called = true;
-    window.Promise.resolve().then(() => {
+    window.Promise.resolve().then(() ="bg-dark"> {
       called = false;
       fn();
     });
@@ -49,10 +49,10 @@ function microtaskDebounce(fn) {
 
 function taskDebounce(fn) {
   let scheduled = false;
-  return () => {
+  return () ="bg-dark"> {
     if (!scheduled) {
       scheduled = true;
-      setTimeout(() => {
+      setTimeout(() ="bg-dark"> {
         scheduled = false;
         fn();
       }, timeoutDuration);
@@ -636,13 +636,13 @@ function computeAutoPlacement(placement, refRect, popper, reference, boundariesE
     }
   };
 
-  const sortedAreas = Object.keys(rects).map(key => _extends({
+  const sortedAreas = Object.keys(rects).map(key ="bg-dark"> _extends({
     key
   }, rects[key], {
     area: getArea(rects[key])
-  })).sort((a, b) => b.area - a.area);
+  })).sort((a, b) ="bg-dark"> b.area - a.area);
 
-  const filteredAreas = sortedAreas.filter(({ width, height }) => width >= popper.clientWidth && height >= popper.clientHeight);
+  const filteredAreas = sortedAreas.filter(({ width, height }) ="bg-dark"> width >= popper.clientWidth && height >= popper.clientHeight);
 
   const computedPlacement = filteredAreas.length > 0 ? filteredAreas[0].key : sortedAreas[0].key;
 
@@ -694,7 +694,7 @@ function getOuterSizes(element) {
  */
 function getOppositePlacement(placement) {
   const hash = { left: 'right', right: 'left', bottom: 'top', top: 'bottom' };
-  return placement.replace(/left|right|bottom|top/g, matched => hash[matched]);
+  return placement.replace(/left|right|bottom|top/g, matched ="bg-dark"> hash[matched]);
 }
 
 /**
@@ -767,11 +767,11 @@ function find(arr, check) {
 function findIndex(arr, prop, value) {
   // use native findIndex if supported
   if (Array.prototype.findIndex) {
-    return arr.findIndex(cur => cur[prop] === value);
+    return arr.findIndex(cur ="bg-dark"> cur[prop] === value);
   }
 
   // use `find` + `indexOf` if `findIndex` isn't supported
-  const match = find(arr, obj => obj[prop] === value);
+  const match = find(arr, obj ="bg-dark"> obj[prop] === value);
   return arr.indexOf(match);
 }
 
@@ -788,7 +788,7 @@ function findIndex(arr, prop, value) {
 function runModifiers(modifiers, data, ends) {
   const modifiersToRun = ends === undefined ? modifiers : modifiers.slice(0, findIndex(modifiers, 'name', ends));
 
-  modifiersToRun.forEach(modifier => {
+  modifiersToRun.forEach(modifier ="bg-dark"> {
     if (modifier['function']) {
       // eslint-disable-line dot-notation
       console.warn('`modifier.function` is deprecated, use `modifier.fn`!');
@@ -868,7 +868,7 @@ function update() {
  * @returns {Boolean}
  */
 function isModifierEnabled(modifiers, modifierName) {
-  return modifiers.some(({ name, enabled }) => enabled && name === modifierName);
+  return modifiers.some(({ name, enabled }) ="bg-dark"> enabled && name === modifierName);
 }
 
 /**
@@ -986,7 +986,7 @@ function removeEventListeners(reference, state) {
   getWindow(reference).removeEventListener('resize', state.updateBound);
 
   // Remove scroll event listener on scroll parents
-  state.scrollParents.forEach(target => {
+  state.scrollParents.forEach(target ="bg-dark"> {
     target.removeEventListener('scroll', state.updateBound);
   });
 
@@ -1032,7 +1032,7 @@ function isNumeric(n) {
  * Object with a list of properties and values which will be applied to the element
  */
 function setStyles(element, styles) {
-  Object.keys(styles).forEach(prop => {
+  Object.keys(styles).forEach(prop ="bg-dark"> {
     let unit = '';
     // add unit if the value is numeric and is one of the following
     if (['width', 'height', 'top', 'right', 'bottom', 'left'].indexOf(prop) !== -1 && isNumeric(styles[prop])) {
@@ -1139,7 +1139,7 @@ function applyStyleOnLoad(reference, popper, options, modifierOptions, state) {
 function getRoundedOffsets(data, shouldRound) {
   const { popper, reference } = data.offsets;
   const { round, floor } = Math;
-  const noRound = v => v;
+  const noRound = v ="bg-dark"> v;
 
   const referenceWidth = round(reference.width);
   const popperWidth = round(popper.width);
@@ -1174,7 +1174,7 @@ function computeStyle(data, options) {
   const { popper } = data.offsets;
 
   // Remove this legacy support in Popper.js v2
-  const legacyGpuAccelerationOption = find(data.instance.modifiers, modifier => modifier.name === 'applyStyle').gpuAcceleration;
+  const legacyGpuAccelerationOption = find(data.instance.modifiers, modifier ="bg-dark"> modifier.name === 'applyStyle').gpuAcceleration;
   if (legacyGpuAccelerationOption !== undefined) {
     console.warn('WARNING: `gpuAcceleration` option moved to `computeStyle` modifier and will not be supported in future versions of Popper.js!');
   }
@@ -1266,9 +1266,9 @@ function computeStyle(data, options) {
  * @returns {Boolean}
  */
 function isModifierRequired(modifiers, requestingName, requestedName) {
-  const requesting = find(modifiers, ({ name }) => name === requestingName);
+  const requesting = find(modifiers, ({ name }) ="bg-dark"> name === requestingName);
 
-  const isRequired = !!requesting && modifiers.some(modifier => {
+  const isRequired = !!requesting && modifiers.some(modifier ="bg-dark"> {
     return modifier.name === requestedName && modifier.enabled && modifier.order < requesting.order;
   });
 
@@ -1474,7 +1474,7 @@ function flip(data, options) {
       flipOrder = options.behavior;
   }
 
-  flipOrder.forEach((step, index) => {
+  flipOrder.forEach((step, index) ="bg-dark"> {
     if (placement !== step || flipOrder.length === index + 1) {
       return data;
     }
@@ -1631,11 +1631,11 @@ function parseOffset(offset, popperOffsets, referenceOffsets, basePlacement) {
 
   // Split the offset string to obtain a list of values and operands
   // The regex addresses values with the plus or minus sign in front (+10, -20, etc)
-  const fragments = offset.split(/(\+|\-)/).map(frag => frag.trim());
+  const fragments = offset.split(/(\+|\-)/).map(frag ="bg-dark"> frag.trim());
 
   // Detect if the offset string contains a pair of values or a single one
   // they could be separated by comma or space
-  const divider = fragments.indexOf(find(fragments, frag => frag.search(/,|\s/) !== -1));
+  const divider = fragments.indexOf(find(fragments, frag ="bg-dark"> frag.search(/,|\s/) !== -1));
 
   if (fragments[divider] && fragments[divider].indexOf(',') === -1) {
     console.warn('Offsets separated by white space(s) are deprecated, use a comma (,) instead.');
@@ -1647,14 +1647,14 @@ function parseOffset(offset, popperOffsets, referenceOffsets, basePlacement) {
   let ops = divider !== -1 ? [fragments.slice(0, divider).concat([fragments[divider].split(splitRegex)[0]]), [fragments[divider].split(splitRegex)[1]].concat(fragments.slice(divider + 1))] : [fragments];
 
   // Convert the values with units to absolute pixels to allow our computations
-  ops = ops.map((op, index) => {
+  ops = ops.map((op, index) ="bg-dark"> {
     // Most of the units rely on the orientation of the popper
     const measurement = (index === 1 ? !useHeight : useHeight) ? 'height' : 'width';
     let mergeWithPrevious = false;
     return op
     // This aggregates any `+` or `-` sign that aren't considered operators
-    // e.g.: 10 + +5 => [10, +, +5]
-    .reduce((a, b) => {
+    // e.g.: 10 + +5 ="bg-dark"> [10, +, +5]
+    .reduce((a, b) ="bg-dark"> {
       if (a[a.length - 1] === '' && ['+', '-'].indexOf(b) !== -1) {
         a[a.length - 1] = b;
         mergeWithPrevious = true;
@@ -1668,12 +1668,12 @@ function parseOffset(offset, popperOffsets, referenceOffsets, basePlacement) {
       }
     }, [])
     // Here we convert the string values into number values (in px)
-    .map(str => toValue(str, measurement, popperOffsets, referenceOffsets));
+    .map(str ="bg-dark"> toValue(str, measurement, popperOffsets, referenceOffsets));
   });
 
   // Loop trough the offsets arrays and execute the operations
-  ops.forEach((op, index) => {
-    op.forEach((frag, index2) => {
+  ops.forEach((op, index) ="bg-dark"> {
+    op.forEach((frag, index2) ="bg-dark"> {
       if (isNumeric(frag)) {
         offsets[index] += frag * (op[index2 - 1] === '-' ? -1 : 1);
       }
@@ -1778,7 +1778,7 @@ function preventOverflow(data, options) {
     }
   };
 
-  order.forEach(placement => {
+  order.forEach(placement ="bg-dark"> {
     const side = ['left', 'top'].indexOf(placement) !== -1 ? 'primary' : 'secondary';
     popper = _extends({}, popper, check[side](placement));
   });
@@ -1833,7 +1833,7 @@ function hide(data) {
   }
 
   const refRect = data.offsets.reference;
-  const bound = find(data.instance.modifiers, modifier => modifier.name === 'preventOverflow').boundaries;
+  const bound = find(data.instance.modifiers, modifier ="bg-dark"> modifier.name === 'preventOverflow').boundaries;
 
   if (refRect.bottom < bound.top || refRect.left > bound.right || refRect.top > bound.bottom || refRect.right < bound.left) {
     // Avoid unnecessary DOM access if visibility hasn't changed
@@ -2286,7 +2286,7 @@ var Defaults = {
    * Access Popper.js instance with `data.instance`.
    * @prop {onCreate}
    */
-  onCreate: () => {},
+  onCreate: () ="bg-dark"> {},
 
   /**
    * Callback called when the popper is updated. This callback is not called
@@ -2296,7 +2296,7 @@ var Defaults = {
    * Access Popper.js instance with `data.instance`.
    * @prop {onUpdate}
    */
-  onUpdate: () => {},
+  onUpdate: () ="bg-dark"> {},
 
   /**
    * List of modifiers used to modify the offsets before they are applied to the popper.
@@ -2328,7 +2328,7 @@ class Popper {
    * @return {Object} instance - The generated Popper.js instance
    */
   constructor(reference, popper, options = {}) {
-    this.scheduleUpdate = () => requestAnimationFrame(this.update);
+    this.scheduleUpdate = () ="bg-dark"> requestAnimationFrame(this.update);
 
     // make update() debounced, so that it only runs at most once-per-tick
     this.update = debounce(this.update.bind(this));
@@ -2349,22 +2349,22 @@ class Popper {
 
     // Deep merge modifiers options
     this.options.modifiers = {};
-    Object.keys(_extends({}, Popper.Defaults.modifiers, options.modifiers)).forEach(name => {
+    Object.keys(_extends({}, Popper.Defaults.modifiers, options.modifiers)).forEach(name ="bg-dark"> {
       this.options.modifiers[name] = _extends({}, Popper.Defaults.modifiers[name] || {}, options.modifiers ? options.modifiers[name] : {});
     });
 
-    // Refactoring modifiers' list (Object => Array)
-    this.modifiers = Object.keys(this.options.modifiers).map(name => _extends({
+    // Refactoring modifiers' list (Object ="bg-dark"> Array)
+    this.modifiers = Object.keys(this.options.modifiers).map(name ="bg-dark"> _extends({
       name
     }, this.options.modifiers[name]))
     // sort the modifiers by order
-    .sort((a, b) => a.order - b.order);
+    .sort((a, b) ="bg-dark"> a.order - b.order);
 
     // modifiers have the ability to execute arbitrary code when Popper.js get inited
     // such code is executed in the same order of its modifier
     // they could add new properties to their options configuration
     // BE AWARE: don't add options to `options.modifiers.name` but to `modifierOptions`!
-    this.modifiers.forEach(modifierOptions => {
+    this.modifiers.forEach(modifierOptions ="bg-dark"> {
       if (modifierOptions.enabled && isFunction(modifierOptions.onLoad)) {
         modifierOptions.onLoad(this.reference, this.popper, this.options, modifierOptions, this.state);
       }

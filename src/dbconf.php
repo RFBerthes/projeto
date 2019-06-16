@@ -1,9 +1,9 @@
 <?php
 
-$username = "root";
-$password = "";
+    $username = "root";
+    $password = "";
 
-$driver = "mysql";
-$host = "localhost";
+    $driver = "mysql";
+    $host = "localhost";
 
 ?>

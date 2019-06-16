@@ -2,8 +2,9 @@
 <html lang="pt-br">
   <head>
     <?php 
-      require_once "header-admin.php";
-      //Buscas
+    require_once('verifica-login.php');
+
+    //Buscas
       $sql1 = "SELECT * FROM bebidas";
       $bebidas = $pdo->query($sql1);  
     ?>
@@ -25,7 +26,7 @@
                     aria-hidden="true">&times;</span></button>
               </div>
               <div class="modal-body">
-                <form action="registro-bebida.php" method="POST">
+                <form action="registro/registro-bebida.php" method="POST">
                   <div class="form-group">
                     <label>Nome</label>
                     <input type="text" id="nome" name="nome" required class="form-control" placeholder="Descrição">
@@ -69,7 +70,7 @@
                 <td><?php echo $row['estoque']; ?></td>
                 <td>
                   <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $row['idbebida']; ?>" data-whateverestoque="<?php echo $row['estoque']; ?>" data-whatevernome="<?php echo $row['nome_bebida']; ?>" data-whatevervalor="<?php echo $row['valorbeb']; ?>"> <img src="open-iconic/png/pencil-2x.png"> </button>
-                  <a href="apagar-bebida.php?idbebida=<?php echo $row['idbebida']; ?>"><button type="button"
+                  <a href="delete/apagar-bebida.php?idbebida=<?php echo $row['idbebida']; ?>"><button type="button"
                       class="btn btn-xs btn-danger"> <img src="open-iconic/png/trash-2x.png"> </button></a>
                 </td>
               </tr>
@@ -89,7 +90,7 @@
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                  <form method="POST" action="edita-bebida.php" enctype="multipart/form-data">
+                  <form method="POST" action="edita/edita-bebida.php" enctype="multipart/form-data">
                     <div class="form-group">
                       <label>Nome</label>
                       <input type="text" id="recipient-nome" name="nome" required class="form-control" placeholder="Descrição">

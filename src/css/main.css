@@ -5028,14 +5028,14 @@ input[type="button"].btn-block {
   border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px);
 }
 
-.card-header-tabs {
+.card-header/header-tabs {
   margin-right: -0.625rem;
   margin-bottom: -0.75rem;
   margin-left: -0.625rem;
   border-bottom: 0;
 }
 
-.card-header-pills {
+.card-header/header-pills {
   margin-right: -0.625rem;
   margin-left: -0.625rem;
 }
@@ -10665,7 +10665,7 @@ a.text-my-color-1:hover, a.text-my-color-1:focus {
     page-break-inside: avoid;
   }
   thead {
-    display: table-header-group;
+    display: table-header/header-group;
   }
   tr,
   img {

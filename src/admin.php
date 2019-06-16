@@ -1,27 +1,26 @@
 <!doctype html>
 <html lang="pt-br">
-
 <head>
-  <?php require_once "header-admin.php";
-  echo "Bem vindo $login";
-  //Buscas
-  $sql1 = "SELECT * FROM usuarios";
-  $usuarios = $pdo->query($sql1);
+  <?php 
+    require_once('verifica-login.php');
 
-  $sql2 = "SELECT * FROM mesas";
-  $mesas = $pdo->query($sql2);
+    //Buscas
+    $sql1 = "SELECT * FROM usuarios";
+    $usuarios = $pdo->query($sql1);
 
-  $sql3 = "SELECT * FROM bebidas";
-  $bebidas = $pdo->query($sql3);
+    $sql2 = "SELECT * FROM mesas";
+    $mesas = $pdo->query($sql2);
 
-  $sql4 = "SELECT * FROM lanches";
-  $lanches = $pdo->query($sql4);
+    $sql3 = "SELECT * FROM bebidas";
+    $bebidas = $pdo->query($sql3);
+
+    $sql4 = "SELECT * FROM lanches";
+    $lanches = $pdo->query($sql4);
   ?>
 
 </head>
 
 <body class="bg-dark text-white">
-
 
   <div class="row pt-3 ml-3 mr-3">
     <div class="column ml-3 mr-3" style="width:45%">

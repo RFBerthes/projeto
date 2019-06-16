@@ -2,7 +2,9 @@
 <html lang="pt-br">
 
 <head>
-  <?php require_once "header-admin.php";
+  <?php 
+    require_once('verifica-login.php');
+
     //Buscas
     $sql1 = "SELECT * FROM sabores";
     $sabores = $pdo->query($sql1);
@@ -27,7 +29,7 @@
                 aria-hidden="true">&times;</span></button>
           </div>
           <div class="modal-body">
-            <form action="registro-sabor.php" method="POST">
+            <form action="registro/registro-sabor.php" method="POST">
               <div class="form-group">
                 <label>Nome</label>
                 <input type="text" id="nome" name="nome" required class="form-control" placeholder="Sabor">
@@ -61,7 +63,7 @@
               <td><?php echo $row['nome']; ?></td>
               <td>
                 <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $row['idsabor']; ?>" data-whatevernome="<?php echo $row['nome']; ?>" > <img src="open-iconic/png/pencil-2x.png"> </button>
-                <a href="apagar-sabor.php?nome=<?php echo $row['nome']; ?>"><button type="button" class="btn btn-xs btn-danger"> <img src="open-iconic/png/trash-2x.png"> </button></a>
+                <a href="delete/apagar-sabor.php?nome=<?php echo $row['nome']; ?>"><button type="button" class="btn btn-xs btn-danger"> <img src="open-iconic/png/trash-2x.png"> </button></a>
               </td>
             </tr>
             <?php } ?>
@@ -80,7 +82,7 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-              <form method="POST" action="edita-sabor.php" enctype="multipart/form-data">
+              <form method="POST" action="edita/edita-sabor.php" enctype="multipart/form-data">
                   <div class="form-group">
                     <label>Nome</label>
                     <input type="text" id=recepient-nome name=nome required class="form-control" placeholder="Nome">

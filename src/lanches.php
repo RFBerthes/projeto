@@ -3,7 +3,8 @@
 
 <head>
   <?php 
-      require_once "header-admin.php";
+     require_once('verifica-login.php');
+
       //Buscas
       $sql1 = "SELECT * FROM lanches";
       $lanches = $pdo->query($sql1);
@@ -27,7 +28,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           </div>
           <div class="modal-body">
-            <form action="registro-lanche.php" method="POST">
+            <form action="registro/registro-lanche.php" method="POST">
               <div class="form-group">
                 <label>Nome</label>
                 <input type="text" id="nome" name="nome" required class="form-control" placeholder="Descrição">
@@ -68,7 +69,7 @@
               <td>
                 <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#editModal"
                   data-whatever="<?php echo $row['idlanche']; ?>" data-whatevernome="<?php echo $row['nome_lanche'];?>" data-whatevervalor="<?php echo $row['valorlan']; ?>"> <img src="open-iconic/png/pencil-2x.png"> </button>
-                <a href="apagar-lanche.php?idlanche=<?php echo $row['idlanche']; ?>"><button type="button" class="btn btn-xs btn-danger"> <img src="open-iconic/png/trash-2x.png"> </button></a>
+                <a href="delete/apagar-lanche.php?idlanche=<?php echo $row['idlanche']; ?>"><button type="button" class="btn btn-xs btn-danger"> <img src="open-iconic/png/trash-2x.png"> </button></a>
               </td>
             </tr>
             <?php } ?>
@@ -88,7 +89,7 @@
                 aria-hidden="true">&times;</span></button>
           </div>
           <div class="modal-body text-dark">
-            <form method="POST" action="edita-lanche.php" enctype="multipart/form-data">
+            <form method="POST" action="edita/edita-lanche.php" enctype="multipart/form-data">
               <div class="form-group">
                 <label>Nome</label>
                 <input type="text" id="recipient-nome" name="nome" required class="form-control" placeholder="Descrição">

@@ -3,16 +3,17 @@
 
 <head>
   <?php
-  require_once "header-cozinheiro.php";
-  //Buscas
-  $sql1 = "SELECT mesa_idmesa, idpedido, nome, comanda_idcomanda, status, nome_lanche, obs, quantidade FROM pedidos
-  JOIN lanches
-  ON pedidos.lanches_idlanche = lanches.idlanche
-  JOIN usuarios
-  ON pedidos.usuario_idusuario = usuarios.idusuario
-  JOIN comandas
-  ON comandas.idcomanda = pedidos.comanda_idcomanda";
-  $pedidos = $pdo->query($sql1);
+    require_once('verifica-login.php');
+
+    //Buscas
+    $sql1 = "SELECT mesa_idmesa, idpedido, nome, comanda_idcomanda, status, nome_lanche, obs, quantidade FROM pedidos
+    JOIN lanches
+    ON pedidos.lanches_idlanche = lanches.idlanche
+    JOIN usuarios
+    ON pedidos.usuario_idusuario = usuarios.idusuario
+    JOIN comandas
+    ON comandas.idcomanda = pedidos.comanda_idcomanda";
+    $pedidos = $pdo->query($sql1);
   ?>
 </head>
 
@@ -23,7 +24,7 @@
         if($row['status'] == 'Preparo'){
         ?>
         <div class="card text-dark mt-2 ml-3" style="width:25%">
-          <a href="apagar-pedido.php?idpedido=<?php echo $row['idpedido']; ?>"><button type="button" class="close float-right mr-2 mt-1"> <span aria-hidden="true">&times;</span></button></a>
+          <a href="delete/apagar-pedido.php?idpedido=<?php echo $row['idpedido']; ?>"><button type="button" class="close float-right mr-2 mt-1"> <span aria-hidden="true">&times;</span></button></a>
           <h6 class="card-title" style="text-align:center"><b>Pedido nº <?php echo $row['idpedido']; ?></b></h6>
           <p class="card-text pl-2">
             Mesa: <?php echo $row['mesa_idmesa']; ?> <br>
@@ -32,7 +33,7 @@
             Obs: <?php echo $row['obs']; ?> <br>
             Satus: <?php echo $row['status']; ?> <br>
             <div class="text-center">
-              <a href="pronto-pedido.php?idpedido=<?php echo $row['idpedido']; ?>"><button type="button" class="btn btn-xs btn-success mb-2"><img src="open-iconic/png/share-2x.png"> </button></a>
+              <a href="update/pronto-pedido.php?idpedido=<?php echo $row['idpedido']; ?>"><button type="button" class="btn btn-xs btn-success mb-2"><img src="open-iconic/png/share-2x.png"> </button></a>
             </div>
         </div>
       <?php } } ?>

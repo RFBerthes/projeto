@@ -2,9 +2,8 @@
 <html lang="pt-br">
 
 <head>
-  <?php require_once "header-atendente.php";
-  echo "Bem vindo $login";
-
+  <?php 
+    require_once('verifica-login.php');
   ?>
 </head>
 

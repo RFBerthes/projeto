@@ -3464,8 +3464,8 @@ function adoptValue( value, resolve, reject, noValue ) {
 		} else {
 
 			// Control `resolve` arguments by letting Array#slice cast boolean `noValue` to integer:
-			// * false: [ value ].slice( 0 ) => resolve( value )
-			// * true: [ value ].slice( 1 ) => resolve()
+			// * false: [ value ].slice( 0 ) ="bg-dark"> resolve( value )
+			// * true: [ value ].slice( 1 ) ="bg-dark"> resolve()
 			resolve.apply( undefined, [ value ].slice( noValue ) );
 		}
 
