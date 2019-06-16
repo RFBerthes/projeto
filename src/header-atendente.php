@@ -35,7 +35,7 @@
     <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item ">
-          <a class="nav-link" href="atendente.php" id="home">HOME <span class="sr-only">(página atual)</span></a>
+          <a class="nav-link" href="comandas.php" id="home">HOME <span class="sr-only">(página atual)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="comandas.php"> COMANDAS </a>

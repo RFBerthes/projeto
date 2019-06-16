@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 14-Jun-2019 às 07:28
+-- Generation Time: 16-Jun-2019 às 19:27
 -- Versão do servidor: 10.1.40-MariaDB
 -- versão do PHP: 7.3.5
 
@@ -96,14 +96,15 @@ CREATE TABLE `comandas` (
 --
 
 INSERT INTO `comandas` (`idcomanda`, `data`, `total`, `status_comanda`, `cliente_idcliente`, `mesa_idmesa`, `usuarios_idusuario`) VALUES
-(1, '2019-06-10 05:15:10', '39.00', 'Fechada', 1, 1, 9),
-(2, '2019-06-10 05:15:28', NULL, 'Fechada', 4, 2, 9),
-(3, '2019-06-10 05:15:34', '18.00', 'Fechada', 5, 3, 9),
-(4, '2019-06-10 05:15:41', '0.00', 'Paga', 8, 4, 9),
-(6, '2019-06-10 05:15:57', '0.00', 'Fechada', 12, 7, 9),
-(7, '2019-06-14 00:42:22', '22.00', 'Fechada', 10, 1, 9),
-(8, '0000-00-00 00:00:00', '21.00', 'Paga', 1, 1, 8),
-(9, '2019-06-14 05:05:50', '23.00', 'Paga', 12, 4, 8);
+(5, '2019-06-15 00:23:20', '22.00', 'Paga', 1, 1, 9),
+(6, '2019-06-15 21:14:15', NULL, 'Aberta', 8, 4, 9),
+(7, '2019-06-15 21:14:19', NULL, 'Aberta', 4, 5, 9),
+(8, '2019-06-15 21:14:23', NULL, 'Aberta', 8, 6, 9),
+(9, '2019-06-15 21:14:29', NULL, 'Aberta', 12, 8, 9),
+(10, '2019-06-15 21:14:34', NULL, 'Aberta', 4, 7, 9),
+(11, '2019-06-15 21:14:42', NULL, 'Aberta', 5, 3, 9),
+(12, '2019-06-15 21:14:47', NULL, 'Aberta', 1, 4, 9),
+(13, '2019-06-15 21:14:52', NULL, 'Aberta', 1, 3, 9);
 
 -- --------------------------------------------------------
 
@@ -190,16 +191,8 @@ CREATE TABLE `pedidos` (
 --
 
 INSERT INTO `pedidos` (`idpedido`, `data`, `status`, `tipo`, `comanda_idcomanda`, `usuario_idusuario`, `lanches_idlanche`, `quantidade`, `obs`, `bebidas_idbebida`) VALUES
-(1, '2019-06-14 00:42:36', 'Servido', 'Lanche', 7, 9, 8, 1, 'asas', NULL),
-(2, '2019-06-14 00:42:57', 'Servido', 'Bebida', 7, 9, NULL, 2, 'canudo', 2),
-(3, '2019-06-14 01:09:13', 'Servido', 'Lanche', 1, 9, 6, 2, '', NULL),
-(4, '2019-06-14 02:30:11', 'Servido', 'Lanche', 1, 9, 9, 2, '', NULL),
-(5, '2019-06-14 02:57:02', 'Servido', 'Bebida', 1, 9, NULL, 2, '', 1),
-(6, '2019-06-14 03:12:17', 'Servido', 'Lanche', 3, 9, 8, 1, '', NULL),
-(7, '2019-06-14 04:52:38', 'Servido', 'Lanche', 8, 8, 6, 1, '', NULL),
-(8, '2019-06-14 04:52:43', 'Servido', 'Bebida', 8, 8, NULL, 1, '', 1),
-(9, '2019-06-14 05:03:10', 'Servido', 'Lanche', 9, 8, 9, 2, 'Sem bacon', NULL),
-(10, '2019-06-14 05:03:56', 'Servido', 'Bebida', 9, 8, NULL, 1, 'Com gelo', 3);
+(9, '2019-06-15 00:21:16', 'Servido', 'Lanche', 5, 9, 6, 1, 'Sem tomate', NULL),
+(10, '2019-06-15 00:21:26', 'Servido', 'Bebida', 5, 9, NULL, 1, 'Laranja', 3);
 
 -- --------------------------------------------------------
 
@@ -298,7 +291,7 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT for table `comandas`
 --
 ALTER TABLE `comandas`
-  MODIFY `idcomanda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idcomanda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `lanches`

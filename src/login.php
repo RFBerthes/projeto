@@ -33,7 +33,7 @@
                 session_start();
                 $_SESSION['usuario'] = $row['nome'];
                 $_SESSION['idusuario'] = $row['idusuario'];
-                header('Location: atendente.php');
+                header('Location: comandas.php');
                 exit();
                 break;
             case "Cozinheiro": 
