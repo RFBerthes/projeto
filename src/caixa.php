@@ -29,10 +29,10 @@
 
 <body class="bg-dark">
   <div class="container  text-white mt-2 mb-2 pb-2">
-    <div class="pull-right">
+    <!-- <div class="pull-right">
       <button type="button" class="btn btn-xs btn-success mt-2 mb-2" data-toggle="modal" data-target="#ModalNovaComanda">Nova Comanda</button>
-      <!-- <a href="update/zera-comandas.php"><button type="button" class="btn btn-xs btn-warning mt-2 mb-2 text-white float-right">Reniciar<img src="open-iconic/png/action-undo-2x.png"> </button> -->
-    </div>
+      <a href="update/zera-comandas.php"><button type="button" class="btn btn-xs btn-warning mt-2 mb-2 text-white float-right">Reniciar<img src="open-iconic/png/action-undo-2x.png"> </button>
+    </div> -->
     <div class="row">
       <?php while ($rowcm = $comandas->fetch()) { 
         if ($rowcm['status_comanda'] == "Fechada") {
@@ -111,7 +111,7 @@
 
 
     <!-- Inicio Modal Nova Comanda -->
-    <div class="modal fade text-dark" id="ModalNovaComanda" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <!-- <div class="modal fade text-dark" id="ModalNovaComanda" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -145,8 +145,7 @@
           </div>
         </div>
       </div>
-    </div>
-
+    </div> -->
     <!-- Fim Modal -->
 
     <!-- Inicio Modal Pedido -->
@@ -170,7 +169,7 @@
                 </div>
                 <div class="col">
                   <label>Quantidade</label>
-                  <input class="form-control" type="number" min="0" max="10" name="quantidade" id="quantidade">
+                  <input class="form-control" type="number" min="1" max="10" name="quantidade" id="quantidade">
                 </div>
               </div>
               <label>Observação</label>
@@ -210,7 +209,7 @@
                 </div>
                 <div class="col">
                   <label>Quantidade</label>
-                  <input class="form-control" type="number" min="0" max="10" name="quantidade" id="quantidade">
+                  <input class="form-control" type="number" min="1" max="10" name="quantidade" id="quantidade">
                 </div>
               </div>
               <label>Observação</label>

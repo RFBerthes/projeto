@@ -6,7 +6,7 @@
     require_once('verifica-login.php');
 
     //Buscas
-    $sql1 = "SELECT * FROM clientes";
+    $sql1 = "SELECT * FROM clientes ORDER BY nome ASC";
     $clientes = $pdo->query($sql1);
   ?>
 </head>
@@ -82,9 +82,9 @@
             <form method="POST" action="edita/edita-cliente.php" enctype="multipart/form-data">
               <div class="form-group">
                 <label>Nome</label>
-                <input type="text" id=recepient-nome name=nome required class="form-control" placeholder="Nome">
+                <input type="text" id="recipient-nome" name="nome" required class="form-control" placeholder="Nome">
               </div>
-              <input type="hidden" id="recepient-idcliente" name="idcliente">
+              <input type="hidden" id="recipient-idcliente" name="idcliente">
               <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
                 <button type="submit" class="btn btn-danger">Alterar</button>
@@ -166,8 +166,8 @@
       // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
       var modal = $(this)
       modal.find('.modal-title').text('ID do Cliente: ' + recipient)
-      modal.find('#recepient-idcliente').val(recipient)
-      modal.find('#recipient-name').val(recipientnome)
+      modal.find('#recipient-idcliente').val(recipient)
+      modal.find('#recipient-nome').val(recipientnome)
     })
   </script>
 </body>

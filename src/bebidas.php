@@ -5,7 +5,7 @@
     require_once('verifica-login.php');
 
     //Buscas
-      $sql1 = "SELECT * FROM bebidas";
+      $sql1 = "SELECT * FROM bebidas ORDER BY nome_bebida ASC";
       $bebidas = $pdo->query($sql1);  
     ?>
   </head>

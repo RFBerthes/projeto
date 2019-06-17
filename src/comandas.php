@@ -9,13 +9,13 @@
     $sql1 = "SELECT * FROM usuarios";
     $usuarios = $pdo->query($sql1);
 
-    $sql2 = "SELECT * FROM mesas";
+    $sql2 = "SELECT * FROM mesas ORDER BY idmesa ASC";
     $mesas = $pdo->query($sql2);
 
-    $sql3 = "SELECT * FROM bebidas";
+    $sql3 = "SELECT * FROM bebidas ORDER BY nome_bebida ASC";
     $bebidas = $pdo->query($sql3);
 
-    $sql4 = "SELECT * FROM lanches";
+    $sql4 = "SELECT * FROM lanches ORDER BY nome_lanche ASC";
     $lanches = $pdo->query($sql4);
 
     $sql5 = "SELECT * FROM comandas JOIN clientes ON clientes.idcliente = comandas.cliente_idcliente";
@@ -42,7 +42,8 @@
           <p class="card-text pl-2">
             Mesa: <?php echo $rowcm['mesa_idmesa']; ?> <br>
             Cliente: <?php echo $rowcm['nome']; ?> <br>
-            Status: <?php echo $rowcm['status_comanda']; ?>
+            Status: <?php echo $rowcm['status_comanda']; ?> <br>
+            Total Parcial: <?php echo $rowcm['total']; ?>
             <div class="row pr-3 pl-3 pb-2">
               <div class="col-4">
                 <button type="button" class="btn btn-xs btn-info " data-toggle="modal" data-target="#ModalNovoPedido" data-whatever="<?php echo $rowcm['idcomanda']; ?>"> <img src="open-iconic/png/dinner.png"> </button>
@@ -119,7 +120,7 @@
                 </div>
                 <div class="col">
                   <label>Quantidade</label>
-                  <input class="form-control" type="number" min="0" max="10" name="quantidade" id="quantidade">
+                  <input class="form-control" type="number" min="1" max="10" name="quantidade" id="quantidade">
                 </div>
               </div>
               <label>Observação</label>
@@ -159,7 +160,7 @@
                 </div>
                 <div class="col">
                   <label>Quantidade</label>
-                  <input class="form-control" type="number" min="0" max="10" name="quantidade" id="quantidade">
+                  <input class="form-control" type="number" min="1" max="10" name="quantidade" id="quantidade">
                 </div>
               </div>
               <label>Observação</label>

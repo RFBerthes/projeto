@@ -4,11 +4,11 @@ include('../database_functions.php');
 $pdo = connect_to_database("bd_pep");
 
 //Recebendo dados 
-$usuario = $_GET['usuario'];
+$idusuario = $_GET['idusuario'];
 
-$sql_del = "DELETE FROM usuarios WHERE usuario = :usuario";
+$sql_del = "DELETE FROM usuarios WHERE idusuario = :idusuario";
 $stmt_del = $pdo->prepare($sql_del);
-$stmt_del->bindParam(':usuario', $usuario);
+$stmt_del->bindParam(':idusuario', $idusuario);
 
 try {
     $stmt_del->execute();

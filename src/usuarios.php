@@ -80,7 +80,7 @@
                       <td><?php echo $row['usuario'];?></td>
                       <td>
                         <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#EditModal" data-whatever="<?php echo $row['idusuario']; ?>"  data-whateverperfil="<?php echo $row['perfil']; ?>" data-whatevernome="<?php echo $row['nome']; ?>" data-whateverusuario="<?php echo $row['usuario']; ?>" > <img src="open-iconic/png/pencil-2x.png"> </button>
-                        <a href="delete/delete/apagar-usuario.php?idusuario=<?php echo $row['idusuario']; ?>"><button type="button" class="btn btn-xs btn-danger"> <img src="open-iconic/png/trash-2x.png"> </button></a>
+                        <a href="delete/apagar-usuario.php?idusuario=<?php echo $row['idusuario']; ?>"><button type="button" class="btn btn-xs btn-danger"> <img src="open-iconic/png/trash-2x.png"> </button></a>
                       </td>
                     </tr>
                   <?php } ?>

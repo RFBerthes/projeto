@@ -6,7 +6,7 @@
      require_once('verifica-login.php');
 
       //Buscas
-      $sql1 = "SELECT * FROM lanches";
+      $sql1 = "SELECT * FROM lanches ORDER BY nome_lanche ASC";
       $lanches = $pdo->query($sql1);
       // $row = $lanches->fetch() 
     ?>

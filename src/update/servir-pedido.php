@@ -21,10 +21,11 @@ try {
   $stmt_search->execute();
   if ($stmt_search->rowCount() == 1) {
     $row = $stmt_search->fetch();
+    $quantidade = $row['quantidade'];
+    $idbebida = $row['bebidas_idbebida'];
     switch ($row['tipo']) {
       case "Lanche":
         $stmt_upd->execute();
-
         if ($stmt_upd->rowCount() == 1) {
           header("Location: ../pedidos.php?sucesso");
         } else {
@@ -32,9 +33,13 @@ try {
         }
         break;
       case "Bebida":
-        $stmt_upd->execute();
-
+      $stmt_upd->execute();
         if ($stmt_upd->rowCount() == 1) {
+          $sql_upd_estq = "UPDATE bebidas SET estoque = estoque - :quantidade WHERE idbebida = :idbebida";
+          $stmt_upd_estq = $pdo->prepare($sql_upd_estq);
+          $stmt_upd_estq->bindParam(':idbebida', $idbebida);
+          $stmt_upd_estq->bindParam(':quantidade', $quantidade);
+          $stmt_upd_estq->execute();
           header("Location: ../pedidos-bebidas.php?sucesso");
         } else {
           header("Location: ../pedidos-bebidas.php?erro");

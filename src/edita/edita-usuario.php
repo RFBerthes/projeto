@@ -20,10 +20,10 @@
         $stmt_upd->execute();
 
         if ($stmt_upd->rowCount() == 0) {
-			header('location:usuarios.php?erro2');
+			header('location: ../usuarios.php?erro2');
             exit();
         } else {
-			header('location:usuarios.php?sucesso2');
+			header('location: ../usuarios.php?sucesso2');
             exit();
         }		
 	} catch (Exception $e) {

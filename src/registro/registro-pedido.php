@@ -26,6 +26,7 @@
 
          //verificar quantas linhas foram alteradas
          if ($stmt_ins->rowCount() > 0) {
+            require_once('../update/atualiza-total.php');
             header("Location: ../comandas.php?sucesso");   
          } else {
             header("Location: ../comandas.php?erro");

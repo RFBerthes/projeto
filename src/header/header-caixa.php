@@ -29,12 +29,6 @@
           <a class="nav-link" href="comandascx.php"> COMANDAS </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="pedidos.php">PEDIDOS</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="update/pedidos-bebidas.php">BEBIDAS</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link " href="relatorio.php">RELATÓRIO</a>
         </li>
        </li>

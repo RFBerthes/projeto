@@ -22,34 +22,12 @@
    $stmt_ins->bindParam(':obs', $obs);
    $stmt_ins->bindParam(':bebida', $bebida);
 
-   // Atualizar total
-   $sql_beb = "SELECT SUM(valorbeb) AS totalbeb FROM pedidos JOIN bebidas ON pedidos.bebidas_idbebida = bebidas.idbebida WHERE pedidos.comanda_idcomanda = :idcomanda ";
-   $stmt_beb = $pdo->prepare($sql_beb);
-   $stmt_beb->bindParam(':idcomanda', $idcomanda);
-
-   $sql_lan = "SELECT SUM(valorlan) AS totallan FROM pedidos JOIN lanches ON pedidos.lanches_idlanche = lanches.idlanche WHERE pedidos.comanda_idcomanda = :idcomanda ";
-   $stmt_lan = $pdo->prepare($sql_lan);
-   $stmt_lan->bindParam(':idcomanda', $idcomanda);
-
-   $sql_upd = "UPDATE comandas SET total = :total, status_comanda = :status WHERE comandas.idcomanda = :idcomanda";
-   $stmt_upd = $pdo->prepare($sql_upd);
-   $stmt_upd->bindParam(':idcomanda', $idcomanda);
-   $stmt_upd->bindParam(':total', $totalcomanda);
-   $stmt_upd->bindParam(':status', $status);
-
-
   try {
          $stmt_ins->execute();
 
          //verificar quantas linhas foram alteradas
          if ($stmt_ins->rowCount() == 1) {
-            $stmt_beb->execute();
-            $stmt_lan->execute();
-            $bebida = $stmt_beb->fetch();
-            $lanche = $stmt_lan->fetch();
-            $totalcomanda = $bebida['totalbeb'] + $lanche['totallan'];
-            // echo  $totalcomanda; exit;
-            $stmt_upd->execute();
+            require_once('../update/atualiza-total.php');
             header("Location: ../caixa.php?sucesso");
          } else {
             header("Location: ../caixa.php?erro");

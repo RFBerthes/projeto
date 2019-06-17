@@ -5,16 +5,16 @@
     require_once('verifica-login.php');
 
     //Buscas
-    $sql1 = "SELECT * FROM usuarios";
+    $sql1 = "SELECT * FROM usuarios ORDER BY perfil";
     $usuarios = $pdo->query($sql1);
 
     $sql2 = "SELECT * FROM mesas";
     $mesas = $pdo->query($sql2);
 
-    $sql3 = "SELECT * FROM bebidas";
+    $sql3 = "SELECT * FROM bebidas ORDER BY nome_bebida ASC";
     $bebidas = $pdo->query($sql3);
 
-    $sql4 = "SELECT * FROM lanches";
+    $sql4 = "SELECT * FROM lanches ORDER BY nome_lanche ASC";
     $lanches = $pdo->query($sql4);
   ?>
 

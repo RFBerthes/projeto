@@ -24,8 +24,8 @@
         if($row['status'] == 'Preparo'){
         ?>
         <div class="card text-dark mt-2 ml-3" style="width:25%">
-          <a href="delete/apagar-pedido.php?idpedido=<?php echo $row['idpedido']; ?>"><button type="button" class="close float-right mr-2 mt-1"> <span aria-hidden="true">&times;</span></button></a>
-          <h6 class="card-title" style="text-align:center"><b>Pedido nº <?php echo $row['idpedido']; ?></b></h6>
+          <!-- <a href="delete/apagar-pedido.php?idpedido=<?php echo $row['idpedido']; ?>"><button type="button" class="close float-right mr-2 mt-1"> <span aria-hidden="true">&times;</span></button></a> -->
+          <h6 class="card-title mt-2" style="text-align:center"><b>Pedido nº <?php echo $row['idpedido']; ?></b></h6>
           <p class="card-text pl-2">
             Mesa: <?php echo $row['mesa_idmesa']; ?> <br>
             Comanda: <?php echo $row['comanda_idcomanda']; ?> <br>

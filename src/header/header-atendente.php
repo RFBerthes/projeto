@@ -14,7 +14,7 @@
   <title>Atendente</title>
 
   <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:cornflowerblue">
-    <a class="navbar-brand" href="atendente.php">Peça&Pag</a>
+    <a class="navbar-brand" href="comandas.php">Peça&Pag</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
       aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
       <span class="navbar-toggler-icon"></span>
@@ -24,9 +24,6 @@
       <ul class="navbar-nav mr-auto">
         <li class="nav-item ">
           <a class="nav-link" href="comandas.php" id="home">HOME <span class="sr-only">(página atual)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="comandas.php"> COMANDAS </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="pedidos.php">PEDIDOS</a>

@@ -15,10 +15,8 @@ try {
 
     if ($stmt_del->rowCount() == 0) {
       header("Location: ../clientes.php?erro3");
-      exit();
     } else {
       header("Location: ../clientes.php?sucesso3");
-      exit();
     }		
 } catch (Exception $e) {
 echo "ERROR: ".$e->getMessage()."<br>";
