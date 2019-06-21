@@ -5,7 +5,7 @@
       require_once('verifica-login.php');
 
       //Buscas
-      $sql1 = "SELECT * FROM usuarios";
+      $sql1 = "SELECT * FROM usuarios ORDER BY perfil ASC";
       $usuarios = $pdo->query($sql1);
       // $row = $usuarios->fetch()
     ?>
